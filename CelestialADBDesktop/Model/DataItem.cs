@@ -1,4 +1,4 @@
-﻿namespace CelestialADBDesktop.Model
+﻿namespace Harris.CelestialADB.Desktop.Model
 {
     public class DataItem
     {

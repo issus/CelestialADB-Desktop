@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using GalaSoft.MvvmLight.Threading;
 
-namespace CelestialADBDesktop
+namespace Harris.CelestialADB.Desktop
 {
     /// <summary>
     /// Interaction logic for App.xaml

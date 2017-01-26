@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CelestialADBDesktop.Model
+namespace Harris.CelestialADB.Desktop.Model
 {
     public class DataService : IDataService
     {

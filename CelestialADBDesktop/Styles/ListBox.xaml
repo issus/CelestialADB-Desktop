@@ -1,0 +1,128 @@
+﻿<ResourceDictionary 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+ >
+    
+	<Style TargetType="{x:Type ListBox}">
+		<Setter Property="Background" Value="{StaticResource BackgroundBrush}"/>
+		<Setter Property="BorderBrush" Value="{StaticResource LowkeyForegroundBrush}"/>
+		<Setter Property="BorderThickness" Value="1"/>
+		<Setter Property="Foreground" Value="{StaticResource LowkeyForegroundBrush}"/>
+		<Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+		<Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+		<Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
+		<Setter Property="ScrollViewer.PanningMode" Value="Both"/>
+		<Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="12,6,12,6"/>
+        <Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type ListBox}">
+					<Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="1" SnapsToDevicePixels="true">
+						<ScrollViewer Focusable="false" Padding="{TemplateBinding Padding}">
+							<ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+						</ScrollViewer>
+					</Border>
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsEnabled" Value="false">
+							<Setter Property="Background" TargetName="Bd" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"/>
+						</Trigger>
+						<Trigger Property="IsGrouping" Value="true">
+							<Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+    
+	<Style TargetType="{x:Type ListBoxItem}">
+		<Setter Property="Background" Value="Transparent"/>
+		<Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+		<Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+		<Setter Property="Padding" Value="6,3,6,3"/>
+		<Setter Property="Template">
+			<Setter.Value>
+                <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                    <ControlTemplate.Resources>
+                        <Storyboard AutoReverse="False" x:Key="ItemSelectedStoryboard">
+                            <ColorAnimation 
+                                BeginTime="0:0:0" 
+                                Duration="0:0:0.2" 
+                                To="{StaticResource Accent2Colour}"
+                                Storyboard.TargetName="Bd" 
+                                Storyboard.TargetProperty="Background.(SolidColorBrush.Color)"
+                            />
+                            <ColorAnimation 
+                                BeginTime="0:0:0" 
+                                Duration="0:0:0.2" 
+                                To="{StaticResource StandardForegroundColour}"
+                                Storyboard.TargetProperty="Foreground.(SolidColorBrush.Color)"
+                            />
+                        </Storyboard>
+                        <Storyboard AutoReverse="False" x:Key="MouseOverStoryboard">
+                            <ColorAnimation 
+                                BeginTime="0:0:0" 
+                                Duration="0:0:0.2" 
+                                To="{StaticResource StandardForegroundColour}"
+                                Storyboard.TargetProperty="Foreground.(SolidColorBrush.Color)"
+                            />
+                        </Storyboard>
+                    </ControlTemplate.Resources>
+                    <Border 
+                        x:Name="Bd" 
+                        BorderBrush="{TemplateBinding BorderBrush}" 
+                        BorderThickness="{TemplateBinding BorderThickness}" 
+                        Background="{TemplateBinding Background}" 
+                        Padding="{TemplateBinding Padding}" 
+                        SnapsToDevicePixels="true"
+                        CornerRadius="2"
+                        Margin="3,0,3,0"
+                    >
+						<ContentPresenter 
+                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
+                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                        />
+					</Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Trigger.EnterActions>
+                                <BeginStoryboard x:Name="MouseOverStoryboard_BeginStoryboard" Storyboard="{StaticResource MouseOverStoryboard}" />
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <RemoveStoryboard BeginStoryboardName="MouseOverStoryboard_BeginStoryboard" />
+                            </Trigger.ExitActions>
+                            <!--<Setter TargetName="PART_HeaderGripper" Property="Panel.Background" Value="Red"/>-->
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="true">
+                            <Trigger.EnterActions>
+                                <BeginStoryboard 
+                                    x:Name="ItemSelectedStoryboard_BeginStoryboard"
+    		                        Storyboard="{StaticResource ItemSelectedStoryboard}"
+                                />
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <RemoveStoryboard BeginStoryboardName="ItemSelectedStoryboard_BeginStoryboard"/>
+                            </Trigger.ExitActions>
+                            <!--<Setter Property="Background" TargetName="Bd" Value="{StaticResource Accent2Brush}"/>
+							<Setter Property="Foreground" Value="{StaticResource StandardForegroundBrush}"/>-->
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsSelected" Value="true"/>
+                                <Condition Property="Selector.IsSelectionActive" Value="false"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Background" TargetName="Bd" Value="{StaticResource Accent2DarkBrush}"/>
+                            <Setter Property="Foreground" Value="{StaticResource StandardForegroundBrush}"/>
+                        </MultiTrigger>
+                        <Trigger Property="IsEnabled" Value="false">
+							<Setter Property="Foreground" Value="{StaticResource DisabledForegroundBrush}"/>
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+    
+</ResourceDictionary>

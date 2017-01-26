@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace CelestialADBDesktop.Model
+namespace Harris.CelestialADB.Desktop.Model
 {
     public interface IDataService
     {

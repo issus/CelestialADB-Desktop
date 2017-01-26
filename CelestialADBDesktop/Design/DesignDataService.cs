@@ -1,7 +1,7 @@
 ﻿using System;
-using CelestialADBDesktop.Model;
+using Harris.CelestialADB.Desktop.Model;
 
-namespace CelestialADBDesktop.Design
+namespace Harris.CelestialADB.Desktop.Design
 {
     public class DesignDataService : IDataService
     {

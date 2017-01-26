@@ -1,7 +1,7 @@
 ﻿/*
   In App.xaml:
   <Application.Resources>
-      <vm:ViewModelLocatorTemplate xmlns:vm="clr-namespace:CelestialADBDesktop.ViewModel"
+      <vm:ViewModelLocatorTemplate xmlns:vm="clr-namespace:Harris.CelestialADB.Desktop.ViewModel"
                                    x:Key="Locator" />
   </Application.Resources>
   
@@ -12,9 +12,9 @@
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
-using CelestialADBDesktop.Model;
+using Harris.CelestialADB.Desktop.Model;
 
-namespace CelestialADBDesktop.ViewModel
+namespace Harris.CelestialADB.Desktop.ViewModel
 {
     /// <summary>
     /// This class contains static references to all the view models in the

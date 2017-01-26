@@ -1,32 +1,117 @@
-﻿<Window x:Class="CelestialADBDesktop.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:ignore="http://www.galasoft.ch/ignore"
-        mc:Ignorable="d ignore"
-        Height="300"
-        Width="300"
-        Title="MVVM Light Application"
-        DataContext="{Binding Main, Source={StaticResource Locator}}">
+﻿<Window 
+    x:Class="Harris.CelestialADB.Desktop.MainWindow"
+    x:Name="dbMainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ignore="http://www.galasoft.ch/ignore"
+    mc:Ignorable="d ignore"
+    xmlns:viewModels="clr-namespace:Harris.CelestialADB.Desktop.ViewModel"
+    xmlns:views="clr-namespace:Harris.CelestialADB.Desktop.Views"
+    xmlns:celestial="clr-namespace:Harris.CelestialADB.Desktop.Controls"
+    xmlns:conv="clr-namespace:Harris.CelestialADB.Desktop.Converters"
+    xmlns:data="clr-namespace:Harris.CelestialADB.Desktop.Data"
+    Title="Celestial Altium DB Desktop"
+    WindowStartupLocation="CenterScreen"
+    Height="{Binding WindowHeight, FallbackValue=900}"
+    Width="{Binding WindowWidth, FallbackValue=1200}"
+    MinHeight="700"
+    MinWidth="1100"
+    SnapsToDevicePixels="true"
+    UseLayoutRounding="True"
+    DataContext="{Binding Main, Source={StaticResource Locator}}"
+>
+    <!--
+    xmlns:gfx="clr-namespace:Harris.CelestialADB.Desktop.Graphics"
+    -->
     
     <Window.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Skins/MainSkin.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
+        <BooleanToVisibilityConverter x:Key="BoolToVis" />
+        <conv:BooleanToBlurConverter x:Key="BooleanToBlurConverter" />
     </Window.Resources>
 
-    <Grid x:Name="LayoutRoot">
+    <Grid x:Name="LayoutRoot" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SizeChanged="MainGrid_SizeChanged">
+        <Grid.LayoutTransform>
+            <ScaleTransform 
+                x:Name="ApplicationScaleTransform"
+                CenterX="0"
+                CenterY="0"
+                ScaleX="{Binding ElementName=dlMainWindow, Path=ScaleValue}"
+                ScaleY="{Binding ElementName=dlMainWindow, Path=ScaleValue}" 
+            />
+        </Grid.LayoutTransform>
 
-        <TextBlock FontSize="36"
-                   FontWeight="Bold"
-                   Foreground="Purple"
-                   Text="{Binding WelcomeTitle}"
-                   VerticalAlignment="Center"
-                   HorizontalAlignment="Center"
-                   TextWrapping="Wrap" />
+        <Grid.RowDefinitions>
+            <RowDefinition Height="75" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.Background>
+            <RadialGradientBrush Center="104.0327,92.7422" RadiusX="1087.9485" RadiusY="1087.9485" GradientOrigin="104.0327,92.7422" MappingMode="Absolute" SpreadMethod="Pad" Transform="Identity">
+                <RadialGradientBrush.GradientStops>
+                    <GradientStop Color="#FF2F323C" Offset="0" />
+                    <GradientStop Color="#FF141319" Offset="1" />
+                </RadialGradientBrush.GradientStops>
+            </RadialGradientBrush>
+        </Grid.Background>
+        <Rectangle Fill="Black" Opacity="0.15" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="0" />
+        <Rectangle Fill="Black" Opacity="0.25" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="0" Visibility="{Binding ShowSearchScreen, Converter={StaticResource BoolToVis}}" />
 
+        <Grid Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Height="Auto">
+            <Rectangle Fill="Black" Opacity="0.15" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="0" />
+
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Left">
+                <StackPanel.Resources>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="Foreground" Value="Gray" />
+                    </Style>
+                </StackPanel.Resources>
+                <TextBlock Text="{Binding Version, StringFormat='Celestial Altium DB Desktop Version \{0\}'}" Margin="6" />
+                <TextBlock Text="{Binding BuildDate, StringFormat='\{0:dd MMM yyyy\}'}" Margin="6" />
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Right" >
+                <StackPanel.Resources>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="Foreground" Value="Gray" />
+                    </Style>
+                </StackPanel.Resources>
+                <TextBlock Text="{Binding BuildDate, StringFormat='Copyright \{0:yyyy\} Mark Harris. All rights reserved.'}" Margin="6" />
+            </StackPanel>
+        </Grid>
+
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Top" Grid.Row="1">
+            <Rectangle Fill="Black" Opacity="0.15" Height="53"  />
+            <Rectangle Fill="Black" Opacity="0.2" Height="3"  />
+        </StackPanel>
+
+        <!-- END BACKGROUND -->
+
+        <TextBlock Grid.Row="0" Text="Celestial Altium DB Desktop" HorizontalAlignment="Left" VerticalAlignment="Bottom" Style="{DynamicResource HeadingTitleStyle}" />
+
+        <TabControl x:Name="MAIN_TABCONTROL_MODULES" Margin="12" Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            <TabControl.Effect>
+                <BlurEffect x:Name="tabBlur" Radius="{Binding ShowRegisterLogin, Converter={StaticResource BooleanToBlurConverter}}" />
+            </TabControl.Effect>
+            <TabItem Header="Settings" DataContext="{Binding SettingsModel}">
+                <Grid Background="Transparent">
+                    <views:SettingsView />
+                </Grid>
+            </TabItem>
+        </TabControl>
+
+
+        <Grid Visibility="{Binding ShowRegisterLogin, Converter={StaticResource BoolToVis}, FallbackValue=true}" Grid.Row="1" HorizontalAlignment="Stretch">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.3*" />
+                <ColumnDefinition Width="0.4*" />
+                <ColumnDefinition Width="0.3*" />
+            </Grid.ColumnDefinitions>
+            <Rectangle Fill="Black" Opacity=".25" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="56" Grid.ColumnSpan="3" />
+            <Rectangle Fill="Black" Opacity=".40" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,56,0,0" Grid.ColumnSpan="3" />
+
+            <views:RegisterLoginView Grid.Column="1" DataContext="{Binding LoginRegisterViewModel}" />
+        </Grid>
     </Grid>
 </Window>

@@ -1,0 +1,23 @@
+﻿<ResourceDictionary 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+>
+    <FontFamily x:Key="ThemeFontFamily">Segoe WP, Segoe UI</FontFamily>
+    <sys:Double x:Key="StandardFontSize">15</sys:Double>
+    <sys:Double x:Key="HeadingFontSize">29</sys:Double>
+    <sys:Double x:Key="SubHeaderFontSize">24</sys:Double>
+    <sys:Double x:Key="ErrorHeaderFontSize">18</sys:Double>
+    <sys:Double x:Key="MinorHeaderFontSize">18</sys:Double>
+    <sys:Double x:Key="LinkButtonFontSize">17</sys:Double>
+
+    <Thickness x:Key="SubHeaderMarginWideLeft">30,4,12,6</Thickness>
+    <Thickness x:Key="SubHeaderMargin">12,4,12,6</Thickness>
+    <Thickness x:Key="MinorHeaderMargin">12,9,12,6</Thickness>
+    <Thickness x:Key="HeaderMargin">12,9,12,12</Thickness>
+    <Thickness x:Key="TextMargin">12,6,12,6</Thickness>
+
+    <Style TargetType="{x:Type Window}">
+        <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
+    </Style>
+</ResourceDictionary>

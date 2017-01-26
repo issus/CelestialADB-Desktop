@@ -1,0 +1,29 @@
+﻿<ResourceDictionary 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:PresentationOptions="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+>
+
+    <Color x:Key="BackgroundColour" PresentationOptions:Freeze="True">#FF202023</Color>
+    <Color x:Key="MediumBackgroundColour" PresentationOptions:Freeze="True">#FF45454B</Color>
+    <Color x:Key="StandardForegroundColour" PresentationOptions:Freeze="True">#FFF3F3F4</Color>
+    <Color x:Key="LowkeyForegroundColour" PresentationOptions:Freeze="True">#FFA5A5A8</Color>
+    <Color x:Key="Accent1Colour" PresentationOptions:Freeze="True">#FF3E88F7</Color>
+    <Color x:Key="Accent1DarkColour" PresentationOptions:Freeze="True">#FF2760B7</Color>
+    <Color x:Key="Accent2Colour" PresentationOptions:Freeze="True">#FFF7543E</Color>
+    <Color x:Key="Accent2DarkColour" PresentationOptions:Freeze="True">#FFB73B27</Color>
+
+
+    <SolidColorBrush Color="{StaticResource BackgroundColour}" x:Key="BackgroundBrush" PresentationOptions:Freeze="True"  />
+    <SolidColorBrush Color="{StaticResource MediumBackgroundColour}" x:Key="MediumBackgroundBrush" PresentationOptions:Freeze="True"  />
+    <SolidColorBrush Color="{StaticResource StandardForegroundColour}" x:Key="StandardForegroundBrush" PresentationOptions:Freeze="True"  />
+    <SolidColorBrush Color="{StaticResource LowkeyForegroundColour}" x:Key="LowkeyForegroundBrush" PresentationOptions:Freeze="True"  />
+    <SolidColorBrush Color="{StaticResource Accent1Colour}" x:Key="Accent1Brush" PresentationOptions:Freeze="True"  />
+    <SolidColorBrush Color="{StaticResource Accent1DarkColour}" x:Key="Accent1DarkBrush" PresentationOptions:Freeze="True"  />
+    <SolidColorBrush Color="{StaticResource Accent2Colour}" x:Key="Accent2Brush" PresentationOptions:Freeze="True"  />
+    <SolidColorBrush Color="{StaticResource Accent2DarkColour}" x:Key="Accent2DarkBrush" PresentationOptions:Freeze="True"  />
+
+
+    <SolidColorBrush Color="{StaticResource MediumBackgroundColour}" x:Key="DisabledForegroundBrush" PresentationOptions:Freeze="True"  />
+    <SolidColorBrush Color="{StaticResource LowkeyForegroundColour}" x:Key="DisabledBackgroundBrush" PresentationOptions:Freeze="True"  />
+</ResourceDictionary>

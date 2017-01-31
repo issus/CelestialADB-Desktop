@@ -5,7 +5,7 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CelestialADBDesktop", "CelestialADBDesktop\CelestialADBDesktop.csproj", "{4BB8896D-2C64-43E6-853B-1F1D86862C70}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Harris.CelestialADB.ApiData", "Harris.CelestialADB.ApiData\Harris.CelestialADB.ApiData.csproj", "{ECBFA5B8-E552-4D5D-B928-77C1B71AA8EA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Harris.CelestialADB.ApiData", "Harris.CelestialADB.ApiData\Harris.CelestialADB.ApiData.csproj", "{B1EF1595-9906-431F-B1A2-51D6E0751F3D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,14 +23,14 @@ Global
 		{4BB8896D-2C64-43E6-853B-1F1D86862C70}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4BB8896D-2C64-43E6-853B-1F1D86862C70}.Release|x86.ActiveCfg = Release|Any CPU
 		{4BB8896D-2C64-43E6-853B-1F1D86862C70}.Release|x86.Build.0 = Release|Any CPU
-		{ECBFA5B8-E552-4D5D-B928-77C1B71AA8EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{ECBFA5B8-E552-4D5D-B928-77C1B71AA8EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{ECBFA5B8-E552-4D5D-B928-77C1B71AA8EA}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{ECBFA5B8-E552-4D5D-B928-77C1B71AA8EA}.Debug|x86.Build.0 = Debug|Any CPU
-		{ECBFA5B8-E552-4D5D-B928-77C1B71AA8EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{ECBFA5B8-E552-4D5D-B928-77C1B71AA8EA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{ECBFA5B8-E552-4D5D-B928-77C1B71AA8EA}.Release|x86.ActiveCfg = Release|Any CPU
-		{ECBFA5B8-E552-4D5D-B928-77C1B71AA8EA}.Release|x86.Build.0 = Release|Any CPU
+		{B1EF1595-9906-431F-B1A2-51D6E0751F3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1EF1595-9906-431F-B1A2-51D6E0751F3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1EF1595-9906-431F-B1A2-51D6E0751F3D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B1EF1595-9906-431F-B1A2-51D6E0751F3D}.Debug|x86.Build.0 = Debug|Any CPU
+		{B1EF1595-9906-431F-B1A2-51D6E0751F3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1EF1595-9906-431F-B1A2-51D6E0751F3D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1EF1595-9906-431F-B1A2-51D6E0751F3D}.Release|x86.ActiveCfg = Release|Any CPU
+		{B1EF1595-9906-431F-B1A2-51D6E0751F3D}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

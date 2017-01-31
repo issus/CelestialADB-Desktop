@@ -19,9 +19,9 @@
                             <ColorAnimation 
                                 BeginTime="0:0:0" 
                                 Duration="0:0:0.2" 
-                                To="{StaticResource Accent1Colour}"
-                                Storyboard.TargetName="Chrome" 
-                                Storyboard.TargetProperty="Background.(SolidColorBrush.Color)"
+                                To="{StaticResource Primary}"
+                                Storyboard.TargetName="Arrow" 
+                                Storyboard.TargetProperty="Fill.(SolidColorBrush.Color)"
                             />
                             <!--ColorAnimation 
                                 BeginTime="0:0:0" 
@@ -32,26 +32,23 @@
                             /-->
                         </Storyboard>
                     </ControlTemplate.Resources>
-                    <Border Background="Transparent">
-                        <Border 
-                            Margin="3"
-                            x:Name="Chrome"
-                            BorderThickness="0"
-                            Background="{StaticResource Accent1DarkBrush}" 
-                            SnapsToDevicePixels="true"
-                            Width="18"
+                    <Grid
+                        Margin="3"
+                        x:Name="Chrome"
+                        Background="Transparent" 
+                        SnapsToDevicePixels="true"
+                        HorizontalAlignment="Stretch"
+                    >
+                        <Path 
+                            x:Name="Arrow" 
+                            Data="{StaticResource DownArrowGeometry}" 
+                            Fill="{StaticResource GrayDarkBrush}"
+                            Margin="3" 
+                            VerticalAlignment="Center"
                             HorizontalAlignment="Right"
-                        >
-                            <Path 
-                                x:Name="Arrow" 
-                                Data="{StaticResource DownArrowGeometry}" 
-                                Fill="{StaticResource StandardForegroundBrush}" 
-                                HorizontalAlignment="Center" 
-                                Margin="3" 
-                                VerticalAlignment="Center"
-                            />
-                        </Border>
-                    </Border>
+                        />
+                        <Rectangle x:Name="TDisable" Fill="White" Opacity="0" IsHitTestVisible="False" />
+                    </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Trigger.EnterActions>
@@ -68,7 +65,7 @@
                             <!--Setter Property="RenderPressed" TargetName="Chrome" Value="true"/-->
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
-                            <Setter Property="Background" TargetName="Chrome" Value="{StaticResource LowkeyForegroundBrush}"/>
+                            <Setter Property="Opacity" TargetName="TDisable" Value="0.5"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -100,7 +97,7 @@
         <Setter Property="IsTabStop" Value="false"/>
         <Setter Property="Focusable" Value="false"/>
         <Setter Property="ClickMode" Value="Press"/>
-        <Setter Property="Background" Value="{StaticResource MediumBackgroundBrush}"/>
+        <Setter Property="Background" Value="{StaticResource InputBgBrush}"/>
         <Setter Property="SnapsToDevicePixels" Value="true" />
         <Setter Property="UseLayoutRounding" Value="true" />
         <Setter Property="Template">
@@ -110,7 +107,7 @@
                         x:Name="Chrome" 
                         Margin="0"
                         BorderThickness="0"
-                        Background="{StaticResource Accent1DarkBrush}" 
+                        Background="Transparent" 
                         SnapsToDevicePixels="true"
                         Width="24"
                     >
@@ -125,14 +122,13 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="true">
-                            <Setter Property="Background" TargetName="Chrome" Value="{StaticResource Accent1Brush}"/>
-                            <Setter Property="Fill" TargetName="Arrow" Value="{StaticResource StandardForegroundBrush}"/>
+                            <Setter Property="Fill" TargetName="Arrow" Value="{StaticResource PrimaryBrush}"/>
                         </Trigger>
                         <Trigger Property="IsChecked" Value="true">
-                            <Setter Property="Background" TargetName="Chrome" Value="{StaticResource Accent1Brush}"/>
+                            <Setter Property="Fill" TargetName="Arrow" Value="{StaticResource PrimaryBrush}"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
-                            <Setter Property="Background" TargetName="Chrome" Value="{StaticResource LowkeyForegroundBrush}"/>
+                            <Setter Property="Fill" TargetName="Arrow" Value="{StaticResource LowkeyForegroundBrush}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -203,7 +199,7 @@
         </Grid>
         <ControlTemplate.Triggers>
             <Trigger Property="IsKeyboardFocusWithin" Value="true">
-                <Setter Property="Foreground" Value="{StaticResource StandardForegroundBrush}"/>
+                <Setter Property="Foreground" Value="{StaticResource GrayDarkBrush}"/>
             </Trigger>
             <!--Trigger Property="IsDropDownOpen" Value="true">
 				<Setter Property="RenderFocused" TargetName="Border" Value="true"/>
@@ -212,7 +208,7 @@
                 <Setter Property="Height" TargetName="DropDownBorder" Value="95"/>
             </Trigger>
             <Trigger Property="IsEnabled" Value="false">
-                <Setter Property="Foreground" Value="{StaticResource DisabledForegroundBrush}"/>
+                <Setter Property="Foreground" Value="{StaticResource GrayLightBrush}"/>
                 <!--Setter Property="Background" Value="#FFF4F4F4"/-->
             </Trigger>
             <Trigger Property="IsGrouping" Value="true">
@@ -231,17 +227,17 @@
 
     <Style x:Key="{x:Type ComboBox}" TargetType="{x:Type ComboBox}">
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
-        <Setter Property="Foreground" Value="{StaticResource StandardForegroundBrush}"/>
-        <Setter Property="Background" Value="{StaticResource MediumBackgroundBrush}"/>
-        <Setter Property="BorderBrush" Value="{StaticResource LowkeyForegroundBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource GrayDarkBrush}"/>
+        <Setter Property="Background" Value="{StaticResource InputBgBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource InputBorderBrush}"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
         <Setter Property="VerticalContentAlignment" Value="Stretch"/>
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
-        <Setter Property="Height" Value="28"/>
-        <Setter Property="Padding" Value="3"/>
-        <Setter Property="Margin" Value="12,6,12,6"/>
+        <Setter Property="Height" Value="32"/>
+        <Setter Property="Padding" Value="10,5,10,5"/>
+        <Setter Property="Margin" Value="0,0,0,12"/>
         <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
         <Setter Property="ScrollViewer.PanningMode" Value="Both"/>
         <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
@@ -332,7 +328,7 @@
                             <Setter Property="Height" TargetName="DropDownBorder" Value="95"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
-                            <Setter Property="Foreground" Value="{StaticResource DisabledForegroundBrush}"/>
+                            <Setter Property="Foreground" Value="{StaticResource GrayBrush}"/>
                             <!--Setter Property="Background" Value="#FFF4F4F4"/-->
                         </Trigger>
                         <Trigger Property="IsGrouping" Value="true">
@@ -363,6 +359,7 @@
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="SnapsToDevicePixels" Value="true" />
         <Setter Property="UseLayoutRounding" Value="true" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Setter Property="Template">
     		<Setter.Value>
     			<ControlTemplate TargetType="{x:Type ComboBoxItem}">
@@ -371,9 +368,15 @@
                             <ColorAnimation 
                                 BeginTime="0:0:0" 
                                 Duration="0:0:0.1" 
-                                To="{StaticResource Accent2Colour}"
+                                To="{StaticResource Primary}"
                                 Storyboard.TargetName="Bd" 
                                 Storyboard.TargetProperty="Background.(SolidColorBrush.Color)"
+                            />
+                            <ColorAnimation 
+                                BeginTime="0:0:0" 
+                                Duration="0:0:0.1" 
+                                To="{StaticResource GrayLightest}"
+                                Storyboard.TargetProperty="Foreground.(SolidColorBrush.Color)"
                             />
                         </Storyboard>
                     </ControlTemplate.Resources>

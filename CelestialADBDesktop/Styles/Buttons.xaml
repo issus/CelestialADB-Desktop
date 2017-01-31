@@ -77,37 +77,46 @@
             </Setter>
         </Style>
 
-        <Style x:Key="{x:Type Button}" TargetType="{x:Type Button}">
+
+    <Style x:Key="BtnDefaultStyle" TargetType="{x:Type Button}">
         <Setter Property="FocusVisualStyle" Value="{StaticResource ButtonFocusVisual}"/>
-        <Setter Property="Background" Value="{StaticResource MediumBackgroundBrush}"/>
-        <Setter Property="BorderBrush" Value="{StaticResource LowkeyForegroundBrush}"/>
+        <Setter Property="Background" Value="{StaticResource BtnDefaultBgBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource BtnDefaultBorderBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource BtnDefaultColorBrush}"/>
         <Setter Property="FontFamily" Value="{StaticResource ThemeFontFamily}"/>
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="Foreground" Value="{StaticResource StandardForegroundBrush}"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
-        <Setter Property="Padding" Value="6,3,6,3"/>
+        <Setter Property="Padding" Value="12,0,12,0"/>
         <Setter Property="Margin" Value="6,6,6,6"/>
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="Height" Value="32" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
                     <ControlTemplate.Resources>
                         <Storyboard AutoReverse="False" x:Key="MouseOverStoryboard">
-                            <ColorAnimation 
+                            <DoubleAnimation
                                 BeginTime="0:0:0" 
                                 Duration="0:0:0.2" 
-                                To="{StaticResource Accent1Colour}"
-                                Storyboard.TargetName="Chrome" 
-                                Storyboard.TargetProperty="Background.(SolidColorBrush.Color)"
+                                To="0.15"
+                                Storyboard.TargetName="BtnDarken" 
+                                Storyboard.TargetProperty="Opacity"
                             />
                         </Storyboard>
                         <Storyboard AutoReverse="False" x:Key="MouseDownStoryboard">
-                            <ColorAnimation 
+                            <DoubleAnimation
                                 BeginTime="0:0:0" 
-                                Duration="0:0:0.1" 
-                                To="{StaticResource Accent1DarkColour}"
-                                Storyboard.TargetName="Chrome" 
-                                Storyboard.TargetProperty="Background.(SolidColorBrush.Color)"
+                                Duration="0:0:0.2" 
+                                To="0.25"
+                                Storyboard.TargetName="BtnDarken" 
+                                Storyboard.TargetProperty="Opacity"
+                            />
+                            <ThicknessAnimation 
+                                BeginTime="0:0:0" 
+                                Duration="0:0:0.075" 
+                                To="7,7,5,5"
+                                Storyboard.TargetProperty="Margin"
                             />
                         </Storyboard>
                     </ControlTemplate.Resources>
@@ -116,6 +125,7 @@
     		            BorderBrush="{TemplateBinding BorderBrush}" 
     		            Background="{TemplateBinding Background}" 
     		            BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="2"
     		            SnapsToDevicePixels="true"
                     >
                         <VisualStateManager.VisualStateGroups>
@@ -126,13 +136,19 @@
                                 <VisualState x:Name="Disabled"/>
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
-                        <ContentPresenter
-    			            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
-    			            Margin="{TemplateBinding Padding}" 
-    			            RecognizesAccessKey="True" 
-    			            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
-    			            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                        />
+                        <Grid IsHitTestVisible="False">
+                            <Rectangle x:Name="BtnDarken" Opacity="0" Fill="Black" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" IsHitTestVisible="False" />
+                            <Rectangle HorizontalAlignment="Stretch" Height="2" Fill="Black" Opacity="0.05" VerticalAlignment="Bottom" IsHitTestVisible="False" />
+                            <ContentPresenter
+    			                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+    			                Margin="{TemplateBinding Padding}" 
+    			                RecognizesAccessKey="True" 
+    			                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
+    			                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                IsHitTestVisible="False"
+                            />
+                            <Rectangle x:Name="BtnDisable" Opacity="0.0" Fill="White" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" IsHitTestVisible="False" />
+                        </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
                         <MultiTrigger>
@@ -172,8 +188,7 @@
                             <!--Setter Property="RenderPressed" TargetName="Chrome" Value="true"/-->
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
-                            <Setter Property="Background" Value="{StaticResource DisabledBackgroundBrush}"/>
-                            <Setter Property="BorderBrush" Value="{StaticResource DisabledForegroundBrush}" />
+                            <Setter TargetName="BtnDisable" Property="Opacity" Value="0.5"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -182,6 +197,28 @@
     </Style>
 
 
+    <Style x:Key="BtnDangerStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource BtnDefaultStyle}">
+        <Setter Property="Background" Value="{StaticResource BtnDangerBgBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource BtnDangerBorderBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource BtnDangerColorBrush}"/>
+    </Style>
+
+    <Style x:Key="BtnPrimaryStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource BtnDefaultStyle}">
+        <Setter Property="Background" Value="{StaticResource BtnPrimaryBgBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource BtnPrimaryBorderBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource BtnPrimaryColorBrush}"/>
+    </Style>
+
+
+    <Style x:Key="BtnInfoStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource BtnDefaultStyle}">
+        <Setter Property="Background" Value="{StaticResource BtnInfoBgBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource BtnInfoBorderBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource BtnInfoColorBrush}"/>
+    </Style>
+    
+    <Style x:Key="{x:Type Button}" TargetType="{x:Type Button}" BasedOn="{StaticResource BtnDefaultStyle}">
+    </Style>
+    
     <Style TargetType="{x:Type celestial:LinkButton}">
         <Setter Property="FocusVisualStyle" Value="{StaticResource ButtonFocusVisual}"/>
         <Setter Property="Foreground" Value="{StaticResource LowkeyForegroundBrush}"/>

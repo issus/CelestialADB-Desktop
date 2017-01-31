@@ -40,11 +40,11 @@ namespace Harris.CelestialADB.Desktop.ViewModel
             WindowWidth = 1200;
 
 
-            if (System.Windows.SystemParameters.PrimaryScreenHeight < 800)
+            if (SystemParameters.PrimaryScreenHeight < 800)
             {
                 WindowHeight = 700;
             }
-            else if (System.Windows.SystemParameters.PrimaryScreenHeight <= 900)
+            else if (SystemParameters.PrimaryScreenHeight <= 900)
             {
                 WindowHeight = 800;
             }
@@ -53,7 +53,7 @@ namespace Harris.CelestialADB.Desktop.ViewModel
                 WindowHeight = 900;
             }
 
-            if (System.Windows.SystemParameters.PrimaryScreenWidth < 1300)
+            if (SystemParameters.PrimaryScreenWidth < 1300)
             {
                 WindowWidth = 1100;
             }

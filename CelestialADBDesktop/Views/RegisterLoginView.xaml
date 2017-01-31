@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
     xmlns:local="clr-namespace:Harris.CelestialADB.Desktop.Views"
     xmlns:celestial="clr-namespace:Harris.CelestialADB.Desktop.Controls"
+    xmlns:graphics="clr-namespace:Harris.CelestialADB.Desktop.Graphics"
     xmlns:sys="clr-namespace:System;assembly=mscorlib" 
     xmlns:conv="clr-namespace:Harris.CelestialADB.Desktop.Converters"
     xmlns:helpers="clr-namespace:Harris.CelestialADB.Desktop.Helpers"
@@ -15,68 +16,352 @@
         <BooleanToVisibilityConverter x:Key="BoolToVis" />
         <conv:BooleanToInvisibilityConverter x:Key="BoolToInvis" />
         <conv:BooleanToBlurConverter x:Key="BooleanToBlurConverter" />
+        <BitmapImage x:Key="AltiumLibPane" UriSource="/CelestialADBDesktop;component/Images/AltiumLibPane.jpg" />
     </UserControl.Resources>
-    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Center">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
+    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="White">
         <Grid.RowDefinitions>
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
+            <RowDefinition Height="75" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <Rectangle 
-            Fill="Black" 
-            Opacity="0.2" 
+        <!-- Heading -->
+        <Border 
             Grid.Row="0" 
-            Grid.ColumnSpan="2"
-            HorizontalAlignment="Stretch" 
-            VerticalAlignment="Stretch"
-            />
-        <celestial:HeaderTextBlock Text="{Binding DisplayText}" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.ColumnSpan="2" Grid.Row="0">
-            <celestial:HeaderTextBlock.Effect>
-                <DropShadowEffect Color="Black" Opacity="1" BlurRadius="40" ShadowDepth="0" />
-            </celestial:HeaderTextBlock.Effect>
-        </celestial:HeaderTextBlock>
-
-        <Rectangle 
-            Fill="Black" 
-            Opacity="0.2" 
-            Grid.Row="0" 
-            Grid.RowSpan="9"
-            Grid.ColumnSpan="2"
             HorizontalAlignment="Stretch" 
             VerticalAlignment="Stretch" 
-            StrokeThickness="1"
-            Stroke="{StaticResource MediumBackgroundBrush}"
-            />
-        <celestial:SubHeaderTextBlock Text="Username" Grid.Row="1" Grid.Column="0" />
-        <TextBox Text="{Binding Username}" Grid.Row="1" Grid.Column="1" />
+            BorderBrush="{StaticResource GrayLighterBrush}" 
+            BorderThickness="0,0,0,1" 
+            Background="{StaticResource SmartNavbarColorStartBrush}" 
+        >
+            <Border.Effect>
+                <BlurEffect x:Name="headingBlur" Radius="{Binding ShowValidationBox, Converter={StaticResource BooleanToBlurConverter}}" />
+            </Border.Effect>
+            <Grid>
+                <graphics:CelestialLibraryIcon
+                    Margin="25,0,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    SnapsToDevicePixels="False"
+                    Height="28"
+                />
 
-        <celestial:SubHeaderTextBlock Text="Password" Grid.Row="2" Grid.Column="0" />
-        <PasswordBox helpers:PasswordHelper.Password="{Binding Password, Mode=TwoWay}" helpers:PasswordHelper.Attach="True" Grid.Row="2" Grid.Column="1" />
+                <Grid HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,25,0" Visibility="{Binding RegisterUser, Converter={StaticResource BoolToVis}, FallbackValue=false}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <celestial:TextBlock Text="Already registered?" Grid.Column="0" VerticalAlignment="Center" Margin="0,0,14,0" Foreground="{StaticResource GrayDarkBrush}" />
+                    <Button Content="SIGN IN" FontWeight="SemiBold" Grid.Column="1" VerticalAlignment="Center" Style="{StaticResource BtnDangerStyle}" Command="{Binding SwitchBetweenRegisterLoginCommand}" />
+                </Grid>
 
-        <celestial:SubHeaderTextBlock Text="Confirm Password" Grid.Row="3" Grid.Column="0" Visibility="{Binding RegisterUser, Converter={StaticResource BoolToVis}, FallbackValue=false}"  />
-        <PasswordBox helpers:PasswordHelper.Password="{Binding PasswordConfirm, Mode=TwoWay}" helpers:PasswordHelper.Attach="True" Visibility="{Binding RegisterUser, Converter={StaticResource BoolToVis}, FallbackValue=false}" Grid.Row="3" Grid.Column="1" />
+                <Grid HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,25,0" Visibility="{Binding RegisterUser, Converter={StaticResource BoolToInvis}, FallbackValue=false}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <celestial:TextBlock Text="Need an account?" Grid.Column="0" VerticalAlignment="Center" Margin="0,0,14,0" Foreground="{StaticResource GrayDarkBrush}" />
+                    <Button Content="CREATE ACCOUNT" FontWeight="SemiBold" Grid.Column="1" VerticalAlignment="Center" Style="{StaticResource BtnDangerStyle}" Command="{Binding SwitchBetweenRegisterLoginCommand}" />
+                </Grid>
+            </Grid>
+        </Border>
 
-        <celestial:SubHeaderTextBlock Text="Email Address" Grid.Row="4" Grid.Column="0" Visibility="{Binding RegisterUser, Converter={StaticResource BoolToVis}, FallbackValue=false}" />
-        <TextBox Text="{Binding EmailAddress}" Grid.Row="4" Grid.Column="1" Visibility="{Binding RegisterUser, Converter={StaticResource BoolToVis}, FallbackValue=false}" />
 
-        <CheckBox Content="New User?" IsChecked="{Binding RegisterUser}" Grid.Row="5" Grid.Column="0" HorizontalAlignment="Left" />
-        <Button Command="{Binding RegisterLoginCommand}" Grid.Row="5" Grid.Column="1" HorizontalAlignment="Right">
-            <Button.Content>
-                <celestial:TextBlock Text="{Binding DisplayText}" />
-            </Button.Content>
-        </Button>
+        <Grid Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,20,0,0">
+            <Grid.Effect>
+                <BlurEffect x:Name="contentBlur" Radius="{Binding ShowValidationBox, Converter={StaticResource BooleanToBlurConverter}}" />
+            </Grid.Effect>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="3.5*" />
+                <ColumnDefinition Width="2.25*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <!-- Info box -->
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <Rectangle Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="90" Margin="0,0,30,0">
+                    <Rectangle.Fill>
+                        <LinearGradientBrush StartPoint="0.5,1" EndPoint="0.45,0">
+                            <GradientStop Color="Transparent" Offset="1" />
+                            <GradientStop Color="{StaticResource GrayLighter}" />
+                        </LinearGradientBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+
+                <Image Source="{StaticResource AltiumLibPane}" Grid.Column="1" Grid.RowSpan="2" VerticalAlignment="Top" Margin="40,0,25,0">
+                    <Image.Effect>
+                        <DropShadowEffect BlurRadius="12" ShadowDepth="3" Color="{StaticResource GrayDarker}" Opacity="0.5" />
+                    </Image.Effect>
+                </Image>
+
+                <StackPanel Grid.Row="0" Orientation="Vertical" Margin="0,0,0,15">
+                    <celestial:HeaderTextBlock Foreground="{StaticResource RedBrush}" Text="Celestial Library" FontWeight="Regular" />
+                    <celestial:TextBlock 
+                        Foreground="{StaticResource GrayBrush}" 
+                        TextWrapping="Wrap" 
+                        Text="The largest open source database library for Altium. Featuring high quality footprints, data and exceptional 3D models for every component." 
+                    />
+                    <celestial:TextBlock 
+                        Foreground="{StaticResource GrayBrush}" 
+                        TextWrapping="Wrap" 
+                        Text="Trusted by Universities and Corporations around the world." 
+                    />
+
+                    <celestial:TextBlock 
+                        Margin="0,18,0,6"
+                        Foreground="{StaticResource GrayBrush}" 
+                        Text="{Binding ComponentCount, StringFormat='Component Count: {0:#,##0}'}" 
+                    />
+                    <celestial:TextBlock 
+                        Foreground="{StaticResource GrayBrush}" 
+                        Text="{Binding FootprintCount, StringFormat='Footprint Count: {0:#,##0}'}" 
+                    />
+                </StackPanel>
+
+                <Button Content="View on GitHub" Command="{Binding ViewGithubCommand}" Style="{StaticResource BtnDangerStyle}" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top" />
+
+            </Grid>
+
+            <!-- Register/Login Box -->
+            <Border 
+                Grid.Column="2" 
+                BorderThickness="1" 
+                BorderBrush="{StaticResource GrayMidLightBrush}" 
+                VerticalAlignment="Top" 
+                HorizontalAlignment="Stretch"
+                Padding="14,0,14,0"
+            >
+                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <!-- heading -->
+                        <RowDefinition />
+                        <!-- username -->
+                        <RowDefinition />
+                        <!-- username tb -->
+                        <RowDefinition />
+                        <!-- email -->
+                        <RowDefinition />
+                        <!-- email tb-->
+                        <RowDefinition />
+                        <!-- Password -->
+                        <RowDefinition />
+                        <!-- Password tb -->
+                        <RowDefinition />
+                        <!-- Password conf -->
+                        <RowDefinition />
+                        <!-- Password conf tb -->
+                        <RowDefinition Height="Auto" />
+                        <!-- border -->
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+
+                    <Border Grid.ColumnSpan="2" Grid.Row="0" BorderThickness="0,0,0,1" BorderBrush="{StaticResource GrayMidLightBrush}" Background="{StaticResource GrayLightestBrush}" Padding="15" Margin="-14,0,-14,10">
+                        <celestial:TextBlock 
+                            Text="{Binding BoxTitleText}" 
+                            HorizontalAlignment="Left" 
+                            VerticalAlignment="Center" 
+                            FontSize="18"
+                            FontWeight="Light"
+                            Foreground="{StaticResource GrayDarkerBrush}"
+                        />
+                    </Border>
+
+                    <celestial:TextBlock Text="Username" Grid.Row="1" />
+                    <TextBox Text="{Binding Username}" Grid.Row="2" />
+
+                    <celestial:TextBlock Text="Email Address" Grid.Row="3" Visibility="{Binding RegisterUser, Converter={StaticResource BoolToVis}, FallbackValue=false}" />
+                    <TextBox Text="{Binding EmailAddress}" Grid.Row="4" Visibility="{Binding RegisterUser, Converter={StaticResource BoolToVis}, FallbackValue=false}" />
+
+                    <celestial:TextBlock Text="Password" Grid.Row="5" />
+                    <PasswordBox 
+                        helpers:PasswordHelper.Password="{Binding Password, Mode=TwoWay}" 
+                        helpers:PasswordHelper.Attach="True" 
+                        Grid.Row="6" 
+                    />
+
+                    <celestial:TextBlock Text="Confirm Password" Grid.Row="7" Visibility="{Binding RegisterUser, Converter={StaticResource BoolToVis}, FallbackValue=false}"  />
+                    <PasswordBox 
+                        helpers:PasswordHelper.Password="{Binding PasswordConfirm, Mode=TwoWay}" 
+                        helpers:PasswordHelper.Attach="True" 
+                        Visibility="{Binding RegisterUser, Converter={StaticResource BoolToVis}, FallbackValue=false}" 
+                        Grid.Row="8" 
+                    />
+
+                    <Border 
+                        BorderThickness="0,1,0,0" 
+                        BorderBrush="{StaticResource GrayMidLightBrush}" 
+                        Grid.Row="9"  
+                        Visibility="{Binding RegisterUser, Converter={StaticResource BoolToInvis}, FallbackValue=false}" 
+                        Padding="14,10,14,0" 
+                        Margin="-14,10,-14,0"
+                    >
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+
+                            <Border 
+                                BorderThickness="0,0,0,1" 
+                                BorderBrush="{StaticResource GrayMidLightBrush}" 
+                                Grid.Row="0" 
+                                Grid.ColumnSpan="2" 
+                                Visibility="{Binding RegisterUser, Converter={StaticResource BoolToInvis}, FallbackValue=false}" 
+                                Background="{StaticResource GrayLightestBrush}"
+                                Padding="14,10,14,10" 
+                                Margin="-14,-10,-14,10"
+                            >
+                                <celestial:SubHeaderTextBlock Text="or" HorizontalAlignment="Center" Margin="0" />
+                            </Border>
+
+                            <celestial:TextBlock Text="Altium Library Path" Grid.Row="1" />
+                            <TextBox Text="{Binding AltiumPath}" Grid.Row="2" IsReadOnly="True" />
+                            <Border Grid.Row="2" Grid.Column="1" Margin="6,0,6,12">
+                                <Button Content="..." Command="{Binding AltiumBrowseCommand}" />
+                            </Border>
+                            
+                            <celestial:DetailTextBlock 
+                                Text="{Binding AltiumPathError}" 
+                                Foreground="{StaticResource DangerBrush}" 
+                                Visibility="{Binding ShowAltiumPathError, Converter={StaticResource BoolToVis}}" 
+                                Grid.Row="3" 
+                                Grid.ColumnSpan="2" 
+                                TextWrapping="Wrap"
+                            />
+                        </Grid>
+                    </Border>
+
+                    <Border 
+                        BorderThickness="0,1,0,0" 
+                        BorderBrush="{StaticResource GrayMidLightBrush}" 
+                        Grid.Row="9"  
+                        Visibility="{Binding RegisterUser, Converter={StaticResource BoolToVis}, FallbackValue=false}" 
+                        Padding="14,10,14,0" 
+                        Margin="-14,10,-14,0"
+                    >
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+
+                            <celestial:TextBlock Text="First Name" Grid.Row="0" />
+                            <TextBox Text="{Binding FirstName}" Grid.Row="1" Grid.Column="0" Margin="0,0,3,12" />
+
+                            <celestial:TextBlock Text="Last Name" Grid.Row="0" Grid.Column="1" />
+                            <TextBox Text="{Binding LastName}" Grid.Row="1" Grid.Column="1" Margin="3,0,0,12" />
+
+                            <celestial:TextBlock Text="Database Use" Grid.Row="2" />
+                            <ComboBox Grid.Row="3" Grid.ColumnSpan="2" SelectedValuePath="Tag" SelectedValue="{Binding DatabaseUse}">
+                                <ComboBoxItem Content="Hobbyist" Tag="Hobbyist" />
+                                <ComboBoxItem Content="Student" Tag="Student" />
+                                <ComboBoxItem Content="Academic/Research" Tag="Academic" />
+                                <ComboBoxItem Content="Professional" Tag="Professional" />
+                            </ComboBox>
+
+                            <celestial:TextBlock Text="Company/University" Grid.Row="4" Visibility="{Binding ShowCompanyField, Converter={StaticResource BoolToVis}, FallbackValue=false}" />
+                            <TextBox Text="{Binding Company}" Grid.Row="5" Grid.ColumnSpan="2" Visibility="{Binding ShowCompanyField, Converter={StaticResource BoolToVis}, FallbackValue=false}" />
+
+                            <CheckBox Content="It's OK to contact me with regards to the database." Grid.Row="6" Grid.ColumnSpan="2" IsChecked="{Binding AllowEmail}" ToolTip="No spam, Promise!" />
+                        </Grid>
+                    </Border>
+
+                    <Border 
+                        Grid.ColumnSpan="2" 
+                        Grid.Row="10" 
+                        BorderThickness="0,1,0,0" 
+                        BorderBrush="{StaticResource GrayMidLightBrush}" 
+                        Background="{StaticResource GrayLightestBrush}" 
+                        Padding="14,11,14,9"
+                        Margin="-14,10,-14,0"
+                    >
+                        <Grid>
+                            <Button Command="{Binding ShowVerificationCommand}" Content="Activate Account" HorizontalAlignment="Left" Style="{StaticResource BtnInfoStyle}" Visibility="{Binding RegisterUser, Converter={StaticResource BoolToVis}, FallbackValue=false}" />
+                            <Button Command="{Binding RegisterLoginCommand}" HorizontalAlignment="Right" Content="{Binding DisplayText}" Style="{StaticResource BtnPrimaryStyle}" />
+                        </Grid>
+                    </Border>
+                </Grid>
+            </Border>
+        </Grid>
+
+        <!-- Block background when activation is up -->
+        <Rectangle Fill="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.RowSpan="2" Visibility="{Binding ShowValidationBox, Converter={StaticResource BoolToVis}}" />
+
+        <!-- Activation -->
+        <Border 
+            Grid.Row="1" 
+            BorderThickness="1" 
+            BorderBrush="{StaticResource GrayMidLightBrush}"
+            Background="White"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Padding="14,0,14,0"
+            Visibility="{Binding ShowValidationBox, Converter={StaticResource BoolToVis}}"
+            Width="350"
+        >
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Border Grid.Row="0" BorderThickness="0,0,0,1" BorderBrush="{StaticResource GrayMidLightBrush}" Background="{StaticResource GrayLightestBrush}" Padding="15" Margin="-14,0,-14,10">
+                    <celestial:TextBlock 
+                        Text="Activate Account" 
+                        HorizontalAlignment="Center" 
+                        VerticalAlignment="Center" 
+                        FontSize="18"
+                        FontWeight="Light"
+                        Foreground="{StaticResource GrayDarkerBrush}"
+                    />
+                </Border>
+
+                <celestial:TextBlock Text="Activation Code" Grid.Row="1" />
+                <TextBox Text="{Binding ActivationCode}" Grid.Row="2" HorizontalContentAlignment="Center" />
+
+                <Border 
+                        Grid.Row="3" 
+                        BorderThickness="0,1,0,0" 
+                        BorderBrush="{StaticResource GrayMidLightBrush}" 
+                        Background="{StaticResource GrayLightestBrush}" 
+                        Padding="14,11,14,9"
+                        Margin="-14,10,-14,0"
+                    >
+                    <Grid>
+                        <Button Command="{Binding ShowVerificationCommand}" Content="Back" HorizontalAlignment="Left" Style="{StaticResource BtnDangerStyle}" Visibility="{Binding RegisterUser, Converter={StaticResource BoolToVis}, FallbackValue=false}" />
+                        <Button Command="{Binding ActivateAccountCommand}" HorizontalAlignment="Right" Content="Activate" Style="{StaticResource BtnPrimaryStyle}" />
+                    </Grid>
+                </Border>
+            </Grid>
+        </Border>
     </Grid>
 </UserControl>

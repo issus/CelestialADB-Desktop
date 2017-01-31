@@ -4,10 +4,10 @@
     xmlns:celestial="clr-namespace:Harris.CelestialADB.Desktop.Controls"
 >
     <Style TargetType="{x:Type celestial:DetailTextBlock}">
-        <Setter Property="Foreground" Value="{StaticResource LowkeyForegroundBrush}" />
+        <Setter Property="Foreground" Value="{StaticResource GrayLightBrush}" />
         <Setter Property="FontFamily" Value="{DynamicResource ThemeFontFamily}" />
         <Setter Property="FontSize" Value="{DynamicResource StandardFontSize}" />
-        <Setter Property="Margin" Value="{DynamicResource TextMargin}" />
+        <Setter Property="Margin" Value="1,0,1,0" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="SnapsToDevicePixels" Value="true" />
         <Setter Property="UseLayoutRounding" Value="true" />
@@ -17,7 +17,7 @@
         <Setter Property="FontFamily" Value="{DynamicResource ThemeFontFamily}" />
         <Setter Property="FontWeight" Value="Light" />
         <Setter Property="FontSize" Value="{DynamicResource HeadingFontSize}" />
-        <Setter Property="Foreground" Value="{StaticResource LowkeyForegroundBrush}" />
+        <Setter Property="Foreground" Value="{StaticResource GrayDarkBrush}" />
         <Setter Property="Margin" Value="{DynamicResource HeaderMargin}" />
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="VerticalAlignment" Value="Top" />
@@ -28,27 +28,28 @@
     <Style TargetType="{x:Type celestial:TextBlock}">
         <Setter Property="Margin" Value="{DynamicResource TextMargin}" />
         <Setter Property="FontFamily" Value="{DynamicResource ThemeFontFamily}" />
-        <Setter Property="Foreground" Value="{StaticResource StandardForegroundBrush}" />
+        <Setter Property="Foreground" Value="{StaticResource GrayDarkBrush}" />
         <Setter Property="FontSize" Value="{DynamicResource StandardFontSize}" />
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="SnapsToDevicePixels" Value="true" />
         <Setter Property="UseLayoutRounding" Value="true" />
     </Style>
-<!--
-    <Style TargetType="{x:Type TextBlock}">
+
+    <Style TargetType="{x:Type Label}">
         <Setter Property="FontFamily" Value="{StaticResource ThemeFontFamily}" />
-        <Setter Property="Foreground" Value="{StaticResource StandardForegroundBrush}" />
+        <Setter Property="Foreground" Value="{StaticResource GrayDarkBrush}" />
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="0,0,0,6" />
     </Style>
--->
+
     <Style TargetType="{x:Type celestial:MinorHeaderTextBlock}">
         <Setter Property="Margin" Value="{DynamicResource MinorHeaderMargin}" />
         <Setter Property="FontWeight" Value="Light" />
         <Setter Property="FontSize" Value="{DynamicResource MinorHeaderFontSize}" />
         <Setter Property="FontFamily" Value="{DynamicResource ThemeFontFamily}" />
-        <Setter Property="Foreground" Value="{StaticResource LowkeyForegroundBrush}" />
+        <Setter Property="Foreground" Value="{StaticResource GrayDarkBrush}" />
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="VerticalAlignment" Value="Top" />
         <Setter Property="SnapsToDevicePixels" Value="true" />
@@ -60,7 +61,7 @@
         <Setter Property="FontWeight" Value="Light" />
         <Setter Property="FontSize" Value="{DynamicResource ErrorHeaderFontSize}" />
         <Setter Property="FontFamily" Value="{DynamicResource ThemeFontFamily}" />
-        <Setter Property="Foreground" Value="{StaticResource Accent2Brush}" />
+        <Setter Property="Foreground" Value="{StaticResource DangerBrush}" />
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="VerticalAlignment" Value="Top" />
         <Setter Property="SnapsToDevicePixels" Value="true" />
@@ -72,7 +73,7 @@
         <Setter Property="FontWeight" Value="Light" />
         <Setter Property="FontSize" Value="{DynamicResource SubHeaderFontSize}" />
         <Setter Property="FontFamily" Value="{DynamicResource ThemeFontFamily}" />
-        <Setter Property="Foreground" Value="{StaticResource LowkeyForegroundBrush}" />
+        <Setter Property="Foreground" Value="{StaticResource GrayDarkBrush}" />
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="VerticalAlignment" Value="Top" />
         <Setter Property="SnapsToDevicePixels" Value="true" />

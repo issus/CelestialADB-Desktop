@@ -4,18 +4,18 @@
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
 >
     <FontFamily x:Key="ThemeFontFamily">Segoe WP, Segoe UI</FontFamily>
-    <sys:Double x:Key="StandardFontSize">12</sys:Double>
-    <sys:Double x:Key="HeadingFontSize">26</sys:Double>
-    <sys:Double x:Key="SubHeaderFontSize">20</sys:Double>
+    <sys:Double x:Key="StandardFontSize">13</sys:Double>
+    <sys:Double x:Key="HeadingFontSize">24</sys:Double>
+    <sys:Double x:Key="SubHeaderFontSize">22</sys:Double>
     <sys:Double x:Key="ErrorHeaderFontSize">16</sys:Double>
-    <sys:Double x:Key="MinorHeaderFontSize">16</sys:Double>
+    <sys:Double x:Key="MinorHeaderFontSize">17</sys:Double>
     <sys:Double x:Key="LinkButtonFontSize">14</sys:Double>
 
-    <Thickness x:Key="SubHeaderMarginWideLeft">30,12,12,12</Thickness>
-    <Thickness x:Key="SubHeaderMargin">12,12,12,12</Thickness>
-    <Thickness x:Key="MinorHeaderMargin">12,12,12,9</Thickness>
-    <Thickness x:Key="HeaderMargin">12,12,12,18</Thickness>
-    <Thickness x:Key="TextMargin">12,6,12,6</Thickness>
+    <Thickness x:Key="SubHeaderMarginWideLeft">10,0,0,10</Thickness>
+    <Thickness x:Key="SubHeaderMargin">0,0,0,10</Thickness>
+    <Thickness x:Key="MinorHeaderMargin">0,0,0,6</Thickness>
+    <Thickness x:Key="HeaderMargin">0,0,0,10</Thickness>
+    <Thickness x:Key="TextMargin">0,0,0,6</Thickness>
 
     <Style TargetType="{x:Type Window}">
         <Setter Property="TextOptions.TextFormattingMode" Value="Ideal" />

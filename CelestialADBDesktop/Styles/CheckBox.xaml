@@ -6,7 +6,7 @@
         <Setter Property="Control.Template">
             <Setter.Value>
                 <ControlTemplate>
-                    <Rectangle Margin="1" SnapsToDevicePixels="true" Stroke="{StaticResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2"/>
+                    
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -17,22 +17,22 @@
         <Setter Property="Control.Template">
             <Setter.Value>
                 <ControlTemplate>
-                    <Rectangle Margin="14,0,0,0" SnapsToDevicePixels="true" Stroke="{StaticResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2"/>
+                    
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
 
     <Style TargetType="{x:Type CheckBox}">
-        <Setter Property="Foreground" Value="{StaticResource StandardForegroundBrush}"/>
-        <Setter Property="Background" Value="{StaticResource MediumBackgroundBrush}"/>
-        <Setter Property="BorderBrush" Value="{StaticResource LowkeyForegroundBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource GrayDarkBrush}"/>
+        <Setter Property="Background" Value="{StaticResource InputBgBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource GrayDarkBrush}"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="FocusVisualStyle" Value="{StaticResource EmptyCheckBoxFocusVisual}"/>
         <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="Margin" Value="12,6,12,6" />
-        <Setter Property="Padding" Value="12,6,12,6" />
-        <Setter Property="Height" Value="28"/>
+        <Setter Property="Margin" Value="0,0,0,15" />
+        <Setter Property="Padding" Value="6,0,6,0" />
+        <Setter Property="Height" Value="32"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type CheckBox}">
@@ -41,7 +41,7 @@
                             <ColorAnimation 
                                 BeginTime="0:0:0" 
                                 Duration="0:0:0.2" 
-                                To="{StaticResource StandardForegroundColour}"
+                                To="{StaticResource GrayLighter}"
                                 Storyboard.TargetName="Bd" 
                                 Storyboard.TargetProperty="Background.(SolidColorBrush.Color)"
                             />
@@ -61,13 +61,13 @@
                             Width="18" 
                             Height="18"
                         >
-                            
                             <Rectangle 
                                 Width="12" 
                                 Height="12" 
                                 HorizontalAlignment="Center" 
                                 VerticalAlignment="Center" 
-                                Fill="{StaticResource MediumBackgroundBrush}"
+                                Fill="{StaticResource PrimaryBrush}"
+                                Opacity="0"
                                 x:Name="Check"
                             />
                         </Border>
@@ -93,7 +93,7 @@
                             </Trigger.ExitActions>
                         </Trigger>
                         <Trigger Property="IsChecked" Value="true">
-                            <Setter TargetName="Check" Property="Fill" Value="{StaticResource Accent1Brush}" />
+                            <Setter TargetName="Check" Property="Opacity" Value="1" />
                         </Trigger>
                         <Trigger Property="HasContent" Value="true">
                             <Setter Property="FocusVisualStyle" Value="{StaticResource CheckRadioFocusVisual}"/>

@@ -3,6 +3,154 @@
     xmlns:PresentationOptions="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options" 
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 >
+    <Color x:Key="GrayDarkest" PresentationOptions:Freeze="True">#FF111111</Color>
+    <Color x:Key="GrayDarker" PresentationOptions:Freeze="True">#FF222222</Color>
+    <Color x:Key="GrayDark" PresentationOptions:Freeze="True">#FF333333</Color>
+    <Color x:Key="Gray" PresentationOptions:Freeze="True">#FF555555</Color>
+    <Color x:Key="GrayLight" PresentationOptions:Freeze="True">#FF999999</Color>
+    <Color x:Key="GrayMidLight" PresentationOptions:Freeze="True">#FFCCCCCC</Color>
+    <Color x:Key="GrayLighter" PresentationOptions:Freeze="True">#FFEEEEEE</Color>
+    <Color x:Key="GrayLightest" PresentationOptions:Freeze="True">#FFFAFAFA</Color>
+
+    <Color x:Key="BlueStandard" PresentationOptions:Freeze="True">#FF3276B1</Color>
+    <Color x:Key="BlueSky" PresentationOptions:Freeze="True">#FF0091D9</Color>
+    <Color x:Key="Blue" PresentationOptions:Freeze="True">#FF57889C</Color>
+    <Color x:Key="BlueLight" PresentationOptions:Freeze="True">#FF92A2A8</Color>
+    <Color x:Key="BlueDark" PresentationOptions:Freeze="True">#FF4c4f53</Color>
+    <Color x:Key="Green" PresentationOptions:Freeze="True">#FF356e35</Color>
+    <Color x:Key="GreenLight" PresentationOptions:Freeze="True">#FF71843f</Color>
+    <Color x:Key="GreenDark" PresentationOptions:Freeze="True">#FF496949</Color>
+    <Color x:Key="GreenBright" PresentationOptions:Freeze="True">#FF40AC2B</Color>
+    <Color x:Key="Red" PresentationOptions:Freeze="True">#FFa90329</Color>
+    <Color x:Key="RedLight" PresentationOptions:Freeze="True">#FFa65858</Color>
+    <Color x:Key="RedBright" PresentationOptions:Freeze="True">#FFed1c24</Color>
+    <Color x:Key="Yellow" PresentationOptions:Freeze="True">#FFb09b5b</Color>
+    <Color x:Key="Orange" PresentationOptions:Freeze="True">#FFC79121</Color>
+    <Color x:Key="OrangeDark" PresentationOptions:Freeze="True">#FFA57225</Color>
+    <Color x:Key="OrangeBright" PresentationOptions:Freeze="True">#FFffc40d</Color>
+    <Color x:Key="Pink" PresentationOptions:Freeze="True">#FFac5287</Color>
+    <Color x:Key="PinkDark" PresentationOptions:Freeze="True">#FFa8829f</Color>
+    <Color x:Key="Purple" PresentationOptions:Freeze="True">#FF6E587A</Color>
+    <Color x:Key="Darken" PresentationOptions:Freeze="True">#FF404040</Color>
+    <Color x:Key="Lighten" PresentationOptions:Freeze="True">#FFd5e7ec</Color>
+    <Color x:Key="White" PresentationOptions:Freeze="True">#FFffffff</Color>
+    <Color x:Key="Magenta" PresentationOptions:Freeze="True">#FF6e3671</Color>
+    <Color x:Key="Teal" PresentationOptions:Freeze="True">#FF568a89</Color>
+    <Color x:Key="TealLight" PresentationOptions:Freeze="True">#FF0AA66E</Color>
+
+    <Color x:Key="SmartNavbarColorStart" PresentationOptions:Freeze="True">#FFf3f3f3</Color>
+    <Color x:Key="SmartNavbarColorEnd" PresentationOptions:Freeze="True">#FFe2e2e2</Color>
+
+    <Color x:Key="Primary" PresentationOptions:Freeze="True">#FF3276B1</Color>
+    <Color x:Key="Success" PresentationOptions:Freeze="True">#FF739E73</Color>
+    <Color x:Key="Warning" PresentationOptions:Freeze="True">#FFC79121</Color>
+    <Color x:Key="Danger" PresentationOptions:Freeze="True">#FFA90329</Color>
+    <Color x:Key="DangerDark" PresentationOptions:Freeze="True">#FF77021d</Color>
+    <Color x:Key="Info" PresentationOptions:Freeze="True">#FF57889C</Color>
+
+    <Color x:Key="BodyBg" PresentationOptions:Freeze="True">#FFffffff</Color>
+
+    <Color x:Key="AsideLinkColor" PresentationOptions:Freeze="True">#FF2A2725</Color>
+    <Color x:Key="AsideColorStart" PresentationOptions:Freeze="True">#FF2A2725</Color>
+    <Color x:Key="AsideColorEnd" PresentationOptions:Freeze="True">#FF3A3633</Color>
+    <Color x:Key="AsideLinkColorHover" PresentationOptions:Freeze="True">#FFFFFFFF</Color>
+    <Color x:Key="AsideLinkColorFocus" PresentationOptions:Freeze="True">#FFC9C9C9</Color>
+    <Color x:Key="AsideNavActiveBGColor" PresentationOptions:Freeze="True">#FF616161</Color>
+
+    <Color x:Key="TableHeaderColorStart" PresentationOptions:Freeze="True">#FFf2f2f2</Color>
+    <Color x:Key="TableHeaderColorEnd" PresentationOptions:Freeze="True">#FFfafafa</Color>
+    <Color x:Key="TableBgAccent" PresentationOptions:Freeze="True">#FFf9f9f9</Color>
+    <Color x:Key="TableBgHover" PresentationOptions:Freeze="True">#FFecf3f8</Color>
+    <Color x:Key="TableBorderColor" PresentationOptions:Freeze="True">#FFdddddd</Color>
+
+    <Color x:Key="RibbonBGColor" PresentationOptions:Freeze="True">#FF474544</Color>
+
+    <Color x:Key="PanelBg" PresentationOptions:Freeze="True">#FFffffff</Color>
+    <Color x:Key="PanelInnerBorder" PresentationOptions:Freeze="True">#FFdddddd</Color>
+    <Color x:Key="PanelFooterBg" PresentationOptions:Freeze="True">#FFf5f5f5</Color>
+    <Color x:Key="PanelDefaultBorder" PresentationOptions:Freeze="True">#FFdddddd</Color>
+    <Color x:Key="PanelDefaultHeadingBg" PresentationOptions:Freeze="True">#FFf5f5f5</Color>
+    <Color x:Key="PanelPrimaryText" PresentationOptions:Freeze="True">#FFffffff</Color>
+
+    <Color x:Key="ListHroupBg" PresentationOptions:Freeze="True">#FFffffff</Color>
+    <Color x:Key="ListHroupBorder" PresentationOptions:Freeze="True">#FFdddddd</Color>
+    <Color x:Key="ListHroupHoverBg" PresentationOptions:Freeze="True">#FFf5f5f5</Color>
+    <Color x:Key="ListHroupActiveTextColor" PresentationOptions:Freeze="True">#FFc1d9ee</Color>
+    <Color x:Key="ListHroupLinkColor" PresentationOptions:Freeze="True">#FF555555</Color>
+    <Color x:Key="ListHroupLinkHeadingColor" PresentationOptions:Freeze="True">#FF333333</Color>
+
+    <Color x:Key="ProgressBg" PresentationOptions:Freeze="True">#FFf5f5f5</Color>
+    <Color x:Key="ProgressBarColor" PresentationOptions:Freeze="True">#FFffffff</Color>
+
+    <Color x:Key="StateWarningText" PresentationOptions:Freeze="True">#FFc09853</Color>
+    <Color x:Key="StateWarningBg" PresentationOptions:Freeze="True">#FFfcf8e3</Color>
+    <Color x:Key="StateWarningBorder" PresentationOptions:Freeze="True">#FFDBAB57</Color>
+    <Color x:Key="StateDangerText" PresentationOptions:Freeze="True">#FFb94a48</Color>
+    <Color x:Key="StateDangerBg" PresentationOptions:Freeze="True">#FFf2dede</Color>
+    <Color x:Key="StateDangerBorder" PresentationOptions:Freeze="True">#FFb94a48</Color>
+    <Color x:Key="StateSuccessText" PresentationOptions:Freeze="True">#FF468847</Color>
+    <Color x:Key="StateSuccessBg" PresentationOptions:Freeze="True">#FFdff0d8</Color>
+    <Color x:Key="StateSuccessBorder" PresentationOptions:Freeze="True">#FF468847</Color>
+    <Color x:Key="StateInfoText" PresentationOptions:Freeze="True">#FF346597</Color>
+    <Color x:Key="StateInfoBg" PresentationOptions:Freeze="True">#FFD6DDE7</Color>
+    <Color x:Key="StateInfoBorder" PresentationOptions:Freeze="True">#FF9cb4c5</Color>
+
+    <Color x:Key="PaginationBg" PresentationOptions:Freeze="True">#FFffffff</Color>
+    <Color x:Key="PaginationBorder" PresentationOptions:Freeze="True">#FFdddddd</Color>
+    <Color x:Key="PaginationHoverBorder" PresentationOptions:Freeze="True">#FFdddddd</Color>
+    <Color x:Key="PaginationActiveColor" PresentationOptions:Freeze="True">#FFffffff</Color>
+    <Color x:Key="PaginationDisabledBg" PresentationOptions:Freeze="True">#FFffffff</Color>
+    <Color x:Key="PaginationDisabledBorder" PresentationOptions:Freeze="True">#FFdddddd</Color>
+
+    <Color x:Key="NavOpenLinkHoverColor" PresentationOptions:Freeze="True">#FFffffff</Color>
+    <Color x:Key="NavOpenCaretBorderColor" PresentationOptions:Freeze="True">#FFffffff</Color>
+    <Color x:Key="NavTabsBorderColor" PresentationOptions:Freeze="True">#FFdddddd</Color>
+    <Color x:Key="NavTabsActiveLinkHoverBorderColor" PresentationOptions:Freeze="True">#FFdddddd</Color>
+    <Color x:Key="NavTabsJustifiedLinkBorderColor" PresentationOptions:Freeze="True">#FFdddddd</Color>
+
+    <Color x:Key="NavbarDefaultColor" PresentationOptions:Freeze="True">#FF777777</Color>
+    <Color x:Key="NavbarDefaultBg" PresentationOptions:Freeze="True">#FFf8f8f8</Color>
+    <Color x:Key="NavbarDefaultBorder" PresentationOptions:Freeze="True">#FFe7e7e7</Color>
+    <Color x:Key="NavbarDefaultLinkColor" PresentationOptions:Freeze="True">#FF777777</Color>
+    <Color x:Key="NavbarDefaultLinkHoverColor" PresentationOptions:Freeze="True">#FF333333</Color>
+    <Color x:Key="NavbarDefaultLinkActiveColor" PresentationOptions:Freeze="True">#FF555555</Color>
+    <Color x:Key="NavbarDefaultLinkActiveBg" PresentationOptions:Freeze="True">#FFE7E7E7</Color>
+    <Color x:Key="NavbarDefaultLinkDisabledColor" PresentationOptions:Freeze="True">#FFcccccc</Color>
+    <Color x:Key="NavbarDefaultBrandColor" PresentationOptions:Freeze="True">#FF777777</Color>
+    <Color x:Key="NavbarDefaultBrandHoverColor" PresentationOptions:Freeze="True">#FF5e5e5e</Color>
+    <Color x:Key="NavbarDefaultToggleHoverBg" PresentationOptions:Freeze="True">#FFdddddd</Color>
+    <Color x:Key="NavbarDefaultToggleIconBarBg" PresentationOptions:Freeze="True">#FFcccccc</Color>
+    <Color x:Key="NavbarDefaultToggleBorderColor" PresentationOptions:Freeze="True">#FFdddddd</Color>
+
+    <Color x:Key="DropdownBg" PresentationOptions:Freeze="True">#FFffffff</Color>
+    <Color x:Key="DropdownBorder" PresentationOptions:Freeze="True">#FF26000000</Color>
+    <Color x:Key="DropdownFallbackBorder" PresentationOptions:Freeze="True">#FFcccccc</Color>
+    <Color x:Key="DropdownDividerBg" PresentationOptions:Freeze="True">#FFe5e5e5</Color>
+    <Color x:Key="DropdownLinkActiveColor" PresentationOptions:Freeze="True">#FFffffff</Color>
+    <Color x:Key="DropdownLinkHoverColor" PresentationOptions:Freeze="True">#FFffffff</Color>
+    <Color x:Key="DropdownCaretColor" PresentationOptions:Freeze="True">#FF000000</Color>
+
+    <Color x:Key="InputBg" PresentationOptions:Freeze="True">#FFffffff</Color>
+    <Color x:Key="InputBorder" PresentationOptions:Freeze="True">#FFBDBDBD</Color>
+    <Color x:Key="InputBorderFocus" PresentationOptions:Freeze="True">#FF66afe9</Color>
+    <Color x:Key="LegendBorderColor" PresentationOptions:Freeze="True">#FFe5e5e5</Color>
+
+    <Color x:Key="BtnDefaultColor" PresentationOptions:Freeze="True">#FF333333</Color>
+    <Color x:Key="BtnDefaultBg" PresentationOptions:Freeze="True">#FFffffff</Color>
+    <Color x:Key="BtnDefaultBorder" PresentationOptions:Freeze="True">#FFcccccc</Color>
+    <Color x:Key="BtnPrimaryColor" PresentationOptions:Freeze="True">#FFffffff</Color>
+    <Color x:Key="BtnPrimaryBorder" PresentationOptions:Freeze="True">#FF2C699D</Color>
+    <Color x:Key="BtnSuccessColor" PresentationOptions:Freeze="True">#FFffffff</Color>
+    <Color x:Key="BtnSuccessBorder" PresentationOptions:Freeze="True">#FF659265</Color>
+    <Color x:Key="BtnWarningColor" PresentationOptions:Freeze="True">#FFffffff</Color>
+    <Color x:Key="BtnWarningBorder" PresentationOptions:Freeze="True">#FFb1811d</Color>
+    <Color x:Key="BtnDangerColor" PresentationOptions:Freeze="True">#FFffffff</Color>
+    <Color x:Key="BtnDangerBorder" PresentationOptions:Freeze="True">#FF900323</Color>
+    <Color x:Key="BtnDangerBorderDark" PresentationOptions:Freeze="True">#FF540114</Color>
+    <Color x:Key="BtnInfoColor" PresentationOptions:Freeze="True">#FFffffff</Color>
+    <Color x:Key="BtnInfoBorder" PresentationOptions:Freeze="True">#FF4e7a8c</Color>
+
+
 
     <Color x:Key="BackgroundColour" PresentationOptions:Freeze="True">#FF202023</Color>
     <Color x:Key="MediumBackgroundColour" PresentationOptions:Freeze="True">#FF45454B</Color>
@@ -26,4 +174,225 @@
 
     <SolidColorBrush Color="{StaticResource MediumBackgroundColour}" x:Key="DisabledForegroundBrush" PresentationOptions:Freeze="True"  />
     <SolidColorBrush Color="{StaticResource LowkeyForegroundColour}" x:Key="DisabledBackgroundBrush" PresentationOptions:Freeze="True"  />
+
+    <SolidColorBrush Color="{StaticResource SmartNavbarColorStart}" x:Key="SmartNavbarColorStartBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource SmartNavbarColorEnd}" x:Key="SmartNavbarColorEndBrush" PresentationOptions:Freeze="True" />
+
+    <SolidColorBrush Color="{StaticResource Primary}" x:Key="PrimaryBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource Success}" x:Key="SuccessBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource Warning}" x:Key="WarningBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource Danger}" x:Key="DangerBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource Info}" x:Key="InfoBrush" PresentationOptions:Freeze="True" />
+    
+    <SolidColorBrush Color="{StaticResource GrayDarkest}" x:Key="GrayDarkestBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource GrayDarker}" x:Key="GrayDarkerBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource GrayDark}" x:Key="GrayDarkBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource Gray}" x:Key="GrayBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource GrayLight}" x:Key="GrayLightBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource GrayMidLight}" x:Key="GrayMidLightBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource GrayLighter}" x:Key="GrayLighterBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource GrayLightest}" x:Key="GrayLightestBrush" PresentationOptions:Freeze="True" />
+    
+    <SolidColorBrush Color="{StaticResource Bluestandard}" x:Key="BluestandardBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource Bluesky}" x:Key="BlueskyBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource Blue}" x:Key="BlueBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource Bluelight}" x:Key="BluelightBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource Bluedark}" x:Key="BluedarkBrush" PresentationOptions:Freeze="True" 
+                     />
+    <SolidColorBrush Color="{StaticResource Green}" x:Key="GreenBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource Greenlight}" x:Key="GreenlightBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource Greendark}" x:Key="GreendarkBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource Greenbright}" x:Key="GreenbrightBrush" PresentationOptions:Freeze="True" />
+    
+    <SolidColorBrush Color="{StaticResource Red}" x:Key="RedBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource Yellow}" x:Key="YellowBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource Orange}" x:Key="OrangeBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource Orangedark}" x:Key="OrangedarkBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource Orangebright}" x:Key="OrangebrightBrush" PresentationOptions:Freeze="True" />
+    
+    <SolidColorBrush Color="{StaticResource Pink}" x:Key="PinkBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource Pinkdark}" x:Key="PinkdarkBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource Purple}" x:Key="PurpleBrush" PresentationOptions:Freeze="True" />
+    
+    <SolidColorBrush Color="{StaticResource Magenta}" x:Key="MagentaBrush" PresentationOptions:Freeze="True" />
+    
+    <SolidColorBrush Color="{StaticResource Teal}" x:Key="TealBrush" PresentationOptions:Freeze="True" />
+    
+    <SolidColorBrush Color="{StaticResource RedLight}" x:Key="RedlightBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource RedBright}" x:Key="RedbrightBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource TealLight}" x:Key="TeallightBrush" PresentationOptions:Freeze="True" />
+    
+    <SolidColorBrush Color="{StaticResource TealLight}" x:Key="WizardStepCompleteBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource Bluesky}" x:Key="WizardStepActiveBrush" PresentationOptions:Freeze="True" />
+    
+    <SolidColorBrush Color="{StaticResource AsidecolorStart}" x:Key="SmartFooterBackgroundBrush" PresentationOptions:Freeze="True" />
+    
+    <SolidColorBrush Color="{StaticResource BodyBg}" x:Key="BodyBgBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource GrayDark}" x:Key="TextColorBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource GrayLight}" x:Key="TextMutedBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource GrayLight}" x:Key="AbbrBorderColorBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource GrayLight}" x:Key="HeadingsSmallColorBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource GrayLight}" x:Key="BlockquoteSmallColorBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource GrayLighter}" x:Key="BlockquoteBorderColorBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource GrayLighter}" x:Key="PageHeaderBorderColorBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource BrandPrimary}" x:Key="LinkColorBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource LinkHoverColor}" x:Key="LinkHoverColorBrush" PresentationOptions:Freeze="True" />
+    
+    <SolidColorBrush Color="{StaticResource ComponentActiveColor}" x:Key="ComponentActiveColorBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource BrandPrimary}" x:Key="ComponentActiveBgBrush" PresentationOptions:Freeze="True" />
+    
+    <SolidColorBrush Color="{StaticResource AsideLinkColor}" x:Key="AsidelinkcolorBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource AsideColorStart}" x:Key="AsidecolorStartBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource AsideColorEnd}" x:Key="AsidecolorEndBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource AsideLinkcolorHover}" x:Key="AsideLinkcolorHoverBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource AsideLinkcolorFocus}" x:Key="AsideLinkcolorFocusBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource AsideNavActiveBgColor}" x:Key="AsideNavActiveBgColorBrush" PresentationOptions:Freeze="True" />
+    
+    <SolidColorBrush Color="{StaticResource TableHeaderColorStart}" x:Key="TableHeaderColorStartBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource TableHeaderColorEnd}" x:Key="TableHeaderColorEndBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource TableBgAccent}" x:Key="TableBgAccentBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource TableBgHover}" x:Key="TableBgHoverBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource TableBgHover}" x:Key="TableBgActiveBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource TableBorderColor}" x:Key="TableBorderColorBrush" PresentationOptions:Freeze="True" />
+    
+    <SolidColorBrush Color="{StaticResource Ribbonbgcolor}" x:Key="RibbonbgcolorBrush" PresentationOptions:Freeze="True" />
+    
+    <SolidColorBrush Color="{StaticResource PanelBg}" x:Key="PanelBgBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource PanelInnerBorder}" x:Key="PanelInnerBorderBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource PanelFooterBg}" x:Key="PanelFooterBgBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource GrayDark}" x:Key="PanelDefaultTextBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource PanelDefaultBorder}" x:Key="PanelDefaultBorderBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource PanelDefaultHeadingBg}" x:Key="PanelDefaultHeadingBgBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource PanelPrimaryText}" x:Key="PanelPrimaryTextBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource BrandPrimary}" x:Key="PanelPrimaryBorderBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource BrandPrimary}" x:Key="PanelPrimaryHeadingBgBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource StateSuccessText}" x:Key="PanelSuccessTextBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource StateSuccessBorder}" x:Key="PanelSuccessBorderBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource StateSuccessBg}" x:Key="PanelSuccessHeadingBgBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource StateInfoText}" x:Key="PanelInfoTextBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource StateInfoBorder}" x:Key="PanelInfoBorderBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource StateInfoBg}" x:Key="PanelInfoHeadingBgBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource StateWarningText}" x:Key="PanelWarningTextBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource StateWarningBorder}" x:Key="PanelWarningBorderBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource StateWarningBg}" x:Key="PanelWarningHeadingBgBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource StateDangerText}" x:Key="PanelDangerTextBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource StateDangerBorder}" x:Key="PanelDangerBorderBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource StateDangerBg}" x:Key="PanelDangerHeadingBgBrush" PresentationOptions:Freeze="True" />
+    
+    <SolidColorBrush Color="{StaticResource ComponentActiveColor}" x:Key="ListGroupActiveColorBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource ComponentActiveBg}" x:Key="ListGroupActiveBgBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource ListGroupActiveBg}" x:Key="ListGroupActiveBorderBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource GrayLight}" x:Key="ListGroupDisabledColorBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource GrayLighter}" x:Key="ListGroupDisabledBgBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource ListGroupDisabledColor}" x:Key="ListGroupDisabledTextColorBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource ListGroupLinkColor}" x:Key="ListGroupLinkHoverColorBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource ListGroupBg}" x:Key="ListGroupBgBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource ListGroupBorder}" x:Key="ListGroupBorderBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource ListGroupHoverBg}" x:Key="ListGroupHoverBgBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource ListGroupActiveTextColor}" x:Key="ListGroupActiveTextColorBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource ListGroupLinkColor}" x:Key="ListGroupLinkColorBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource ListGroupLinkHeadingColor}" x:Key="ListGroupLinkHeadingColorBrush" PresentationOptions:Freeze="True" />
+    
+    <SolidColorBrush Color="{StaticResource ProgressBg}" x:Key="ProgressBgBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource ProgressBarColor}" x:Key="ProgressBarColorBrush" PresentationOptions:Freeze="True" />
+    
+    <SolidColorBrush Color="{StaticResource StateWarningText}" x:Key="StateWarningTextBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource StateWarningBg}" x:Key="StateWarningBgBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource StateWarningBorder}" x:Key="StateWarningBorderBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource StateDangerText}" x:Key="StateDangerTextBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource StateDangerBg}" x:Key="StateDangerBgBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource StateDangerBorder}" x:Key="StateDangerBorderBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource StateSuccessText}" x:Key="StateSuccessTextBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource StateSuccessBg}" x:Key="StateSuccessBgBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource StateSuccessBorder}" x:Key="StateSuccessBorderBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource StateInfoText}" x:Key="StateInfoTextBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource StateInfoBg}" x:Key="StateInfoBgBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource StateInfoBorder}" x:Key="StateInfoBorderBrush" PresentationOptions:Freeze="True" />
+    
+    <SolidColorBrush Color="{StaticResource LinkColor}" x:Key="PaginationColorBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource PaginationBg}" x:Key="PaginationBgBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource PaginationBorder}" x:Key="PaginationBorderBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource PaginationHoverBorder}" x:Key="PaginationHoverBorderBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource LinkHoverColor}" x:Key="PaginationHoverColorBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource GrayLighter}" x:Key="PaginationHoverBgBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource PaginationActiveColor}" x:Key="PaginationActiveColorBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource BrandPrimary}" x:Key="PaginationActiveBgBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource BrandPrimary}" x:Key="PaginationActiveBorderBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource GrayLight}" x:Key="PaginationDisabledColorBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource PaginationDisabledBg}" x:Key="PaginationDisabledBgBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource PaginationDisabledBorder}" x:Key="PaginationDisabledBorderBrush" PresentationOptions:Freeze="True" />
+    
+    <SolidColorBrush Color="{StaticResource NavOpenLinkHoverColor}" x:Key="NavOpenLinkHoverColorBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource NavOpenCaretBorderColor}" x:Key="NavOpenCaretBorderColorBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource GrayLighter}" x:Key="NavTabsLinkHoverBorderColorBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource BodyBg}" x:Key="NavTabsActiveLinkHoverBgBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource Gray}" x:Key="NavTabsActiveLinkHoverColorBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource BodyBg}" x:Key="NavTabsJustifiedActiveLinkBorderColorBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource NavTabsBorderColor}" x:Key="NavTabsBorderColorBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource NavTabsActiveLinkHoverBorderColor}" x:Key="NavTabsActiveLinkHoverBorderColorBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource NavTabsJustifiedLinkBorderColor}" x:Key="NavTabsJustifiedLinkBorderColorBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource NavbarDefaultLinkColor}" x:Key="NavbarDefaultBrandColorBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource NavbarDefaultColor}" x:Key="NavbarDefaultColorBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource NavbarDefaultBg}" x:Key="NavbarDefaultBgBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource NavbarDefaultBorder}" x:Key="NavbarDefaultBorderBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource NavbarDefaultLinkColor}" x:Key="NavbarDefaultLinkColorBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource NavbarDefaultLinkHoverColor}" x:Key="NavbarDefaultLinkHoverColorBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource NavbarDefaultLinkActiveColor}" x:Key="NavbarDefaultLinkActiveColorBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource NavbarDefaultLinkActiveBg}" x:Key="NavbarDefaultLinkActiveBgBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource NavbarDefaultLinkDisabledColor}" x:Key="NavbarDefaultLinkDisabledColorBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource NavbarDefaultBrandHoverColor}" x:Key="NavbarDefaultBrandHoverColorBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource NavbarDefaultToggleHoverBg}" x:Key="NavbarDefaultToggleHoverBgBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource NavbarDefaultToggleIconBarBg}" x:Key="NavbarDefaultToggleIconBarBgBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource NavbarDefaultToggleBorderColor}" x:Key="NavbarDefaultToggleBorderColorBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource GrayLighter}" x:Key="NavLinkHoverBgBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource GrayLight}" x:Key="NavDisabledLinkColorBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource GrayLight}" x:Key="NavDisabledLinkHoverColorBrush" PresentationOptions:Freeze="True" />
+    
+    <SolidColorBrush Color="{StaticResource DropdownBg}" x:Key="DropdownBgBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource DropdownBorder}" x:Key="DropdownBorderBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource DropdownFallbackBorder}" x:Key="DropdownFallbackBorderBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource DropdownDividerBg}" x:Key="DropdownDividerBgBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource DropdownLinkActiveColor}" x:Key="DropdownLinkActiveColorBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource DropdownLinkHoverColor}" x:Key="DropdownLinkHoverColorBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource DropdownCaretColor}" x:Key="DropdownCaretColorBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource ComponentActiveBg}" x:Key="DropdownLinkActiveBgBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource GrayDark}" x:Key="DropdownLinkColorBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource DropdownLinkActiveBg}" x:Key="DropdownLinkHoverBgBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource GrayLight}" x:Key="DropdownLinkDisabledColorBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource GrayLight}" x:Key="DropdownHeaderColorBrush" PresentationOptions:Freeze="True" />
+    
+    <SolidColorBrush Color="{StaticResource InputBg}" x:Key="InputBgBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource GrayLighter}" x:Key="InputBgDisabledBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource Gray}" x:Key="InputColorBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource GrayLight}" x:Key="InputColorPlaceholderBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource InputBorder}" x:Key="InputBorderBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource InputBorderFocus}" x:Key="InputBorderFocusBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource GrayDark}" x:Key="LegendColorBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource GrayLighter}" x:Key="InputGroupAddonBgBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource InputBorder}" x:Key="InputGroupAddonBorderColorBrush" PresentationOptions:Freeze="True" />
+    
+    <SolidColorBrush Color="{StaticResource LegendBorderColor}" x:Key="LegendBorderColorBrush" PresentationOptions:Freeze="True" />
+    
+    <SolidColorBrush Color="{StaticResource BtnDefaultColor}" x:Key="BtnDefaultColorBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource BtnDefaultBg}" x:Key="BtnDefaultBgBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource BtnDefaultBorder}" x:Key="BtnDefaultBorderBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource BtnPrimaryColor}" x:Key="BtnPrimaryColorBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource BtnPrimaryBorder}" x:Key="BtnPrimaryBorderBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource BtnSuccessColor}" x:Key="BtnSuccessColorBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource BtnSuccessBorder}" x:Key="BtnSuccessBorderBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource BtnWarningColor}" x:Key="BtnWarningColorBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource BtnWarningBorder}" x:Key="BtnWarningBorderBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource BtnDangerColor}" x:Key="BtnDangerColorBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource BtnDangerBorder}" x:Key="BtnDangerBorderBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource BtnDangerBorderDark}" x:Key="BtnDangerBorderDarkBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource BtnInfoColor}" x:Key="BtnInfoColorBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource BtnInfoBorder}" x:Key="BtnInfoBorderBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource Primary}" x:Key="BtnPrimaryBgBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource Success}" x:Key="BtnSuccessBgBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource Warning}" x:Key="BtnWarningBgBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource Danger}" x:Key="BtnDangerBgBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource DangerDark}" x:Key="BtnDangerDarkBgBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource Info}" x:Key="BtnInfoBgBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource GrayLight}" x:Key="BtnLinkDisabledColorBrush" PresentationOptions:Freeze="True" />
+
 </ResourceDictionary>

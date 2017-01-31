@@ -78,7 +78,7 @@ namespace Harris.CelestialADB.Desktop
 
         private void MainGrid_SizeChanged(object sender, EventArgs e)
         {
-            CalculateScale();
+            //CalculateScale();
         }
 
         private void CalculateScale()

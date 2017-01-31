@@ -37,6 +37,7 @@
     <!-- A reference to the entire .NET Framework is automatically included -->
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DatabaseStats.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserRegistrationRequest.cs" />
     <Compile Include="UserType.cs" />

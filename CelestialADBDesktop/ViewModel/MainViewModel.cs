@@ -20,24 +20,17 @@ namespace Harris.CelestialADB.Desktop.ViewModel
     public class MainViewModel : ViewModelBase
     {
         private string version;
-
-        private DateTime buildDate;
-
-        private bool isUserLoggedIn;
-
         private int windowWidth;
-
         private int windowHeight;
-
-        private bool showRegisterLogin;
 
         public MainViewModel()
         {
             version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
-            buildDate = DateTime.Now;
 
             WindowHeight = 900;
             WindowWidth = 1200;
+
+            UserIsLoggedIn = false;
 
 
             if (SystemParameters.PrimaryScreenHeight < 800)
@@ -62,26 +55,21 @@ namespace Harris.CelestialADB.Desktop.ViewModel
                 WindowWidth = 1200;
             }
 
-            isUserLoggedIn = false;
-            showRegisterLogin = true;
+            Date = DateTime.Now;
 
             LoginRegisterViewModel = new LoginRegisterViewModel();
+            LoginRegisterViewModel.PropertyChanged += LoginRegisterViewModel_PropertyChanged;
+        }
+
+        private void LoginRegisterViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "UserIsLoggedIn")
+            {
+                UserIsLoggedIn = LoginRegisterViewModel.UserIsLoggedIn;
+            }
         }
 
         public LoginRegisterViewModel LoginRegisterViewModel { get; set; }
-
-        public bool ShowRegisterLogin {
-            get
-            {
-                return showRegisterLogin;
-            }
-            set
-            {
-                this.showRegisterLogin = value;
-
-                RaisePropertyChanged("ShowRegisterLogin");
-            }
-        }
 
         public int WindowHeight
         {
@@ -126,21 +114,28 @@ namespace Harris.CelestialADB.Desktop.ViewModel
             }
         }
 
-        public DateTime BuildDate
+        private DateTime date;
+        public DateTime Date
         {
-            get
-            {
-                return this.buildDate;
-            }
+            get { return date; }
             set
             {
-                if (buildDate == value)
-                    return;
-
-                this.buildDate = value;
-
-                RaisePropertyChanged("BuildDate");
+                date = value;
+                RaisePropertyChanged("Date");
             }
         }
+
+
+        private bool userIsLoggedIn;
+        public bool UserIsLoggedIn
+        {
+            get { return userIsLoggedIn; }
+            set
+            {
+                userIsLoggedIn = value;
+                RaisePropertyChanged("UserIsLoggedIn");
+            }
+        }
+
     }
 }

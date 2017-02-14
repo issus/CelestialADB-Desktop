@@ -34,7 +34,7 @@
             Background="{StaticResource SmartNavbarColorStartBrush}" 
         >
             <Border.Effect>
-                <BlurEffect x:Name="headingBlur" Radius="{Binding ShowValidationBox, Converter={StaticResource BooleanToBlurConverter}}" />
+                <BlurEffect x:Name="headingBlur" Radius="{Binding ShowBlur, Converter={StaticResource BooleanToBlurConverter}}" />
             </Border.Effect>
             <Grid>
                 <graphics:CelestialLibraryIcon
@@ -65,10 +65,9 @@
             </Grid>
         </Border>
 
-
         <Grid Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,20,0,0">
             <Grid.Effect>
-                <BlurEffect x:Name="contentBlur" Radius="{Binding ShowValidationBox, Converter={StaticResource BooleanToBlurConverter}}" />
+                <BlurEffect x:Name="contentBlur" Radius="{Binding ShowBlur, Converter={StaticResource BooleanToBlurConverter}}" />
             </Grid.Effect>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
@@ -147,23 +146,25 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <!-- heading -->
-                        <RowDefinition />
+                        <RowDefinition Height="auto" />
                         <!-- username -->
-                        <RowDefinition />
+                        <RowDefinition Height="auto" />
                         <!-- username tb -->
-                        <RowDefinition />
+                        <RowDefinition Height="auto" />
                         <!-- email -->
-                        <RowDefinition />
+                        <RowDefinition Height="auto" />
                         <!-- email tb-->
-                        <RowDefinition />
+                        <RowDefinition Height="auto" />
                         <!-- Password -->
-                        <RowDefinition />
+                        <RowDefinition Height="auto" />
                         <!-- Password tb -->
-                        <RowDefinition />
+                        <RowDefinition Height="auto" />
                         <!-- Password conf -->
-                        <RowDefinition />
+                        <RowDefinition Height="auto" />
                         <!-- Password conf tb -->
                         <RowDefinition Height="Auto" />
+                        <!-- Error -->
+                        <RowDefinition Height="auto" />
                         <!-- border -->
                         <RowDefinition Height="auto" />
                     </Grid.RowDefinitions>
@@ -180,26 +181,28 @@
                     </Border>
 
                     <celestial:TextBlock Text="Username" Grid.Row="1" />
-                    <TextBox Text="{Binding Username}" Grid.Row="2" />
+                    <TextBox Text="{Binding Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" ToolTip="Username must only contain letters and numbers (A-Z, 0-9) for AzureSQL" />
 
                     <celestial:TextBlock Text="Email Address" Grid.Row="3" Visibility="{Binding RegisterUser, Converter={StaticResource BoolToVis}, FallbackValue=false}" />
-                    <TextBox Text="{Binding EmailAddress}" Grid.Row="4" Visibility="{Binding RegisterUser, Converter={StaticResource BoolToVis}, FallbackValue=false}" />
+                    <TextBox Text="{Binding EmailAddress, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="4" Visibility="{Binding RegisterUser, Converter={StaticResource BoolToVis}, FallbackValue=false}" />
 
                     <celestial:TextBlock Text="Password" Grid.Row="5" />
                     <PasswordBox 
-                        helpers:PasswordHelper.Password="{Binding Password, Mode=TwoWay}" 
+                        helpers:PasswordHelper.Password="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                         helpers:PasswordHelper.Attach="True" 
                         Grid.Row="6" 
+                        ToolTip="Password must be at least 10 characters and contain an uppercase letter, lowercase letter, a number and a symbol for AzureSQL"
                     />
 
                     <celestial:TextBlock Text="Confirm Password" Grid.Row="7" Visibility="{Binding RegisterUser, Converter={StaticResource BoolToVis}, FallbackValue=false}"  />
                     <PasswordBox 
-                        helpers:PasswordHelper.Password="{Binding PasswordConfirm, Mode=TwoWay}" 
+                        helpers:PasswordHelper.Password="{Binding PasswordConfirm, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                         helpers:PasswordHelper.Attach="True" 
                         Visibility="{Binding RegisterUser, Converter={StaticResource BoolToVis}, FallbackValue=false}" 
                         Grid.Row="8" 
                     />
 
+                    <!-- LOGIN -->
                     <Border 
                         BorderThickness="0,1,0,0" 
                         BorderBrush="{StaticResource GrayMidLightBrush}" 
@@ -250,6 +253,7 @@
                         </Grid>
                     </Border>
 
+                    <!-- REGISTER -->
                     <Border 
                         BorderThickness="0,1,0,0" 
                         BorderBrush="{StaticResource GrayMidLightBrush}" 
@@ -274,10 +278,10 @@
                             </Grid.RowDefinitions>
 
                             <celestial:TextBlock Text="First Name" Grid.Row="0" />
-                            <TextBox Text="{Binding FirstName}" Grid.Row="1" Grid.Column="0" Margin="0,0,3,12" />
+                            <TextBox Text="{Binding FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="0" Margin="0,0,3,12" />
 
                             <celestial:TextBlock Text="Last Name" Grid.Row="0" Grid.Column="1" />
-                            <TextBox Text="{Binding LastName}" Grid.Row="1" Grid.Column="1" Margin="3,0,0,12" />
+                            <TextBox Text="{Binding LastName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1" Margin="3,0,0,12" />
 
                             <celestial:TextBlock Text="Database Use" Grid.Row="2" />
                             <ComboBox Grid.Row="3" Grid.ColumnSpan="2" SelectedValuePath="Tag" SelectedValue="{Binding DatabaseUse}">
@@ -287,16 +291,24 @@
                                 <ComboBoxItem Content="Professional" Tag="Professional" />
                             </ComboBox>
 
-                            <celestial:TextBlock Text="Company/University" Grid.Row="4" Visibility="{Binding ShowCompanyField, Converter={StaticResource BoolToVis}, FallbackValue=false}" />
-                            <TextBox Text="{Binding Company}" Grid.Row="5" Grid.ColumnSpan="2" Visibility="{Binding ShowCompanyField, Converter={StaticResource BoolToVis}, FallbackValue=false}" />
+                            <celestial:TextBlock Text="Company/University" Grid.Row="4" Visibility="{Binding ShowCompanyField, Converter={StaticResource BoolToVis}, FallbackValue=false}" ToolTip="It's nice to know who's using the database. Purely curiosity." />
+                            <TextBox Text="{Binding Company, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="5" Grid.ColumnSpan="2" Visibility="{Binding ShowCompanyField, Converter={StaticResource BoolToVis}, FallbackValue=false}" />
 
                             <CheckBox Content="It's OK to contact me with regards to the database." Grid.Row="6" Grid.ColumnSpan="2" IsChecked="{Binding AllowEmail}" ToolTip="No spam, Promise!" />
                         </Grid>
                     </Border>
 
+                    <celestial:TextBlock 
+                        Text="{Binding ErrorMessage}" 
+                        TextWrapping="Wrap"
+                        Grid.Row="10" 
+                        Foreground="{StaticResource DangerBrush}" 
+                        Visibility="{Binding ShowLoginError, Converter={StaticResource BoolToVis}}" 
+                    />
+
                     <Border 
                         Grid.ColumnSpan="2" 
-                        Grid.Row="10" 
+                        Grid.Row="11" 
                         BorderThickness="0,1,0,0" 
                         BorderBrush="{StaticResource GrayMidLightBrush}" 
                         Background="{StaticResource GrayLightestBrush}" 
@@ -313,8 +325,9 @@
         </Grid>
 
         <!-- Block background when activation is up -->
-        <Rectangle Fill="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.RowSpan="2" Visibility="{Binding ShowValidationBox, Converter={StaticResource BoolToVis}}" />
-
+        <Rectangle Fill="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.RowSpan="2" Visibility="{Binding ShowActivationBox, Converter={StaticResource BoolToVis}}" />
+        <Rectangle Fill="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.RowSpan="2" Visibility="{Binding ShowResendToken, Converter={StaticResource BoolToVis}}" />
+        
         <!-- Activation -->
         <Border 
             Grid.Row="1" 
@@ -324,14 +337,20 @@
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
             Padding="14,0,14,0"
-            Visibility="{Binding ShowValidationBox, Converter={StaticResource BoolToVis}}"
-            Width="350"
+            Visibility="{Binding ShowActivationBox, Converter={StaticResource BoolToVis}}"
+            Width="400"
         >
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition />
                     <RowDefinition />
                     <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
                     <RowDefinition />
                 </Grid.RowDefinitions>
                 <Border Grid.Row="0" BorderThickness="0,0,0,1" BorderBrush="{StaticResource GrayMidLightBrush}" Background="{StaticResource GrayLightestBrush}" Padding="15" Margin="-14,0,-14,10">
@@ -345,23 +364,137 @@
                     />
                 </Border>
 
-                <celestial:TextBlock Text="Activation Code" Grid.Row="1" />
-                <TextBox Text="{Binding ActivationCode}" Grid.Row="2" HorizontalContentAlignment="Center" />
+                <celestial:TextBlock 
+                    Text="{Binding ActivationMessage}" 
+                    TextWrapping="Wrap"
+                    Grid.Row="1" 
+                    Foreground="{StaticResource InfoBrush}" 
+                    Visibility="{Binding ShowActivationMessage, Converter={StaticResource BoolToVis}}" 
+                />
+
+                <celestial:TextBlock Text="Username" Grid.Row="2" />
+                <TextBox Text="{Binding Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="3" />
+
+                <celestial:TextBlock Text="Password" Grid.Row="4" />
+                <PasswordBox 
+                        helpers:PasswordHelper.Password="{Binding Password, Mode=TwoWay}" 
+                        helpers:PasswordHelper.Attach="True" 
+                        Grid.Row="5" 
+                    />
+
+                <celestial:TextBlock Text="Activation Code" Grid.Row="6" />
+                <TextBox Text="{Binding ActivationCode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="7" HorizontalContentAlignment="Center" TextWrapping="Wrap" Height="95" />
+
+                <celestial:TextBlock 
+                    Text="{Binding ErrorMessage}" 
+                    TextWrapping="Wrap"
+                    Grid.Row="8" 
+                    Foreground="{StaticResource DangerBrush}" 
+                    Visibility="{Binding ShowActivationError, Converter={StaticResource BoolToVis}}" 
+                />
 
                 <Border 
-                        Grid.Row="3" 
-                        BorderThickness="0,1,0,0" 
-                        BorderBrush="{StaticResource GrayMidLightBrush}" 
-                        Background="{StaticResource GrayLightestBrush}" 
-                        Padding="14,11,14,9"
-                        Margin="-14,10,-14,0"
-                    >
+                    Grid.Row="9" 
+                    BorderThickness="0,1,0,0" 
+                    BorderBrush="{StaticResource GrayMidLightBrush}" 
+                    Background="{StaticResource GrayLightestBrush}" 
+                    Padding="14,11,14,9"
+                    Margin="-14,10,-14,0"
+                >
                     <Grid>
                         <Button Command="{Binding ShowVerificationCommand}" Content="Back" HorizontalAlignment="Left" Style="{StaticResource BtnDangerStyle}" Visibility="{Binding RegisterUser, Converter={StaticResource BoolToVis}, FallbackValue=false}" />
-                        <Button Command="{Binding ActivateAccountCommand}" HorizontalAlignment="Right" Content="Activate" Style="{StaticResource BtnPrimaryStyle}" />
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                            <Button Command="{Binding ShowResendTokenCommand}" HorizontalAlignment="Right" Content="Resend" Style="{StaticResource BtnInfoStyle}" />
+                            <Button Command="{Binding ActivateAccountCommand}" HorizontalAlignment="Right" Content="Activate" Style="{StaticResource BtnPrimaryStyle}" />
+                        </StackPanel>
                     </Grid>
                 </Border>
             </Grid>
+        </Border>
+
+        <!-- Resend Email-->
+        <Border 
+            Grid.Row="1" 
+            BorderThickness="1" 
+            BorderBrush="{StaticResource GrayMidLightBrush}"
+            Background="White"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Padding="14,0,14,0"
+            Visibility="{Binding ShowResendToken, Converter={StaticResource BoolToVis}}"
+            Width="400"
+        >
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Border Grid.Row="0" BorderThickness="0,0,0,1" BorderBrush="{StaticResource GrayMidLightBrush}" Background="{StaticResource GrayLightestBrush}" Padding="15" Margin="-14,0,-14,10">
+                    <celestial:TextBlock 
+                        Text="Resend Activation" 
+                        HorizontalAlignment="Center" 
+                        VerticalAlignment="Center" 
+                        FontSize="18"
+                        FontWeight="Light"
+                        Foreground="{StaticResource GrayDarkerBrush}"
+                    />
+                </Border>
+
+                <celestial:TextBlock Text="Email Address" Grid.Row="1" />
+                <TextBox Text="{Binding EmailAddress, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" />
+
+                <celestial:TextBlock 
+                    Text="{Binding ErrorMessage}" 
+                    TextWrapping="Wrap"
+                    Grid.Row="3" 
+                    Foreground="{StaticResource DangerBrush}" 
+                    Visibility="{Binding ShowResendError, Converter={StaticResource BoolToVis}}" 
+                />
+
+                <Border 
+                    Grid.Row="4" 
+                    BorderThickness="0,1,0,0" 
+                    BorderBrush="{StaticResource GrayMidLightBrush}" 
+                    Background="{StaticResource GrayLightestBrush}" 
+                    Padding="14,11,14,9"
+                    Margin="-14,10,-14,0"
+                >
+                    <Grid>
+                        <Button Command="{Binding ShowResendTokenCommand}" Content="Back" HorizontalAlignment="Left" Style="{StaticResource BtnDangerStyle}" />
+                        
+                        <Button Command="{Binding ResendTokenCommand}" HorizontalAlignment="Right" Content="Resend" Style="{StaticResource BtnPrimaryStyle}" />
+                        
+                    </Grid>
+                </Border>
+            </Grid>
+        </Border>
+        
+        <!-- Block background when busy -->
+        <Border Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.RowSpan="2" Visibility="{Binding ShowBusy, Converter={StaticResource BoolToVis}}">
+            <celestial:SubHeaderTextBlock x:Name="waitForIt" Text="Please wait..." HorizontalAlignment="Center" VerticalAlignment="Center">
+                <celestial:SubHeaderTextBlock.Triggers>
+                    <EventTrigger RoutedEvent="TextBlock.Loaded">
+                        <EventTrigger.Actions>
+                            <BeginStoryboard>
+                                <Storyboard
+                                    BeginTime="00:00:00"
+                                    RepeatBehavior="Forever"
+                                    Storyboard.TargetName="waitForIt"
+                                    Storyboard.TargetProperty="Opacity"
+                                    >
+                                    <DoubleAnimation From="1.0" To="0.3" Duration="0:0:1" AccelerationRatio="0.6" AutoReverse="True"  />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger.Actions>
+                    </EventTrigger>
+                </celestial:SubHeaderTextBlock.Triggers>
+                <celestial:SubHeaderTextBlock.Effect>
+                    <DropShadowEffect Color="Black" Opacity="1" BlurRadius="40" ShadowDepth="0" />
+                </celestial:SubHeaderTextBlock.Effect>
+            </celestial:SubHeaderTextBlock>
         </Border>
     </Grid>
 </UserControl>

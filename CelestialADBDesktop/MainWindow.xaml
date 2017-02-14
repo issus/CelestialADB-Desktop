@@ -12,6 +12,7 @@
     xmlns:celestial="clr-namespace:Harris.CelestialADB.Desktop.Controls"
     xmlns:conv="clr-namespace:Harris.CelestialADB.Desktop.Converters"
     xmlns:data="clr-namespace:Harris.CelestialADB.Desktop.Data"
+    xmlns:graphics="clr-namespace:Harris.CelestialADB.Desktop.Graphics"
     Title="Celestial Altium DB Desktop"
     WindowStartupLocation="CenterScreen"
     Height="{Binding WindowHeight, FallbackValue=900}"
@@ -29,6 +30,7 @@
     
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVis" />
+        <conv:BooleanToInvisibilityConverter x:Key="BoolToInvis" />
         <conv:BooleanToBlurConverter x:Key="BooleanToBlurConverter" />
     </Window.Resources>
 
@@ -43,39 +45,57 @@
             />
         </Grid.LayoutTransform>
         <Grid.RowDefinitions>
-            <RowDefinition Height="75" />
+            <RowDefinition Height="50" />
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <Grid Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Height="Auto">
-            <Rectangle Fill="Black" Opacity="0.15" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="0" />
 
-            <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Left">
-                <StackPanel.Resources>
-                    <Style TargetType="TextBlock">
-                        <Setter Property="Foreground" Value="Gray" />
-                    </Style>
-                </StackPanel.Resources>
-                <TextBlock Text="{Binding Version, StringFormat='Celestial Altium DB Desktop Version \{0\}'}" Margin="6" />
-                <TextBlock Text="{Binding BuildDate, StringFormat='\{0:dd MMM yyyy\}'}" Margin="6" />
-            </StackPanel>
+        <Border Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="50">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,1" EndPoint="0,0">
+                    <GradientStop Color="{StaticResource SmartNavbarColorStart}" Offset="1" />
+                    <GradientStop Color="{StaticResource SmartNavbarColorEnd}" />
+                </LinearGradientBrush>
+            </Border.Background>
+            <Grid>
+                <Viewbox 
+                    Stretch="Uniform"
+                    Height="25"
+                    Margin="25,0,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                >
+                    <graphics:CelestialLibraryIcon
+                        SnapsToDevicePixels="False"
+                    />
+                </Viewbox>
+            </Grid>
+        </Border>
+        
+        <Border 
+            Background="{StaticResource AsidecolorStartBrush}" 
+            BorderBrush="{StaticResource GrayMidLightBrush}"
+            BorderThickness="0,1,0,0"
+            Grid.Row="2" 
+            VerticalAlignment="Bottom" 
+            HorizontalAlignment="Stretch"
+            Padding="20,15,13,0"
+            Height="52"
+        >
+            <Grid>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Left">
+                    <celestial:TextBlock Text="{Binding Version, StringFormat='Celestial Altium DB Desktop Version \{0\}'}" Foreground="White" />
+                </StackPanel>
 
-            <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Right" >
-                <StackPanel.Resources>
-                    <Style TargetType="TextBlock">
-                        <Setter Property="Foreground" Value="Gray" />
-                    </Style>
-                </StackPanel.Resources>
-                <TextBlock Text="{Binding BuildDate, StringFormat='Copyright \{0:yyyy\} Mark Harris. All rights reserved.'}" Margin="6" />
-            </StackPanel>
-        </Grid>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right">
+                    <celestial:TextBlock Text="{Binding Date, StringFormat='Copyright © \{0:yyyy\} Mark Harris. All rights reserved.'}" Foreground="White" />
+                </StackPanel>
+            </Grid>
+        </Border>
 
         <!-- END BACKGROUND -->
 
         <TabControl x:Name="MAIN_TABCONTROL_MODULES" Margin="12" Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-            <TabControl.Effect>
-                <BlurEffect x:Name="tabBlur" Radius="{Binding BlurTabs, Converter={StaticResource BooleanToBlurConverter}, FallbackValue=false}" />
-            </TabControl.Effect>
             <TabItem Header="Settings" DataContext="{Binding SettingsModel}">
                 <Grid Background="Transparent">
                     <views:SettingsView />
@@ -86,7 +106,7 @@
         <views:RegisterLoginView
             Grid.RowSpan="3" 
             DataContext="{Binding LoginRegisterViewModel}" 
-            Visibility="{Binding ShowRegisterLogin, Converter={StaticResource BoolToVis}, FallbackValue=true}" 
+            Visibility="{Binding UserIsLoggedIn, Converter={StaticResource BoolToInvis}}" 
             HorizontalAlignment="Stretch" 
             VerticalAlignment="Stretch" 
         />

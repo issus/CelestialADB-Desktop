@@ -9,11 +9,18 @@ using Microsoft.WindowsAPICodePack.Dialogs;
 using System.IO;
 using System.Text.RegularExpressions;
 using Harris.CelestialADB.ApiData;
+using RestSharp;
+using Harris.CelestialADB.Desktop.WebService;
+using System.Globalization;
+using Harris.CelestialADB.Desktop.WPF;
+using System.Windows.Input;
 
 namespace Harris.CelestialADB.Desktop.ViewModel
 {
     public class LoginRegisterViewModel : ViewModelBase
     {
+        //todo: this view model is getting pretty big now. Split out to register, login, auth, resend.
+
         public LoginRegisterViewModel()
         {
             username = "";
@@ -22,7 +29,7 @@ namespace Harris.CelestialADB.Desktop.ViewModel
             emailAddress = "";
             verificationCode = "";
             registerUser = true;
-            showVerificationCodeEntry = false;
+            showActivationCodeEntry = false;
             errorMessage = "";
             boxTitleText = "Registration is FREE";
             displayText = "Register";
@@ -35,47 +42,246 @@ namespace Harris.CelestialADB.Desktop.ViewModel
             showCompanyField = true;
             Company = "";
             allowEmail = true;
-            ShowValidationBox = false;
+            ShowActivationBox = false;
             ActivationCode = "";
+            ShowActivationMessage = false;
+            ShowBusy = false;
+            ShowResendToken = false;
+            UserIsLoggedIn = false; //= false;
 
-            //TODO: Web Service Call
-            componentCount = 28635;
-            footprintCount = 601;
+            try
+            {
+                var stats = AltiumDbApi.GetDatabaseStats();
+                componentCount = stats.ComponentCount;
+                footprintCount = stats.FootprintCount;
+            }
+            catch (Exception err)
+            {
+                // todo: network issue?
+            }
 
-            VerifyCodeCommand = new DelegateCommand(VerifyCode);
-            RegisterLoginCommand = new DelegateCommand(RegisterLogin, RegisterLoginButtonEnabled);
+            ActivateAccountCommand = new AwaitableDelegateCommand(ActivateAccount, ActivateAccountButtonEnabled);
+            RegisterLoginCommand = new AwaitableDelegateCommand(RegisterLogin, RegisterLoginButtonEnabled);
+            ResendTokenCommand = new AwaitableDelegateCommand(ResendToken, ResendButtonEnabled);
 
-            SwitchBetweenRegisterLoginCommand = new DelegateCommand(() => RegisterUser = !RegisterUser);
+            SwitchBetweenRegisterLoginCommand = new DelegateCommand(() => { RegisterUser = !RegisterUser; ShowLoginError = false; });
 
-            ShowVerificationCommand = new DelegateCommand(() => ShowValidationBox = !ShowValidationBox);
+            ShowResendTokenCommand = new DelegateCommand(() => { ShowResendToken = !ShowResendToken; ShowActivationError = false; ShowActivationMessage = false; ShowActivationBox = !ShowActivationBox; });
+
+            ShowVerificationCommand = new DelegateCommand(() => { ShowActivationBox = !ShowActivationBox; ShowActivationError = false; });
 
             ViewGithubCommand = new DelegateCommand(() => System.Diagnostics.Process.Start("https://github.com/issus/altium-library"));
 
             AltiumBrowseCommand = new DelegateCommand(BrowseForAltiumDirectory);
         }
 
-        void RegisterLogin()
+        async Task<bool> RegisterLogin()
+        {
+            ShowRegisterError = false;
+            ShowLoginError = false;
+            ErrorMessage = "";
+
+            if (registerUser)
+            {
+                return await DoRegistration();
+            }
+            else
+            {
+                return await DoLogin();
+            }
+        }
+
+        async Task<bool> DoRegistration()
+        {
+            ActivationMessage = "";
+            ErrorMessage = "";
+            ShowLoginError = false;
+
+            if (!CheckEmailAddressValid(EmailAddress))
+            {
+                ShowLoginError = true;
+                ErrorMessage = "You need to enter a valid email address.";
+                return false;
+            }
+
+            if (Password.Length < 10)
+            {
+                ShowLoginError = true;
+                ErrorMessage = "Password must be at least 10 characters.";
+                return false;
+            }
+
+            UserRegistrationRequest user = new UserRegistrationRequest();
+            user.AllowEmail = AllowEmail;
+            user.Username = Username;
+            user.Password = Password;
+            user.ConfirmPassword = PasswordConfirm;
+            user.FirstName = FirstName;
+            user.LastName = LastName;
+            user.Company = Company;
+            user.Email = EmailAddress;
+            user.Password = Password;
+            user.UserType = databaseUse;
+
+            ShowBusy = true;
+            try
+            {
+                var resp = await AltiumDbApi.AccountRegister(user);
+                ShowBusy = false;
+
+                if (resp.Success)
+                {
+                    ActivationCode = "";
+                    ActivationMessage = "Registration complete. Please activate with the code you were emailed - it may take a few minutes to arrive.";
+                    ShowActivationMessage = true;
+                    ShowActivationBox = true;
+                }
+                else
+                {
+                    ShowLoginError = true;
+                    ErrorMessage = resp.Message;
+                    return false;
+                }
+            }
+            catch (Exception err)
+            {
+                ShowBusy = false;
+
+                ShowLoginError = true;
+                ErrorMessage = err.InnerException.Message;
+                return false;
+            }
+
+            return true;
+        }
+
+        async Task<bool> DoLogin()
         {
             ErrorMessage = "";
+            ShowLoginError = false;
 
             if (String.IsNullOrEmpty(Username) ||
                 String.IsNullOrEmpty(Password))
             {
                 ErrorMessage = "You need to enter a username and password.";
-                return;
+                ShowLoginError = true;
+                return false;
             }
 
-            // todo: Switch email validation to proper regex
-            if (RegisterUser && (String.IsNullOrEmpty(EmailAddress) || !EmailAddress.Contains('@') || !EmailAddress.Contains('.')))
+            ShowBusy = true;
+            try
             {
-                ErrorMessage = "You need to enter an email address.";
-                return;
+                var response = await AltiumDbApi.Login(Username, Password);
+                ShowBusy = false;
+
+                if (!string.IsNullOrEmpty(response.error))
+                {
+                    ErrorMessage = response.error_description;
+                    ShowLoginError = true;
+                    return false;
+                }
             }
+            catch (Exception err)
+            {
+                ShowBusy = false;
+                ErrorMessage = err.InnerException.Message;
+                ShowLoginError = true;
+            }
+
+            ShowBusy = true;
+            try
+            {
+                var active = await AltiumDbApi.CheckAccountActivated();
+                ShowBusy = false;
+
+                if (!active.Success)
+                {
+                    ErrorMessage = active.Message;
+                    ShowLoginError = true;
+                }
+            }
+            catch (Exception err)
+            {
+                ShowBusy = false;
+                ErrorMessage = err.InnerException.Message;
+                ShowLoginError = true;
+            }
+
+            UserIsLoggedIn = true;
+
+            return true;
         }
 
-        void VerifyCode()
+        async Task<bool> ActivateAccount()
         {
             ErrorMessage = "";
+            ShowActivationError = false;
+
+            try
+            {
+                ShowBusy = true;
+                var response = await AltiumDbApi.ActivateAccount(new AccountActivation { Username = this.Username, Password = this.Password, Code = this.ActivationCode });
+                ShowBusy = false;
+
+                if (response.Success)
+                {
+                    ShowActivationBox = false;
+                    RegisterUser = false;
+                }
+                else
+                {
+                    ErrorMessage = response.Message;
+                    ShowActivationError = true;
+                    return false;
+                }
+            }
+            catch (Exception err)
+            {
+                ShowBusy = false;
+                ErrorMessage = err.InnerException.Message;
+                ShowActivationError = true;
+                return false;
+            }
+
+            return await DoLogin();
+        }
+
+        async Task<bool> ResendToken()
+        {
+            ErrorMessage = "";
+            ShowResendError = false;
+
+            ShowBusy = true;
+            try
+            {
+                var response = await AltiumDbApi.ResendActivationEmail(EmailAddress);
+                ShowBusy = false;
+
+                if (!response.Success)
+                {
+                    ErrorMessage = response.Message;
+                    ShowResendError = true;
+                }
+                else
+                {
+                    ShowResendToken = false;
+
+                    ActivationCode = "";
+                    ActivationMessage = "Please activate with the code you were emailed - it may take a few minutes to arrive.";
+                    ShowActivationMessage = true;
+                    ShowActivationBox = true;
+                }
+
+                return response.Success;
+            }
+            catch (Exception err)
+            {
+                ShowBusy = false;
+                ErrorMessage = err.InnerException.Message;
+                ShowResendError = true;
+            }
+
+            return false;
         }
 
         void BrowseForAltiumDirectory()
@@ -132,6 +338,18 @@ namespace Harris.CelestialADB.Desktop.ViewModel
 
             AltiumPath = path;
         }
+
+        private bool userIsLoggedIn;
+        public bool UserIsLoggedIn
+        {
+            get { return userIsLoggedIn; }
+            set
+            {
+                userIsLoggedIn = value;
+                RaisePropertyChanged("UserIsLoggedIn");
+            }
+        }
+
 
         private string altiumPath;
         public string AltiumPath
@@ -213,6 +431,39 @@ namespace Harris.CelestialADB.Desktop.ViewModel
             }
         }
 
+        private bool showLoginError;
+        public bool ShowLoginError
+        {
+            get { return showLoginError; }
+            set
+            {
+                showLoginError = value;
+                RaisePropertyChanged("ShowLoginError");
+            }
+        }
+
+        private bool showRegisterError;
+        public bool ShowRegisterError
+        {
+            get { return showRegisterError; }
+            set
+            {
+                showRegisterError = value;
+                RaisePropertyChanged("ShowRegisterError");
+            }
+        }
+
+        private bool showActivationError;
+        public bool ShowActivationError
+        {
+            get { return showActivationError; }
+            set
+            {
+                showActivationError = value;
+                RaisePropertyChanged("ShowActivationError");
+            }
+        }
+
         private string errorMessage;
         public string ErrorMessage
         {
@@ -225,16 +476,18 @@ namespace Harris.CelestialADB.Desktop.ViewModel
             }
         }
 
+
         private string username;
         public string Username
         {
             get { return username; }
             set
             {
-                username = value;
+                username = value.Replace("@csql", "");
 
                 RaisePropertyChanged("Username");
-                RaisePropertyChanged("RegisterLoginCommand");
+                RegisterLoginCommand.RaiseCanExecuteChanged();
+                ActivateAccountCommand.RaiseCanExecuteChanged();
             }
         }
 
@@ -247,7 +500,8 @@ namespace Harris.CelestialADB.Desktop.ViewModel
                 password = value;
 
                 RaisePropertyChanged("Password");
-                RaisePropertyChanged("RegisterLoginCommand");
+                RegisterLoginCommand.RaiseCanExecuteChanged();
+                ActivateAccountCommand.RaiseCanExecuteChanged();
             }
         }
 
@@ -260,7 +514,7 @@ namespace Harris.CelestialADB.Desktop.ViewModel
                 passwordConfirm = value;
 
                 RaisePropertyChanged("PasswordConfirm");
-                RaisePropertyChanged("RegisterLoginCommand");
+                RegisterLoginCommand.RaiseCanExecuteChanged();
             }
         }
 
@@ -273,7 +527,8 @@ namespace Harris.CelestialADB.Desktop.ViewModel
                 emailAddress = value;
 
                 RaisePropertyChanged("EmailAddress");
-                RaisePropertyChanged("RegisterLoginCommand");
+                RegisterLoginCommand.RaiseCanExecuteChanged();
+                ResendTokenCommand.RaiseCanExecuteChanged();
             }
         }
 
@@ -285,6 +540,7 @@ namespace Harris.CelestialADB.Desktop.ViewModel
             {
                 firstName = value;
                 RaisePropertyChanged("FirstName");
+                RaisePropertyChanged("RegisterLoginCommand");
             }
         }
 
@@ -296,8 +552,10 @@ namespace Harris.CelestialADB.Desktop.ViewModel
             {
                 lastName = value;
                 RaisePropertyChanged("LastName");
+                RaisePropertyChanged("RegisterLoginCommand");
             }
         }
+
 
         private bool registerUser;
         public bool RegisterUser
@@ -324,13 +582,13 @@ namespace Harris.CelestialADB.Desktop.ViewModel
             }
         }
 
-        private bool showVerificationCodeEntry;
-        public bool ShowVerificationCodeEntry
+        private bool showActivationCodeEntry;
+        public bool ShowActivationCodeEntry
         {
-            get { return showVerificationCodeEntry; }
+            get { return showActivationCodeEntry; }
             set
             {
-                showVerificationCodeEntry = value;
+                showActivationCodeEntry = value;
 
                 RaisePropertyChanged("ShowVerificationCodeEntry");
             }
@@ -395,14 +653,15 @@ namespace Harris.CelestialADB.Desktop.ViewModel
             }
         }
 
-        private bool showValidationBox;
-        public bool ShowValidationBox
+        private bool showActivationBox;
+        public bool ShowActivationBox
         {
-            get { return showValidationBox; }
+            get { return showActivationBox; }
             set
             {
-                showValidationBox = value;
-                RaisePropertyChanged("ShowValidationBox");
+                showActivationBox = value;
+                RaisePropertyChanged("ShowActivationBox");
+                RaisePropertyChanged("ShowBlur");
             }
         }
 
@@ -414,30 +673,149 @@ namespace Harris.CelestialADB.Desktop.ViewModel
             {
                 activationCode = value;
                 RaisePropertyChanged("ActivationCode");
+                RaisePropertyChanged("ActivateAccountCommand");
+            }
+        }
+
+        private bool showActivationMessage;
+        public bool ShowActivationMessage
+        {
+            get { return showActivationMessage; }
+            set
+            {
+                showActivationMessage = value;
+                RaisePropertyChanged("ShowActivationMessage");
+            }
+        }
+
+        private string activationMessage;
+        public string ActivationMessage
+        {
+            get { return activationMessage; }
+            set
+            {
+                activationMessage = value;
+                RaisePropertyChanged("ActivationMessage");
+            }
+        }
+
+        private bool showBusy;
+        public bool ShowBusy
+        {
+            get { return showBusy; }
+            set
+            {
+                showBusy = value;
+                RaisePropertyChanged("ShowBlur");
+                RaisePropertyChanged("ShowBusy");
+            }
+        }
+
+        public bool ShowBlur
+        {
+            get { return ShowActivationBox || ShowBusy || ShowResendToken; }
+        }
+
+        private bool showResendToken;
+        public bool ShowResendToken
+        {
+            get { return showResendToken; }
+            set
+            {
+                showResendToken = value;
+                RaisePropertyChanged("ShowResendToken");
+                RaisePropertyChanged("ShowBlur");
+            }
+        }
+
+        private bool showResendError;
+        public bool ShowResendError
+        {
+            get { return showResendError; }
+            set
+            {
+                showResendError = value;
+                RaisePropertyChanged("ShowResendError");
             }
         }
 
 
-
-        public DelegateCommand VerifyCodeCommand { get; }
-        public DelegateCommand RegisterLoginCommand { get; }
-        public DelegateCommand ViewGithubCommand { get; }
-        public DelegateCommand ShowVerificationCommand { get; }
-        public DelegateCommand SwitchBetweenRegisterLoginCommand { get; }
-        public DelegateCommand AltiumBrowseCommand { get; }
+        public IAsyncCommand ResendTokenCommand { get; }
+        public IAsyncCommand ActivateAccountCommand { get; }
+        public IAsyncCommand RegisterLoginCommand { get; }
+        public ICommand ViewGithubCommand { get; }
+        public ICommand ShowVerificationCommand { get; }
+        public ICommand SwitchBetweenRegisterLoginCommand { get; }
+        public ICommand AltiumBrowseCommand { get; }
+        public ICommand ShowResendTokenCommand { get; }
 
         bool RegisterLoginButtonEnabled()
         {
+            if (Username != Username.Trim())
+            {
+                Username = Username.Trim();
+            }
+
+            Regex usernameCheck = new Regex("^[a-z0-9]+$", RegexOptions.IgnoreCase);
+
+            if (!usernameCheck.IsMatch(Username))
+            {
+                return false;
+            }
+
             if (RegisterUser)
                 return !String.IsNullOrEmpty(Username) &&
                     !String.IsNullOrEmpty(Password) &&
                     !String.IsNullOrEmpty(PasswordConfirm) &&
                     (Password == PasswordConfirm) &&
+                    !String.IsNullOrEmpty(FirstName) &&
+                    !String.IsNullOrEmpty(LastName) &&
                     !String.IsNullOrEmpty(EmailAddress) &&
-                    (EmailAddress.Contains('@') && EmailAddress.Contains('.'));
+                    CheckEmailAddressValid(EmailAddress);
             else
                 return !String.IsNullOrEmpty(Username) &&
                     !String.IsNullOrEmpty(Password);
+        }
+
+        bool ActivateAccountButtonEnabled()
+        {
+            if (String.IsNullOrEmpty(Username) ||
+                String.IsNullOrEmpty(Password) ||
+                String.IsNullOrEmpty(ActivationCode))
+                return false;
+
+            return true;
+        }
+
+        bool ResendButtonEnabled()
+        {
+            return !string.IsNullOrEmpty(EmailAddress) && CheckEmailAddressValid(EmailAddress);
+        }
+
+        bool CheckEmailAddressValid(string email)
+        {
+            bool mappingInvalid = false;
+            email = Regex.Replace(email, @"(@)(.+)$", match =>
+            {
+                String domainName = match.Groups[2].Value;
+                try
+                {
+                    domainName = new IdnMapping().GetAscii(domainName);
+                }
+                catch (ArgumentException)
+                {
+                    mappingInvalid = true;
+                }
+                return match.Groups[1].Value + domainName;
+            });
+            if (mappingInvalid)
+            {
+                return false;
+            }
+            return Regex.IsMatch(email,
+                    @"^(?("")(""[^""]+?""@)|(([0-9a-z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-z])@))" +
+                    @"(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-z][-\w]*[0-9a-z]*\.)+[a-z0-9]{2,17}))$",
+                    RegexOptions.IgnoreCase);
         }
     }
 }

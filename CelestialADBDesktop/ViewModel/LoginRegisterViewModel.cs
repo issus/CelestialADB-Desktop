@@ -19,7 +19,7 @@ namespace Harris.CelestialADB.Desktop.ViewModel
 {
     public class LoginRegisterViewModel : ViewModelBase
     {
-        //todo: this view model is getting pretty big now. Split out to register, login, auth, resend.
+        //todo: this view model is getting pretty big and ugly now. Split out to register, login, auth, resend.
 
         public LoginRegisterViewModel()
         {
@@ -47,7 +47,7 @@ namespace Harris.CelestialADB.Desktop.ViewModel
             ShowActivationMessage = false;
             ShowBusy = false;
             ShowResendToken = false;
-            UserIsLoggedIn = false; //= false;
+            UserIsLoggedIn = true; //= false;
 
             try
             {
@@ -286,57 +286,41 @@ namespace Harris.CelestialADB.Desktop.ViewModel
 
         void BrowseForAltiumDirectory()
         {
-            var dialog = new CommonOpenFileDialog();
-            dialog.EnsureFileExists = true;
-            dialog.Title = "Locate DbLib File";
-            dialog.Multiselect = false;
-            dialog.Filters.Add(new CommonFileDialogFilter("Altium Database File", "*.DbLib"));
-            ShowAltiumPathError = false;
+            var dbLib = AltiumFile.BrowseForDbLib();
 
-            if (dialog.ShowDialog() != CommonFileDialogResult.Ok)
+            if (!dbLib.Success)
+            {
+                ShowAltiumPathError = true;
+                AltiumPathError = "DbLib could not be found/opened. Please login with username and password.";
                 return;
-
-            string path = dialog.FileName;
-
-            Regex dblibRex = new Regex(@"^ConnectionString=FILE NAME=(?<File>.+)\s*$", RegexOptions.Multiline);
-            string dblib = File.ReadAllText(path);
-            if (!dblibRex.IsMatch(dblib))
+            }
+            
+            if (String.IsNullOrEmpty(dbLib.ConnectionStringPath))
             {
                 ShowAltiumPathError = true;
                 AltiumPathError = "DbLib has not been configured correctly. Please login with username and password.";
                 return;
             }
 
-            var udlPath = dblibRex.Match(dblib).Groups["File"].Value.Trim();
-            if (!File.Exists(udlPath))
+            var conn = AltiumFile.ReadUdlFile(dbLib.ConnectionStringPath);
+            if (!String.IsNullOrEmpty(conn.Error))
             {
                 ShowAltiumPathError = true;
-                AltiumPathError = "Connection file is missing. Please login with username and password.";
+                AltiumPathError = String.Format("{0} Please login with username and password.", conn.Error);
                 return;
             }
 
-            Regex tokenRex = new Regex(@"^(?=[^;])(?:(?<Token>.+?)=(?<Value>.+?);)+", RegexOptions.Multiline);
-            string udl = File.ReadAllText(udlPath);
-            if (!tokenRex.IsMatch(udl))
+            if (conn.Server != "csql.database.windows.net")
             {
                 ShowAltiumPathError = true;
-                AltiumPathError = "UDL file has not been configured correctly. Please login with username and password.";
+                AltiumPathError = "DbLib configured for a local server. Please login with username and password.";
                 return;
             }
 
-            Username = "";
-            Password = "";
+            Username = conn.Username;
+            Password = conn.Password;
 
-            var match = tokenRex.Match(udl);
-            for (int i = 0; i < match.Groups["Token"].Captures.Count; i++)
-            {
-                if (match.Groups["Token"].Captures[i].Value == "User ID")
-                    Username = match.Groups["Value"].Captures[i].Value;
-                else if (match.Groups["Token"].Captures[i].Value == "Password")
-                    Password = match.Groups["Value"].Captures[i].Value;
-            }
-
-            AltiumPath = path;
+            AltiumPath = dbLib.Path;
         }
 
         private bool userIsLoggedIn;

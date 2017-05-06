@@ -66,6 +66,13 @@ namespace Harris.CelestialADB.Desktop.ViewModel
             LoginRegisterViewModel = new LoginRegisterViewModel();
             LoginRegisterViewModel.PropertyChanged += LoginRegisterViewModel_PropertyChanged;
 
+            if (LoginRegisterViewModel.UserIsLoggedIn) // autologin from settings, doesnt fire property changed after attached
+            {
+                UserIsLoggedIn = true;
+
+                UserHasLoggedIn();
+            }
+
             FirewallRuleOk = false;
             firewallCheck = new Timer(CheckFirewallStatus);
             firewallCheck.Change(new TimeSpan(1, 0, 0), new TimeSpan(1, 0, 0));
@@ -102,8 +109,16 @@ namespace Harris.CelestialADB.Desktop.ViewModel
             {
                 UserIsLoggedIn = LoginRegisterViewModel.UserIsLoggedIn;
 
-                CheckFirewallStatus(null);
+                if (UserIsLoggedIn)
+                    UserHasLoggedIn();
             }
+        }
+
+        void UserHasLoggedIn()
+        {
+            CheckFirewallStatus(null);
+
+            UsersName = AltiumDbApi.GetUsersName();
         }
 
         public LoginRegisterViewModel LoginRegisterViewModel { get; set; }
@@ -203,8 +218,22 @@ namespace Harris.CelestialADB.Desktop.ViewModel
         public bool ShowBusy
         {
             get { return showBusy; }
-            set { showBusy = value;
+            set
+            {
+                showBusy = value;
                 RaisePropertyChanged("ShowBusy");
+            }
+        }
+
+        private string usersName;
+
+        public string UsersName
+        {
+            get { return usersName; }
+            set
+            {
+                usersName = value;
+                RaisePropertyChanged("UsersName");
             }
         }
 

@@ -9,17 +9,20 @@ using System.Threading.Tasks;
 
 namespace Harris.CelestialADB.Desktop.WebService
 {
-    // TwilioApi.cs
     public static class AltiumDbApi
     {
         //const string BaseUrl = "http://localhost:64446/";
         const string BaseUrl = "https://altiumservices.azurewebsites.net/";
 
-        static string Token { get; set; }
+        public static string Token { get; set; }
         static string LastError { get; set; }
 
         static AltiumDbApi()
         {
+            if (!String.IsNullOrEmpty(Properties.Settings.Default.AccessToken))
+            {
+                Token = Properties.Settings.Default.AccessToken;
+            }
         }
 
         public static async Task<T> ExecuteAsync<T>(RestRequest request) where T : new()
@@ -147,15 +150,47 @@ namespace Harris.CelestialADB.Desktop.WebService
             request.AddParameter("username", user);
             request.AddParameter("password", pass);
             
-
             var token = await ExecuteAsync<TokenResponse>(request);
 
             if (!string.IsNullOrEmpty(token.access_token))
             {
                 Token = token.access_token;
+                Properties.Settings.Default.AccessToken = Token;
+                Properties.Settings.Default.Username = user;
+                Properties.Settings.Default.Save();
             }
 
             return token;
+        }
+
+        public static bool CheckTokenValid()
+        {
+            LastError = "";
+
+            var request = new RestRequest();
+            request.Resource = "api/Account/CheckTokenValid";
+
+            return (Execute<ApiResponse>(request)).Success;
+        }
+
+        public static async Task<String> GetUsersNameAsync()
+        {
+            LastError = "";
+
+            var request = new RestRequest();
+            request.Resource = "api/Account/GetUsersName";
+
+            return (await ExecuteAsync<ApiResponse>(request)).Message;
+        }
+
+        public static string GetUsersName()
+        {
+            LastError = "";
+
+            var request = new RestRequest();
+            request.Resource = "api/Account/GetUsersName";
+
+            return (Execute<ApiResponse>(request)).Message;
         }
 
         public static async Task<ApiResponse> CheckFirewallRule()

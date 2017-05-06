@@ -48,7 +48,7 @@ namespace Harris.CelestialADB.Desktop.ViewModel
             ShowBusy = false;
             ShowResendToken = false;
             UserIsLoggedIn = false; //= false;
-
+            
             try
             {
                 var stats = AltiumDbApi.GetDatabaseStats();
@@ -73,6 +73,22 @@ namespace Harris.CelestialADB.Desktop.ViewModel
             ViewGithubCommand = new DelegateCommand(() => System.Diagnostics.Process.Start("https://github.com/issus/altium-library"));
 
             AltiumBrowseCommand = new DelegateCommand(BrowseForAltiumDirectory);
+
+
+            if (!String.IsNullOrEmpty(Properties.Settings.Default.Username))
+            {
+                Username = Properties.Settings.Default.Username;
+                RegisterUser = false;
+            }
+
+            if (!String.IsNullOrEmpty(Properties.Settings.Default.AccessToken))
+            {
+                try
+                {
+                    UserIsLoggedIn = AltiumDbApi.CheckTokenValid();
+                }
+                catch { } // will throw an exception if the token is invalid
+            }
         }
 
         async Task<bool> RegisterLogin()

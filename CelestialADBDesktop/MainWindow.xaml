@@ -156,7 +156,6 @@
             VerticalAlignment="Stretch" 
         />
 
-
         <!-- Block UI when busy -->
         <Border Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.RowSpan="2" Visibility="{Binding ShowBusy, Converter={StaticResource BoolToVis}}">
             <celestial:SubHeaderTextBlock x:Name="waitForIt" Text="Please wait..." HorizontalAlignment="Center" VerticalAlignment="Center">

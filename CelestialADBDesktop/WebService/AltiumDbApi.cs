@@ -157,5 +157,36 @@ namespace Harris.CelestialADB.Desktop.WebService
 
             return token;
         }
+
+        public static async Task<ApiResponse> CheckFirewallRule()
+        {
+            LastError = "";
+
+            var request = new RestRequest(Method.GET);
+            request.Resource = "api/Altium/CheckFirewallRule";
+
+            return await ExecuteAsync<ApiResponse>(request);
+        }
+
+        public static async Task<ApiResponse> UpdateFirewallRule()
+        {
+            LastError = "";
+
+            var request = new RestRequest(Method.GET);
+            request.Resource = "api/Altium/UpdateFirewallRule";
+
+            return await ExecuteAsync<ApiResponse>(request);
+        }
+
+        
+        public static async Task<ApiResponse> GetIpAddress()
+        {
+            LastError = "";
+
+            var request = new RestRequest(Method.GET);
+            request.Resource = "api/Altium/IpAddress";
+
+            return await ExecuteAsync<ApiResponse>(request);
+        }
     }
 }

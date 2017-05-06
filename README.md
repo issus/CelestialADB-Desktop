@@ -9,7 +9,7 @@ Windows software that enables you to register for access to the Live Azure datab
 
 ![image](https://cloud.githubusercontent.com/assets/1425724/25770493/1be0c16a-31f4-11e7-9032-3cdaa514beed.png)
 
-Just enter your details, and an authorisation code will be Emailed to you automatically to make sure you're a real person!
+Just enter your details, and an authorisation code will be Emailed to you automatically to make sure you're a real person! Note that your password will eventually be stored on your computer in *plain text*. The Altium Database UDL file requires a plain text password in it - there is no way that I'm aware of around this. Your password must meet the [AzureSQL password complexity requirements](https://docs.microsoft.com/en-us/sql/relational-databases/security/password-policy) - the software will try to enforce this.
 
 3. Activate your account, using the code emailed to you:
 

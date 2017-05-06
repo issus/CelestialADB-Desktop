@@ -10,7 +10,7 @@
     <Color x:Key="GrayLight" PresentationOptions:Freeze="True">#FF999999</Color>
     <Color x:Key="GrayMidLight" PresentationOptions:Freeze="True">#FFCCCCCC</Color>
     <Color x:Key="GrayLighter" PresentationOptions:Freeze="True">#FFEEEEEE</Color>
-    <Color x:Key="GrayLightest" PresentationOptions:Freeze="True">#FFFAFAFA</Color>
+    <Color x:Key="GrayLightest" PresentationOptions:Freeze="True">#FFFBFBFB</Color>
 
     <Color x:Key="BlueStandard" PresentationOptions:Freeze="True">#FF3276B1</Color>
     <Color x:Key="BlueSky" PresentationOptions:Freeze="True">#FF0091D9</Color>
@@ -108,6 +108,7 @@
     <Color x:Key="NavTabsActiveLinkHoverBorderColor" PresentationOptions:Freeze="True">#FFdddddd</Color>
     <Color x:Key="NavTabsJustifiedLinkBorderColor" PresentationOptions:Freeze="True">#FFdddddd</Color>
 
+    <Color x:Key="NavbarBreadcrumbColor" PresentationOptions:Freeze="True">#FFe5e5e5</Color>
     <Color x:Key="NavbarDefaultColor" PresentationOptions:Freeze="True">#FFC0BBB7</Color>
     <Color x:Key="NavbarDefaultBg" PresentationOptions:Freeze="True">#FF333333</Color>
     <Color x:Key="NavbarDefaultBorder" PresentationOptions:Freeze="True">#FFe7e7e7</Color>
@@ -331,6 +332,8 @@
     <SolidColorBrush Color="{StaticResource NavTabsBorderColor}" x:Key="NavTabsBorderColorBrush" PresentationOptions:Freeze="True" />
     <SolidColorBrush Color="{StaticResource NavTabsActiveLinkHoverBorderColor}" x:Key="NavTabsActiveLinkHoverBorderColorBrush" PresentationOptions:Freeze="True" />
     <SolidColorBrush Color="{StaticResource NavTabsJustifiedLinkBorderColor}" x:Key="NavTabsJustifiedLinkBorderColorBrush" PresentationOptions:Freeze="True" />
+
+    <SolidColorBrush Color="{StaticResource NavbarBreadcrumbColor}" x:Key="NavbarBreadcrumbColorBrush" PresentationOptions:Freeze="True" />
     <SolidColorBrush Color="{StaticResource NavbarDefaultLinkColor}" x:Key="NavbarDefaultBrandColorBrush" PresentationOptions:Freeze="True" />
     <SolidColorBrush Color="{StaticResource NavbarDefaultColor}" x:Key="NavbarDefaultColorBrush" PresentationOptions:Freeze="True" />
     <SolidColorBrush Color="{StaticResource NavbarDefaultBg}" x:Key="NavbarDefaultBgBrush" PresentationOptions:Freeze="True" />

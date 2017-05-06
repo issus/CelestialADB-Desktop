@@ -1,5 +1,5 @@
 ﻿<UserControl 
-    x:Class="Harris.CelestialADB.Desktop.Views.SettingsView"
+    x:Class="Harris.CelestialADB.Desktop.Views.AzureView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -9,7 +9,8 @@
     xmlns:sys="clr-namespace:System;assembly=mscorlib" 
     xmlns:conv="clr-namespace:Harris.CelestialADB.Desktop.Converters"
     mc:Ignorable="d" 
-    d:DesignHeight="690" d:DesignWidth="1160">
+    d:DesignHeight="300" d:DesignWidth="300"
+>
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVis" />
         <conv:BooleanToInvisibilityConverter x:Key="BoolToInvis" />
@@ -18,13 +19,9 @@
     <StackPanel Orientation="Vertical">
         <Border Background="{StaticResource GrayLightestBrush}" BorderBrush="{StaticResource GrayMidLightBrush}" BorderThickness="1" >
             <Grid>
-                <Button Content="X" HorizontalAlignment="Right" VerticalAlignment="Top" Command="{Binding HideIntroBoxCommand}" />
                 <StackPanel Orientation="Vertical" Margin="19">
-                    <celestial:HeaderTextBlock Text="Welcome to Celestial DB Desktop" />
-                    <celestial:TextBlock Text="Using this software you can manage your own firewall access to the live Azure database." TextWrapping="Wrap" />
-                    <celestial:TextBlock Text="If your IP address changes, the icon in the top right will change - clicking on it will update your firewall rule. While this software is running it will check your firewall rule every hour." TextWrapping="Wrap" />
-                    <celestial:TextBlock Text="This software is still under development, if you break it, please submit a bug on GitHub. If you have an idea, please submit a request on GitHub." TextWrapping="Wrap" />
-                    <celestial:TextBlock Text="If you have some .NET/C# experience, please feel free to contribute - there's lots to be done!." TextWrapping="Wrap" />
+                    <celestial:HeaderTextBlock Text="This is a work in progress!" />
+                    <celestial:TextBlock Text="This screen will eventually allow you to manage your azure database connection, as well as push local database items up to azure. The groundwork has been laid for this on the server side, but it still needs local implementation." TextWrapping="Wrap" />
                 </StackPanel>
             </Grid>
         </Border>

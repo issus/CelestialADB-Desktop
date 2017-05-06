@@ -112,7 +112,7 @@
 
     <Style x:Key="MenuTabItem" TargetType="{x:Type TabItem}">
         <Setter Property="FocusVisualStyle" Value="{StaticResource MenuTabItemFocusVisual}"/>
-        <Setter Property="Foreground" Value="{StaticResource LowkeyForegroundBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource NavbarDefaultColorBrush}"/>
         <Setter Property="Padding" Value="11,10,10,10"/>
         <Setter Property="BorderBrush" Value="Transparent" />
         <Setter Property="Background" Value="Transparent"/>
@@ -165,6 +165,7 @@
                             Grid.Row="1" 
                             KeyboardNavigation.TabIndex="2" 
                             KeyboardNavigation.TabNavigation="Local"
+                            Padding="14,10,14,10"
                         >
                             <ContentPresenter 
                                 x:Name="PART_SelectedContentHost" 

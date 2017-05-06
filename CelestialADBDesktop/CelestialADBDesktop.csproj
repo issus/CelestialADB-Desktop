@@ -163,15 +163,26 @@
     <Compile Include="Graphics\IconSettings.xaml.cs">
       <DependentUpon>IconSettings.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Graphics\IconSync.xaml.cs">
+      <DependentUpon>IconSync.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Helpers\AltiumFile.cs" />
     <Compile Include="Helpers\PasswordHelper.cs" />
     <Compile Include="Model\DataItem.cs" />
     <Compile Include="Model\DataService.cs" />
     <Compile Include="Model\IDataService.cs" />
+    <Compile Include="ViewModel\AzureViewModel.cs" />
+    <Compile Include="ViewModel\LocalDbViewModel.cs" />
     <Compile Include="ViewModel\LoginRegisterViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\SettingsViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="Views\AzureView.xaml.cs">
+      <DependentUpon>AzureView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LocalDbView.xaml.cs">
+      <DependentUpon>LocalDbView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\RegisterLoginView.xaml.cs">
       <DependentUpon>RegisterLoginView.xaml</DependentUpon>
     </Compile>
@@ -198,6 +209,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Graphics\IconSettings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Graphics\IconSync.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -284,6 +299,14 @@
     <Page Include="Styles\ThemeFonts.Small.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\AzureView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LocalDbView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\RegisterLoginView.xaml">
       <SubType>Designer</SubType>

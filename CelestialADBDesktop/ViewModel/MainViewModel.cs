@@ -78,6 +78,10 @@ namespace Harris.CelestialADB.Desktop.ViewModel
             firewallCheck.Change(new TimeSpan(1, 0, 0), new TimeSpan(1, 0, 0));
 
             FirewallErrorButtonCommand = new DelegateCommand(async () => await UpdateFirewall());
+
+            SettingsViewModel = new SettingsViewModel();
+            AzureViewModel = new AzureViewModel();
+            LocalDbViewModel = new LocalDbViewModel();
         }
 
         public async void CheckFirewallStatus(Object stateInfo)
@@ -121,7 +125,10 @@ namespace Harris.CelestialADB.Desktop.ViewModel
             UsersName = AltiumDbApi.GetUsersName();
         }
 
-        public LoginRegisterViewModel LoginRegisterViewModel { get; set; }
+        public LoginRegisterViewModel LoginRegisterViewModel { get; private set; }
+        public SettingsViewModel SettingsViewModel { get; private set; }
+        public AzureViewModel AzureViewModel { get; private set; }
+        public LocalDbViewModel LocalDbViewModel { get; private set; }
 
         public int WindowHeight
         {

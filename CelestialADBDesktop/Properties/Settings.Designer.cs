@@ -58,5 +58,17 @@ namespace Harris.CelestialADB.Desktop.Properties {
                 this["Username"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ShowIntroBox {
+            get {
+                return ((bool)(this["ShowIntroBox"]));
+            }
+            set {
+                this["ShowIntroBox"] = value;
+            }
+        }
     }
 }

@@ -42,6 +42,7 @@
         </Grid.LayoutTransform>
         <Grid.RowDefinitions>
             <RowDefinition Height="50" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
@@ -106,7 +107,7 @@
             Background="{StaticResource AsidecolorStartBrush}" 
             BorderBrush="{StaticResource GrayMidLightBrush}"
             BorderThickness="0,0,0,0"
-            Grid.Row="2" 
+            Grid.Row="3" 
             VerticalAlignment="Bottom" 
             HorizontalAlignment="Stretch"
             Padding="20,10,13,0"
@@ -122,9 +123,9 @@
                 </StackPanel>
             </Grid>
         </Border>
-
-        <TabControl Style="{StaticResource MenuTabControl}" x:Name="MAIN_TABCONTROL_MODULES" Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" TabStripPlacement="Left">
-            <TabItem DataContext="{Binding SettingsModel}" Style="{StaticResource MenuTabItem}">
+        
+        <TabControl Style="{StaticResource MenuTabControl}" x:Name="MAIN_TABCONTROL_MODULES" Grid.Row="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" TabStripPlacement="Left">
+            <TabItem DataContext="{Binding SettingsModel}" Style="{StaticResource MenuTabItem}" Tag="Altium-Database DbLib Setup">
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <graphics:IconSettings VerticalAlignment="Center" />
@@ -135,7 +136,7 @@
                     <views:SettingsView />
                 </Grid>
             </TabItem>
-            <TabItem DataContext="{Binding SettingsModel}" Style="{StaticResource MenuTabItem}">
+            <TabItem DataContext="{Binding AzureModel}" Style="{StaticResource MenuTabItem}" Tag="Azure Database Status">
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <graphics:IconDatabase VerticalAlignment="Center" />
@@ -143,11 +144,53 @@
                     </StackPanel>
                 </TabItem.Header>
                 <Grid Background="Transparent">
-                    <views:SettingsView />
+                    <views:AzureView />
+                </Grid>
+            </TabItem>
+            <TabItem DataContext="{Binding LocalDbModel}" Style="{StaticResource MenuTabItem}" Tag="Local Database Setup and Sync">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <graphics:IconSync VerticalAlignment="Center" />
+                        <TextBlock Text="Local DB" VerticalAlignment="Center" Foreground="{Binding Path=(TextElement.Foreground), RelativeSource={RelativeSource AncestorType=ContentPresenter}}"/>
+                    </StackPanel>
+                </TabItem.Header>
+                <Grid Background="Transparent">
+                    <views:LocalDbView />
                 </Grid>
             </TabItem>
         </TabControl>
 
+        <!-- user name bar/breadcrumb -->
+        <Border 
+            Grid.Row="1" 
+            Background="{StaticResource AsidecolorStartBrush}" 
+            BorderBrush="{StaticResource GrayMidLightBrush}"
+            BorderThickness="0,0,0,0"
+            VerticalAlignment="Bottom" 
+            HorizontalAlignment="Stretch"
+            Height="42">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="220" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Border Background="{StaticResource GrayDarkBrush}" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <TextBlock Text="{Binding UsersName}" Foreground="{StaticResource NavbarDefaultColorBrush}" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                </Border>
+                <Separator Background="#35000000" Height="2" Grid.Column="0" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Margin="0,0,0,-1" />
+                <Separator Background="#35999999" Height="1" Grid.Column="0" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Margin="0,0,0,-1" />
+                <TextBlock 
+                    Text="{Binding Path=SelectedItem.Tag, ElementName=MAIN_TABCONTROL_MODULES}" 
+                    Grid.Column="1" 
+                    Foreground="{StaticResource NavbarBreadcrumbColorBrush}" 
+                    VerticalAlignment="Center"
+                    Margin="20,0,0,0"
+                    />
+            </Grid>
+        </Border>
+
+
+        <!-- Login, must be at bottom -->
         <views:RegisterLoginView
             Grid.RowSpan="3" 
             DataContext="{Binding LoginRegisterViewModel}" 

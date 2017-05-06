@@ -108,12 +108,12 @@
     <Color x:Key="NavTabsActiveLinkHoverBorderColor" PresentationOptions:Freeze="True">#FFdddddd</Color>
     <Color x:Key="NavTabsJustifiedLinkBorderColor" PresentationOptions:Freeze="True">#FFdddddd</Color>
 
-    <Color x:Key="NavbarDefaultColor" PresentationOptions:Freeze="True">#FF777777</Color>
-    <Color x:Key="NavbarDefaultBg" PresentationOptions:Freeze="True">#FFf8f8f8</Color>
+    <Color x:Key="NavbarDefaultColor" PresentationOptions:Freeze="True">#FFC0BBB7</Color>
+    <Color x:Key="NavbarDefaultBg" PresentationOptions:Freeze="True">#FF333333</Color>
     <Color x:Key="NavbarDefaultBorder" PresentationOptions:Freeze="True">#FFe7e7e7</Color>
     <Color x:Key="NavbarDefaultLinkColor" PresentationOptions:Freeze="True">#FF777777</Color>
-    <Color x:Key="NavbarDefaultLinkHoverColor" PresentationOptions:Freeze="True">#FF333333</Color>
-    <Color x:Key="NavbarDefaultLinkActiveColor" PresentationOptions:Freeze="True">#FF555555</Color>
+    <Color x:Key="NavbarDefaultLinkHoverColor" PresentationOptions:Freeze="True">#FFFFFFFF</Color>
+    <Color x:Key="NavbarDefaultLinkActiveColor" PresentationOptions:Freeze="True">#FFFFFFFF</Color>
     <Color x:Key="NavbarDefaultLinkActiveBg" PresentationOptions:Freeze="True">#FFE7E7E7</Color>
     <Color x:Key="NavbarDefaultLinkDisabledColor" PresentationOptions:Freeze="True">#FFcccccc</Color>
     <Color x:Key="NavbarDefaultBrandColor" PresentationOptions:Freeze="True">#FF777777</Color>

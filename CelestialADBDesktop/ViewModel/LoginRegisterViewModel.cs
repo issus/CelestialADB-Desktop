@@ -47,7 +47,7 @@ namespace Harris.CelestialADB.Desktop.ViewModel
             ShowActivationMessage = false;
             ShowBusy = false;
             ShowResendToken = false;
-            UserIsLoggedIn = true; //= false;
+            UserIsLoggedIn = false; //= false;
 
             try
             {

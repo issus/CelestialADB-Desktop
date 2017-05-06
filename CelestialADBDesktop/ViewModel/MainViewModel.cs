@@ -8,6 +8,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Reflection;
+using Harris.CelestialADB.Desktop.WebService;
+using System.Windows.Input;
+using Harris.CelestialADB.Desktop.WPF;
+using System.Threading.Tasks;
 
 namespace Harris.CelestialADB.Desktop.ViewModel
 {
@@ -22,6 +26,8 @@ namespace Harris.CelestialADB.Desktop.ViewModel
         private string version;
         private int windowWidth;
         private int windowHeight;
+
+        Timer firewallCheck;
 
         public MainViewModel()
         {
@@ -59,6 +65,35 @@ namespace Harris.CelestialADB.Desktop.ViewModel
 
             LoginRegisterViewModel = new LoginRegisterViewModel();
             LoginRegisterViewModel.PropertyChanged += LoginRegisterViewModel_PropertyChanged;
+
+            FirewallRuleOk = false;
+            firewallCheck = new Timer(CheckFirewallStatus);
+            firewallCheck.Change(new TimeSpan(1, 0, 0), new TimeSpan(1, 0, 0));
+
+            FirewallErrorButtonCommand = new DelegateCommand(async () => await UpdateFirewall());
+        }
+
+        public async void CheckFirewallStatus(Object stateInfo)
+        {
+            await CheckFirewallStatusAsync(stateInfo);
+        }
+
+        public async Task CheckFirewallStatusAsync(Object stateInfo)
+        {
+            if (!UserIsLoggedIn)
+                return;
+
+            FirewallRuleOk = (await AltiumDbApi.CheckFirewallRule()).Success;
+        }
+
+        public async Task UpdateFirewall()
+        {
+            UpdatingFirewallRule = true;
+
+            await AltiumDbApi.UpdateFirewallRule();
+            await CheckFirewallStatusAsync(null);
+
+            UpdatingFirewallRule = false;
         }
 
         private void LoginRegisterViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -66,6 +101,8 @@ namespace Harris.CelestialADB.Desktop.ViewModel
             if (e.PropertyName == "UserIsLoggedIn")
             {
                 UserIsLoggedIn = LoginRegisterViewModel.UserIsLoggedIn;
+
+                CheckFirewallStatus(null);
             }
         }
 
@@ -134,6 +171,40 @@ namespace Harris.CelestialADB.Desktop.ViewModel
             {
                 userIsLoggedIn = value;
                 RaisePropertyChanged("UserIsLoggedIn");
+            }
+        }
+
+        private bool firewallRuleOk;
+        public bool FirewallRuleOk
+        {
+            get { return firewallRuleOk; }
+            set
+            {
+                firewallRuleOk = value;
+                RaisePropertyChanged("FirewallRuleOk");
+            }
+        }
+
+        public ICommand FirewallErrorButtonCommand { get; private set; }
+
+        private bool updatingFirewallRule;
+        public bool UpdatingFirewallRule
+        {
+            get { return updatingFirewallRule; }
+            set
+            {
+                updatingFirewallRule = value;
+                RaisePropertyChanged("UpdatingFirewallRule");
+                ShowBusy = value;
+            }
+        }
+
+        private bool showBusy;
+        public bool ShowBusy
+        {
+            get { return showBusy; }
+            set { showBusy = value;
+                RaisePropertyChanged("ShowBusy");
             }
         }
 

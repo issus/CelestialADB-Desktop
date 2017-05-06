@@ -23,11 +23,7 @@
     UseLayoutRounding="True"
     DataContext="{Binding Main, Source={StaticResource Locator}}"
     Background="{StaticResource GrayLighterBrush}"
->
-    <!--
-    xmlns:gfx="clr-namespace:Harris.CelestialADB.Desktop.Graphics"
-    -->
-    
+>    
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVis" />
         <conv:BooleanToInvisibilityConverter x:Key="BoolToInvis" />
@@ -50,6 +46,7 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
+        <!-- logo & firewall status -->
         <Border Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="50">
             <Border.Background>
                 <LinearGradientBrush StartPoint="0,1" EndPoint="0,0">
@@ -65,22 +62,55 @@
                     HorizontalAlignment="Left"
                     VerticalAlignment="Center"
                 >
-                    <graphics:CelestialLibraryIcon
-                        SnapsToDevicePixels="False"
-                    />
+                    <graphics:CelestialLibraryIcon SnapsToDevicePixels="False" />
                 </Viewbox>
+
+                <Button HorizontalAlignment="Right" VerticalAlignment="Stretch" Visibility="{Binding FirewallRuleOk, Converter={StaticResource BoolToInvis}}" Style="{StaticResource BtnInvisStyle}" Command="{Binding FirewallErrorButtonCommand}" >
+                    <Grid VerticalAlignment="Center" Margin="12,0,12,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Text="FIREWALL STATUS:" FontSize="10" Foreground="{StaticResource GrayMidLightBrush}" FontWeight="Bold" VerticalAlignment="Bottom" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" />
+                        <TextBlock Text="Azure Access Blocked" VerticalAlignment="Top" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left" />
+                        
+                        <graphics:IconFirewallError Grid.RowSpan="2" Grid.Column="1" Margin="10,0,0,0" />
+                    </Grid>
+                </Button>
+
+                <Grid VerticalAlignment="Stretch" HorizontalAlignment="Right" Margin="12,0,12,0" Visibility="{Binding FirewallRuleOk, Converter={StaticResource BoolToVis}}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Text="FIREWALL STATUS:" FontSize="10" Foreground="{StaticResource GrayMidLightBrush}" FontWeight="Bold" VerticalAlignment="Bottom" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" />
+                    <TextBlock Text="Azure Access Valid" VerticalAlignment="Top" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left" />
+
+                    <graphics:IconFirewallOK Grid.RowSpan="2" Grid.Column="1" Margin="10,0,0,0" />
+                </Grid>
             </Grid>
         </Border>
         
+        <!-- footer -->
         <Border 
             Background="{StaticResource AsidecolorStartBrush}" 
             BorderBrush="{StaticResource GrayMidLightBrush}"
-            BorderThickness="0,1,0,0"
+            BorderThickness="0,0,0,0"
             Grid.Row="2" 
             VerticalAlignment="Bottom" 
             HorizontalAlignment="Stretch"
-            Padding="20,15,13,0"
-            Height="52"
+            Padding="20,10,13,0"
+            Height="42"
         >
             <Grid>
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Left">
@@ -93,10 +123,25 @@
             </Grid>
         </Border>
 
-        <!-- END BACKGROUND -->
-
-        <TabControl x:Name="MAIN_TABCONTROL_MODULES" Margin="12" Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-            <TabItem Header="Settings" DataContext="{Binding SettingsModel}">
+        <TabControl Style="{StaticResource MenuTabControl}" x:Name="MAIN_TABCONTROL_MODULES" Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" TabStripPlacement="Left">
+            <TabItem DataContext="{Binding SettingsModel}" Style="{StaticResource MenuTabItem}">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <graphics:IconSettings VerticalAlignment="Center" />
+                        <TextBlock Text="Configuration" VerticalAlignment="Center" Foreground="{Binding Path=(TextElement.Foreground), RelativeSource={RelativeSource AncestorType=ContentPresenter}}"/>
+                    </StackPanel>
+                </TabItem.Header>
+                <Grid Background="Transparent">
+                    <views:SettingsView />
+                </Grid>
+            </TabItem>
+            <TabItem DataContext="{Binding SettingsModel}" Style="{StaticResource MenuTabItem}">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <graphics:IconDatabase VerticalAlignment="Center" />
+                        <TextBlock Text="Database" VerticalAlignment="Center" Foreground="{Binding Path=(TextElement.Foreground), RelativeSource={RelativeSource AncestorType=ContentPresenter}}"/>
+                    </StackPanel>
+                </TabItem.Header>
                 <Grid Background="Transparent">
                     <views:SettingsView />
                 </Grid>
@@ -110,5 +155,31 @@
             HorizontalAlignment="Stretch" 
             VerticalAlignment="Stretch" 
         />
+
+
+        <!-- Block UI when busy -->
+        <Border Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.RowSpan="2" Visibility="{Binding ShowBusy, Converter={StaticResource BoolToVis}}">
+            <celestial:SubHeaderTextBlock x:Name="waitForIt" Text="Please wait..." HorizontalAlignment="Center" VerticalAlignment="Center">
+                <celestial:SubHeaderTextBlock.Triggers>
+                    <EventTrigger RoutedEvent="TextBlock.Loaded">
+                        <EventTrigger.Actions>
+                            <BeginStoryboard>
+                                <Storyboard
+                                    BeginTime="00:00:00"
+                                    RepeatBehavior="Forever"
+                                    Storyboard.TargetName="waitForIt"
+                                    Storyboard.TargetProperty="Opacity"
+                                    >
+                                    <DoubleAnimation From="1.0" To="0.3" Duration="0:0:1" AccelerationRatio="0.6" AutoReverse="True"  />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger.Actions>
+                    </EventTrigger>
+                </celestial:SubHeaderTextBlock.Triggers>
+                <celestial:SubHeaderTextBlock.Effect>
+                    <DropShadowEffect Color="Black" Opacity="1" BlurRadius="40" ShadowDepth="0" />
+                </celestial:SubHeaderTextBlock.Effect>
+            </celestial:SubHeaderTextBlock>
+        </Border>
     </Grid>
 </Window>

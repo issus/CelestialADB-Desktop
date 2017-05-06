@@ -21,8 +21,10 @@
                 <ResourceDictionary Source="Styles/RadioButton.xaml" />
                 <ResourceDictionary Source="Styles/ScrollBar.xaml" />
                 <ResourceDictionary Source="Styles/TabControl.xaml" />
+                <ResourceDictionary Source="Styles/TabControl - Menu.xaml" />
                 <ResourceDictionary Source="Styles/Text.xaml" />
                 <ResourceDictionary Source="Styles/TextBox.xaml" />
+                <ResourceDictionary Source="Styles/Menu.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <vm:ViewModelLocator x:Key="Locator"  />
 

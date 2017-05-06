@@ -8,7 +8,7 @@
         <Setter Property="Control.Template">
             <Setter.Value>
                 <ControlTemplate>
-                    <Rectangle Margin="2" SnapsToDevicePixels="true" Stroke="{StaticResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2"/>
+                    <Rectangle Margin="2" SnapsToDevicePixels="true" Stroke="{StaticResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="0" StrokeDashArray="1 2"/>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -146,6 +146,123 @@
     			                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
     			                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                 IsHitTestVisible="False"
+                            />
+                            <Rectangle x:Name="BtnDisable" Opacity="0.0" Fill="White" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" IsHitTestVisible="False" />
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="True"/>
+                                <Condition Property="IsEnabled" Value="True"/>
+                            </MultiTrigger.Conditions>
+                            <MultiTrigger.EnterActions>
+                                <BeginStoryboard 
+                                    x:Name="MouseOverStoryboard_BeginStoryboard"
+    		                        Storyboard="{StaticResource MouseOverStoryboard}"
+                                />
+                            </MultiTrigger.EnterActions>
+                            <MultiTrigger.ExitActions>
+                                <RemoveStoryboard BeginStoryboardName="MouseOverStoryboard_BeginStoryboard"/>
+                            </MultiTrigger.ExitActions>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsPressed" Value="True"/>
+                                <Condition Property="IsEnabled" Value="True"/>
+                            </MultiTrigger.Conditions>
+                            <MultiTrigger.EnterActions>
+                                <BeginStoryboard 
+                                    x:Name="MouseDownStoryboard_BeginStoryboard"
+    		                        Storyboard="{StaticResource MouseDownStoryboard}"
+                                />
+                            </MultiTrigger.EnterActions>
+                            <MultiTrigger.ExitActions>
+                                <RemoveStoryboard BeginStoryboardName="MouseDownStoryboard_BeginStoryboard"/>
+                            </MultiTrigger.ExitActions>
+                        </MultiTrigger>
+                        <Trigger Property="IsKeyboardFocused" Value="true">
+                            <!--Setter Property="RenderDefaulted" TargetName="Chrome" Value="true"/-->
+                        </Trigger>
+                        <Trigger Property="ToggleButton.IsChecked" Value="true">
+                            <!--Setter Property="RenderPressed" TargetName="Chrome" Value="true"/-->
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter TargetName="BtnDisable" Property="Opacity" Value="0.5"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="BtnInvisStyle" TargetType="{x:Type Button}">
+        <Setter Property="FocusVisualStyle" Value="{StaticResource ButtonFocusVisual}"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="Foreground" Value="{StaticResource GrayBrush}"/>
+        <Setter Property="FontFamily" Value="{StaticResource ThemeFontFamily}"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="0,0,0,0"/>
+        <Setter Property="Margin" Value="0"/>
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <ControlTemplate.Resources>
+                        <Storyboard AutoReverse="False" x:Key="MouseOverStoryboard">
+                            <DoubleAnimation
+                                BeginTime="0:0:0" 
+                                Duration="0:0:0.2" 
+                                To="0.15"
+                                Storyboard.TargetName="BtnDarken" 
+                                Storyboard.TargetProperty="Opacity"
+                            />
+                        </Storyboard>
+                        <Storyboard AutoReverse="False" x:Key="MouseDownStoryboard">
+                            <DoubleAnimation
+                                BeginTime="0:0:0" 
+                                Duration="0:0:0.2" 
+                                To="0.25"
+                                Storyboard.TargetName="BtnDarken" 
+                                Storyboard.TargetProperty="Opacity"
+                            />
+                            <ThicknessAnimation 
+                                BeginTime="0:0:0" 
+                                Duration="0:0:0.075" 
+                                To="2,2,2,2"
+                                Storyboard.TargetProperty="Margin"
+                            />
+                        </Storyboard>
+                    </ControlTemplate.Resources>
+                    <Border 
+    		            x:Name="Chrome" 
+    		            BorderBrush="{TemplateBinding BorderBrush}" 
+    		            Background="{TemplateBinding Background}" 
+    		            BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="2"
+    		            SnapsToDevicePixels="true"
+                        IsHitTestVisible="True"
+                    >
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal"/>
+                                <VisualState x:Name="MouseOver"/>
+                                <VisualState x:Name="Pressed"/>
+                                <VisualState x:Name="Disabled"/>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <Grid IsHitTestVisible="True">
+                            <Rectangle x:Name="BtnDarken" Opacity="0" Fill="Black" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" IsHitTestVisible="False" />
+                            <ContentPresenter
+    			                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+    			                Margin="{TemplateBinding Padding}" 
+    			                RecognizesAccessKey="True" 
+    			                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
+    			                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                IsHitTestVisible="True"
                             />
                             <Rectangle x:Name="BtnDisable" Opacity="0.0" Fill="White" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" IsHitTestVisible="False" />
                         </Grid>

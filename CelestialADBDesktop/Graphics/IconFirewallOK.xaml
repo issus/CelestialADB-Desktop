@@ -1,0 +1,14 @@
+﻿<UserControl x:Class="Harris.CelestialADB.Desktop.Graphics.IconFirewallOK"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Harris.CelestialADB.Desktop.Graphics"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <Canvas x:Name="FWOK" Height="25.207" Canvas.Left="0" Canvas.Top="-0.103" Width="22">
+            <Path Data="F1M16.8018,8.5458L9.9628,15.3858C9.7908,15.5568,9.5648,15.6438,9.3398,15.6438C9.1198,15.6438,8.8998,15.5618,8.7288,15.3978L5.5318,12.3248C5.1808,11.9878,5.1698,11.4298,5.5078,11.0798C5.8448,10.7288,6.4028,10.7168,6.7538,11.0548L9.3268,13.5278L15.5558,7.2988C15.8998,6.9548,16.4578,6.9548,16.8018,7.2988C17.1458,7.6438,17.1458,8.2018,16.8018,8.5458 M10.9998,-0.103199999999999C6.7148,1.6178,4.8698,2.6208,-0.000199999999999534,2.8148L-0.000199999999999534,11.0208C-0.000199999999999534,14.4418,1.4038,17.3838,4.0598,19.5378C4.9448,20.2538,10.8978,25.0438,10.9998,25.1038C11.0938,25.0488,17.0548,20.2538,17.9398,19.5378C20.5968,17.3838,21.9998,14.4418,21.9998,11.0208L21.9998,2.8148C17.1298,2.6208,15.2848,1.6178,10.9998,-0.103199999999999" Fill="{StaticResource GreenBrush}" Height="25.207" Canvas.Left="0" Stretch="Fill" Canvas.Top="0" Width="22"/>
+        </Canvas>
+    </Grid>
+</UserControl>

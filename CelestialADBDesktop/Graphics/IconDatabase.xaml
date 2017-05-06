@@ -1,0 +1,14 @@
+﻿<UserControl x:Class="Harris.CelestialADB.Desktop.Graphics.IconDatabase"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Harris.CelestialADB.Desktop.Graphics"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <Canvas x:Name="DB" Height="16" Canvas.Left="0" Canvas.Top="0" Width="28">
+            <Path Data="F1M8,-0.00010000000000332C3.582,-0.00010000000000332,0,0.708899999999997,0,1.5839L0,4.5019C0,5.3769,3.582,6.0859,8,6.0859C12.418,6.0859,16,5.3769,16,4.5019L16,1.5839C16,0.708899999999997,12.418,-0.00010000000000332,8,-0.00010000000000332 M0.506,10.9429C0.179,11.1159,0,11.3029,0,11.4979L0,14.4169C0,15.2909,3.582,15.9999,8,15.9999C12.418,15.9999,16,15.2909,16,14.4169L16,11.4979C16,11.3029,15.821,11.1159,15.494,10.9429C14.358,11.5429,11.432,11.9719,8,11.9719C4.568,11.9719,1.642,11.5429,0.506,10.9429 M8,7.0139C11.432,7.0139,14.358,6.5869,15.494,5.9859C15.821,6.1589,16,6.3459,16,6.5409L16,9.4589C16,10.3339,12.418,11.0429,8,11.0429C3.582,11.0429,0,10.3329,0,9.4589L0,6.5409C0,6.3459,0.179,6.1589,0.506,5.9859C1.642,6.5869,4.568,7.0139,8,7.0139" Fill="{Binding Path=(TextElement.Foreground), RelativeSource={RelativeSource AncestorLevel=2, AncestorType=ContentPresenter}}" Height="16" Canvas.Left="0" Stretch="Fill" Canvas.Top="0" Width="16"/>
+        </Canvas>
+    </Grid>
+</UserControl>

@@ -151,6 +151,18 @@
     <Compile Include="Graphics\CelestialLibraryIcon.xaml.cs">
       <DependentUpon>CelestialLibraryIcon.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Graphics\IconDatabase.xaml.cs">
+      <DependentUpon>IconDatabase.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Graphics\IconFirewallError.xaml.cs">
+      <DependentUpon>IconFirewallError.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Graphics\IconFirewallOK.xaml.cs">
+      <DependentUpon>IconFirewallOK.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Graphics\IconSettings.xaml.cs">
+      <DependentUpon>IconSettings.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Helpers\AltiumFile.cs" />
     <Compile Include="Helpers\PasswordHelper.cs" />
     <Compile Include="Model\DataItem.cs" />
@@ -170,6 +182,22 @@
     <Compile Include="WebService\TokenRequest.cs" />
     <Compile Include="WPF\AsyncCommand.cs" />
     <Page Include="Graphics\CelestialLibraryIcon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Graphics\IconDatabase.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Graphics\IconFirewallError.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Graphics\IconFirewallOK.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Graphics\IconSettings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -222,6 +250,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Styles\ScrollBar.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\TabControl - Menu.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

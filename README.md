@@ -7,8 +7,9 @@ Windows SmartScreen shows a warning/block of both the installer and the applicat
 # Very Easy to Use
 1. Download and install: http://altiumservices.azurewebsites.net/Desktop/download.html
 
-If you are using Windows 10, SmartScreen will block you from running the unsigned setup tool and CelestialADB.exe... you can click "more info" and then "run anyway":
+If you are using Windows 8, 8.1, or 10, SmartScreen will block you from running the unsigned setup tool and CelestialADB.exe... you can click "more info" and then "run anyway" ([donate to help make this go away](https://www.gofundme.com/code-signing-cert-for-altium-db)). This will also show up any time the software is auto-updated on start.
 
+![image](https://cloud.githubusercontent.com/assets/1425724/25776418/be5a99c6-327a-11e7-9482-609efbbf3018.png)
 ![image](https://cloud.githubusercontent.com/assets/1425724/25770655/81ce8dfa-31f8-11e7-882a-9c0379c3b375.png)
 
 If you don't trust the pre-compiled ClickOnce distribution, you're welcome to clone this repo and build the source using Visual Studio (or even commandline...)

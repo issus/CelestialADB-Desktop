@@ -55,7 +55,7 @@ namespace Harris.CelestialADB.Desktop.ViewModel
                 componentCount = stats.ComponentCount;
                 footprintCount = stats.FootprintCount;
             }
-            catch (Exception err)
+            catch // (Exception err)
             {
                 // todo: network issue?
             }
@@ -124,6 +124,13 @@ namespace Harris.CelestialADB.Desktop.ViewModel
             {
                 ShowLoginError = true;
                 ErrorMessage = "Password must be at least 10 characters.";
+                return false;
+            }
+
+            if (Password.Contains("\""))
+            {
+                ShowLoginError = true;
+                ErrorMessage = "Password cannot contain a \".";
                 return false;
             }
 

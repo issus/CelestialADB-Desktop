@@ -16,7 +16,7 @@
         <conv:BooleanToBlurConverter x:Key="BooleanToBlurConverter" />
     </UserControl.Resources>
     <StackPanel Orientation="Vertical">
-        <Border Background="{StaticResource GrayLightestBrush}" BorderBrush="{StaticResource GrayMidLightBrush}" BorderThickness="1" >
+        <Border Background="{StaticResource GrayLightestBrush}" BorderBrush="{StaticResource GrayMidLightBrush}" BorderThickness="1" Margin="0,0,0,20" >
             <Grid>
                 <Button Content="X" HorizontalAlignment="Right" VerticalAlignment="Top" Command="{Binding HideIntroBoxCommand}" />
                 <StackPanel Orientation="Vertical" Margin="19">
@@ -28,5 +28,48 @@
                 </StackPanel>
             </Grid>
         </Border>
+
+        <StackPanel Orientation="Vertical" Margin="0,0,0,20">
+            <Border Background="{StaticResource BluedarkBrush}" BorderBrush="{StaticResource BluedarkBorderBrush}" BorderThickness="1,1,1,1" Height="34">
+                <celestial:WidgetHeaderTextBlock Text="Database Library Location" />
+            </Border>
+            <Border Background="White" BorderBrush="{StaticResource GrayMidLightBrush}" BorderThickness="1,0,1,2" Padding="13">
+                <StackPanel Orientation="Vertical">
+                    <celestial:TextBlock 
+                        Text="Setup your database to talk to the Live Azure database by selecting a file path then generate the UDL file. If you have not just logged in, you will be logged out so you can login again, as your password is not stored." 
+                        Margin="0,0,0,12"
+                        TextWrapping="Wrap"
+                    />
+                    <celestial:TextBlock Text="Path to Altium DbLib" />
+                    <Grid HorizontalAlignment="Stretch">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBox Text="{Binding PathToDbLib}" Grid.Column="0" IsReadOnly="True" HorizontalAlignment="Stretch"  />
+                        <Border Grid.Column="1" Margin="6,0,6,12">
+                            <Button Content="..." Command="{Binding BrowseForDbLibCommand}" />
+                        </Border>
+                    </Grid>
+                    <StackPanel Orientation="Horizontal">
+                        <celestial:TextBlock Text="{Binding PathToUdl, StringFormat='Universal Data Link (.udl) location: {0}'}" />
+                        <celestial:TextBlock Text="(does not exist!)" Visibility="{Binding UdlExists, Converter={StaticResource BoolToInvis}}" />
+                    </StackPanel>
+                    <Button Content="Update UDL Settings to Use Azure" Style="{StaticResource BtnPrimaryStyle}" Command="{Binding UpdateUdlFileCommand}" />
+                    <celestial:TextBlock 
+                        Text="{Binding UdlMessage}" 
+                        TextWrapping="Wrap"
+                        Foreground="{StaticResource DangerBrush}" 
+                        Visibility="{Binding ShowUdlErrorMessage, Converter={StaticResource BoolToVis}}" 
+                    />
+                    <celestial:TextBlock 
+                        Text="{Binding UdlMessage}" 
+                        TextWrapping="Wrap"
+                        Foreground="{StaticResource SuccessBrush}" 
+                        Visibility="{Binding ShowUdlSuccessMessage, Converter={StaticResource BoolToVis}}" 
+                    />
+                </StackPanel>
+            </Border>
+        </StackPanel> 
     </StackPanel>
 </UserControl>

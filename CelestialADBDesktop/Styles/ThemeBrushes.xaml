@@ -17,6 +17,7 @@
     <Color x:Key="Blue" PresentationOptions:Freeze="True">#FF57889C</Color>
     <Color x:Key="BlueLight" PresentationOptions:Freeze="True">#FF92A2A8</Color>
     <Color x:Key="BlueDark" PresentationOptions:Freeze="True">#FF4c4f53</Color>
+    <Color x:Key="BlueDarkBorder" PresentationOptions:Freeze="True">#FF45474B</Color>
     <Color x:Key="Green" PresentationOptions:Freeze="True">#FF356e35</Color>
     <Color x:Key="GreenLight" PresentationOptions:Freeze="True">#FF71843f</Color>
     <Color x:Key="GreenDark" PresentationOptions:Freeze="True">#FF496949</Color>
@@ -198,8 +199,8 @@
     <SolidColorBrush Color="{StaticResource Bluesky}" x:Key="BlueskyBrush" PresentationOptions:Freeze="True" />
     <SolidColorBrush Color="{StaticResource Blue}" x:Key="BlueBrush" PresentationOptions:Freeze="True" />
     <SolidColorBrush Color="{StaticResource Bluelight}" x:Key="BluelightBrush" PresentationOptions:Freeze="True" />
-    <SolidColorBrush Color="{StaticResource Bluedark}" x:Key="BluedarkBrush" PresentationOptions:Freeze="True" 
-                     />
+    <SolidColorBrush Color="{StaticResource BlueDark}" x:Key="BluedarkBrush" PresentationOptions:Freeze="True" />
+    <SolidColorBrush Color="{StaticResource BlueDarkBorder}" x:Key="BluedarkBorderBrush" PresentationOptions:Freeze="True" />
     <SolidColorBrush Color="{StaticResource Green}" x:Key="GreenBrush" PresentationOptions:Freeze="True" />
     <SolidColorBrush Color="{StaticResource Greenlight}" x:Key="GreenlightBrush" PresentationOptions:Freeze="True" />
     <SolidColorBrush Color="{StaticResource Greendark}" x:Key="GreendarkBrush" PresentationOptions:Freeze="True" />

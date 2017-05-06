@@ -12,6 +12,8 @@ namespace Harris.CelestialADB.Desktop.Helpers
 {
     static class AltiumFile
     {
+        static Regex dblibConnStrRex = new Regex(@"^(?<key>ConnectionString=FILE NAME=)(?<File>.+)\s*$", RegexOptions.Multiline);
+
         public static AltiumDblibPath BrowseForDbLib()
         {
             AltiumDblibPath path = new AltiumDblibPath();
@@ -31,22 +33,62 @@ namespace Harris.CelestialADB.Desktop.Helpers
             path.Success = true;
             path.Path = dialog.FileName;
 
-            try
-            {
-                Regex dblibRex = new Regex(@"^ConnectionString=FILE NAME=(?<File>.+)\s*$", RegexOptions.Multiline);
-                string dblib = File.ReadAllText(path.Path);
-                if (dblibRex.IsMatch(dblib))
-                {
-                    path.ConnectionStringPath = dblibRex.Match(dblib).Groups["File"].Value.Trim();
-                }
-            }
-            catch (Exception err)
-            {
-                path.Error = err.Message;
-                path.Success = false;
-            }
+            path.ConnectionStringPath = ReadUdlLocation(path.Path);
 
             return path;
+        }
+        public static string ReadUdlLocation(string dbLibPath)
+        {
+            try
+            {
+                string dblib = File.ReadAllText(dbLibPath);
+                if (dblibConnStrRex.IsMatch(dblib))
+                {
+                    return dblibConnStrRex.Match(dblib).Groups["File"].Value.Trim();
+                }
+            }
+            catch
+            {
+                return "";
+            }
+
+            return "";
+        }
+
+        public static bool SetUdlLocationInDbLib(string dbLibPath, string udlPath)
+        {
+            if (!File.Exists(dbLibPath))
+                return false;
+
+            if (!File.Exists(udlPath))
+                return false;
+
+            string dblib = "";
+
+            try
+            {
+                 dblib = File.ReadAllText(dbLibPath);
+
+                if (dblibConnStrRex.IsMatch(dblib))
+                {
+                    if (udlPath == dblibConnStrRex.Match(dblib).Groups["File"].Value.Trim())
+                        return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+
+            dblib = dblibConnStrRex.Replace(dblib, String.Format("${{key}}{0}", udlPath));
+
+            File.WriteAllText(dbLibPath, dblib);
+
+            return true;
         }
 
         public static UdlCredentials ReadUdlFile(AltiumDblibPath p)
@@ -80,12 +122,12 @@ namespace Harris.CelestialADB.Desktop.Helpers
                 cred.Error = err.Message;
                 return cred;
             }
-            
+
             var match = tokenRex.Match(udl);
             for (int i = 0; i < match.Groups["Token"].Captures.Count; i++)
             {
                 if (match.Groups["Token"].Captures[i].Value == "User ID")
-                    cred.Username= match.Groups["Value"].Captures[i].Value;
+                    cred.Username = match.Groups["Value"].Captures[i].Value;
                 else if (match.Groups["Token"].Captures[i].Value == "Password")
                     cred.Password = match.Groups["Value"].Captures[i].Value;
                 else if (match.Groups["Token"].Captures[i].Value == "Data Source")
@@ -107,7 +149,7 @@ namespace Harris.CelestialADB.Desktop.Helpers
                 StringBuilder udl = new StringBuilder();
                 udl.AppendLine("[oledb]");
                 udl.AppendLine("; Everything after this line is an OLE DB initstring");
-                udl.AppendFormat("Provider = SQLNCLI11.1; Password = {0}; User ID = {1}; Initial Catalog = altium_library; Data Source = {2}; Initial File Name = \"\"; Server SPN = \"\"\r\n",
+                udl.AppendFormat("Provider=SQLNCLI11.1; Password=\"{0}\";User ID={1}; Initial Catalog=altium_library; Data Source={2}; Initial File Name=\"\"; Server SPN=\"\"\r\n",
                     cred.Password, cred.Username, cred.Server);
 
                 File.WriteAllText(connectionStringPath, udl.ToString());
@@ -141,7 +183,7 @@ namespace Harris.CelestialADB.Desktop.Helpers
         public string Path { get; set; }
         public bool Success { get; set; }
         public string Error { get; set; }
-        
+
         public string ConnectionStringPath { get; set; }
     }
 }

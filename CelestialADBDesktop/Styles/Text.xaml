@@ -24,7 +24,19 @@
         <Setter Property="SnapsToDevicePixels" Value="true" />
         <Setter Property="UseLayoutRounding" Value="true" />
     </Style>
-    
+
+    <Style TargetType="{x:Type celestial:WidgetHeaderTextBlock}">
+        <Setter Property="Margin" Value="10,0,0,0" />
+        <Setter Property="FontFamily" Value="{DynamicResource ThemeFontFamily}" />
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="FontSize" Value="{DynamicResource StandardFontSize}" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="SnapsToDevicePixels" Value="true" />
+        <Setter Property="UseLayoutRounding" Value="true" />
+    </Style>
+
     <Style TargetType="{x:Type celestial:TextBlock}">
         <Setter Property="Margin" Value="{DynamicResource TextMargin}" />
         <Setter Property="FontFamily" Value="{DynamicResource ThemeFontFamily}" />

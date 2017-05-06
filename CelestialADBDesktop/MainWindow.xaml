@@ -125,7 +125,7 @@
         </Border>
         
         <TabControl Style="{StaticResource MenuTabControl}" x:Name="MAIN_TABCONTROL_MODULES" Grid.Row="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" TabStripPlacement="Left">
-            <TabItem DataContext="{Binding SettingsModel}" Style="{StaticResource MenuTabItem}" Tag="Altium-Database DbLib Setup">
+            <TabItem DataContext="{Binding SettingsViewModel}" Style="{StaticResource MenuTabItem}" Tag="Altium-Database DbLib Setup">
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <graphics:IconSettings VerticalAlignment="Center" />
@@ -136,7 +136,7 @@
                     <views:SettingsView />
                 </Grid>
             </TabItem>
-            <TabItem DataContext="{Binding AzureModel}" Style="{StaticResource MenuTabItem}" Tag="Azure Database Status">
+            <TabItem DataContext="{Binding AzureViewModel}" Style="{StaticResource MenuTabItem}" Tag="Azure Database Status">
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <graphics:IconDatabase VerticalAlignment="Center" />
@@ -147,7 +147,7 @@
                     <views:AzureView />
                 </Grid>
             </TabItem>
-            <TabItem DataContext="{Binding LocalDbModel}" Style="{StaticResource MenuTabItem}" Tag="Local Database Setup and Sync">
+            <TabItem DataContext="{Binding LocalDbViewModel}" Style="{StaticResource MenuTabItem}" Tag="Local Database Setup and Sync">
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <graphics:IconSync VerticalAlignment="Center" />

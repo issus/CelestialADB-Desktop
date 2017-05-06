@@ -21,7 +21,7 @@ namespace Harris.CelestialADB.Desktop.ViewModel
     /// See http://www.mvvmlight.net
     /// </para>
     /// </summary>
-    public class MainViewModel : ViewModelBase
+    public class MainViewModel : ViewModelBase, IDisposable
     {
         private string version;
         private int windowWidth;
@@ -80,6 +80,7 @@ namespace Harris.CelestialADB.Desktop.ViewModel
             FirewallErrorButtonCommand = new DelegateCommand(async () => await UpdateFirewall());
 
             SettingsViewModel = new SettingsViewModel();
+            SettingsViewModel.MainViewModel = this;
             AzureViewModel = new AzureViewModel();
             LocalDbViewModel = new LocalDbViewModel();
         }
@@ -123,6 +124,17 @@ namespace Harris.CelestialADB.Desktop.ViewModel
             CheckFirewallStatus(null);
 
             UsersName = AltiumDbApi.GetUsersName();
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool native)
+        {
+            firewallCheck.Dispose();
         }
 
         public LoginRegisterViewModel LoginRegisterViewModel { get; private set; }

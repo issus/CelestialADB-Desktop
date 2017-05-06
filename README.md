@@ -5,7 +5,7 @@ Windows software that enables you to register for access to the Live Azure datab
 # Very Easy to Use
 1. Download and install: http://altiumservices.azurewebsites.net/Desktop/download.html
 
-If you are using Windows 10, SmartScreen might try to block you from running the setup tool and/or CelestialADB.exe... you can click "more info" and then "run away":
+If you are using Windows 10, SmartScreen might try to block you from running the setup tool and/or CelestialADB.exe... you can click "more info" and then "run anway":
 
 ![image](https://cloud.githubusercontent.com/assets/1425724/25770655/81ce8dfa-31f8-11e7-882a-9c0379c3b375.png)
 

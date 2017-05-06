@@ -1,6 +1,8 @@
 # Celestial Altium Database Desktop Manager
 Windows software that enables you to register for access to the Live Azure database, keep your firewall rule up to date, and create the connection data file for Altium to use.
 
+# We need a Code Signing Certificate
+Windows SmartScreen shows a warning/block of both the installer and the application as it is not digitally signed. I don't have the funds to buy a code signing certificate, so I have setup a GoFundMe campaign to raise the CA$275 to purchase one: https://www.gofundme.com/code-signing-cert-for-altium-db. I'd be very appreciative of a few dollars towards buying the certificate so we can make this software more accessible!
 
 # Very Easy to Use
 1. Download and install: http://altiumservices.azurewebsites.net/Desktop/download.html

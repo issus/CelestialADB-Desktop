@@ -48,6 +48,7 @@
     <Compile Include="AltiumComponent.cs" />
     <Compile Include="ApiResponse.cs" />
     <Compile Include="DatabaseStats.cs" />
+    <Compile Include="DatabaseTableColumnDefinition.cs" />
     <Compile Include="DatabaseViewDefinition.cs" />
     <Compile Include="GenericViewDefinition.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

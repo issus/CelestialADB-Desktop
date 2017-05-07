@@ -274,5 +274,31 @@ namespace Harris.CelestialADB.Desktop.WebService
             };
             return await ExecuteAsync<List<string>>(request);
         }
+
+        public static async Task<List<AltiumComponent>> ListComponents(int rows = 500, int offset = 0)
+        {
+            LastError = "";
+
+            var request = new RestRequest()
+            {
+                Resource = "api/Altium/DatabaseViewList"
+            };
+            request.AddParameter("rows", rows);
+            request.AddParameter("offset", offset);
+
+            return await ExecuteAsync<List<AltiumComponent>>(request);
+        }
+
+        public static async Task<List<DatabaseTableColumnDefinition>> DatabaseTableColumns()
+        {
+            LastError = "";
+
+            var request = new RestRequest()
+            {
+                Resource = "api/Altium/DatabaseTableColumns"
+            };
+
+            return await ExecuteAsync<List<DatabaseTableColumnDefinition>>(request);
+        }
     }
 }

@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccountActivation.cs" />
+    <Compile Include="AltiumComponent.cs" />
     <Compile Include="ApiResponse.cs" />
     <Compile Include="DatabaseStats.cs" />
     <Compile Include="DatabaseViewDefinition.cs" />

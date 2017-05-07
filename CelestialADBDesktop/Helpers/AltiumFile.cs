@@ -18,10 +18,13 @@ namespace Harris.CelestialADB.Desktop.Helpers
         {
             AltiumDblibPath path = new AltiumDblibPath();
 
-            var dialog = new CommonOpenFileDialog();
-            dialog.EnsureFileExists = true;
-            dialog.Title = "Locate DbLib File";
-            dialog.Multiselect = false;
+            var dialog = new CommonOpenFileDialog()
+            {
+                EnsureFileExists = true,
+                Title = "Locate DbLib File",
+                Multiselect = false
+            };
+
             dialog.Filters.Add(new CommonFileDialogFilter("Altium Database File", "*.DbLib"));
 
             if (dialog.ShowDialog() != CommonFileDialogResult.Ok)

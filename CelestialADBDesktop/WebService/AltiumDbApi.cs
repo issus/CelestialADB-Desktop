@@ -77,9 +77,10 @@ namespace Harris.CelestialADB.Desktop.WebService
 
         public static RestClient GenerateClient(RestRequest request)
         {
-            var client = new RestClient();
-            client.BaseUrl = new System.Uri(BaseUrl);
-
+            var client = new RestClient()
+            {
+                BaseUrl = new System.Uri(BaseUrl)
+            };
             if (!string.IsNullOrEmpty(Token))
             {
                 request.AddHeader("Authorization", String.Format("Bearer {0}", Token));
@@ -93,8 +94,10 @@ namespace Harris.CelestialADB.Desktop.WebService
         {
             LastError = "";
 
-            var request = new RestRequest(Method.POST);
-            request.Resource = "api/Account/Register";
+            var request = new RestRequest(Method.POST)
+            {
+                Resource = "api/Account/Register"
+            };
             request.AddJsonBody(user);
 
             return await ExecuteAsync<UserRegistrationResponse>(request);
@@ -104,9 +107,10 @@ namespace Harris.CelestialADB.Desktop.WebService
         {
             LastError = "";
 
-            var request = new RestRequest();
-            request.Resource = "api/Altium/DatabaseStats";
-
+            var request = new RestRequest()
+            {
+                Resource = "api/Altium/DatabaseStats"
+            };
             return Execute<DatabaseStats>(request);
         }
         
@@ -114,9 +118,10 @@ namespace Harris.CelestialADB.Desktop.WebService
         {
             LastError = "";
 
-            var request = new RestRequest(Method.GET);
-            request.Resource = "api/Account/CheckAccountActivated";
-
+            var request = new RestRequest(Method.GET)
+            {
+                Resource = "api/Account/CheckAccountActivated"
+            };
             return await ExecuteAsync<ApiResponse>(request);
         }
 
@@ -124,8 +129,10 @@ namespace Harris.CelestialADB.Desktop.WebService
         {
             LastError = "";
 
-            var request = new RestRequest(Method.GET);
-            request.Resource = "api/Account/ResendActivationEmail";
+            var request = new RestRequest(Method.GET)
+            {
+                Resource = "api/Account/ResendActivationEmail"
+            };
             request.AddParameter("email", email);
 
             return await ExecuteAsync<ApiResponse>(request);
@@ -135,8 +142,10 @@ namespace Harris.CelestialADB.Desktop.WebService
         {
             LastError = "";
 
-            var request = new RestRequest(Method.POST);
-            request.Resource = "api/Account/ActivateAccount";
+            var request = new RestRequest(Method.POST)
+            {
+                Resource = "api/Account/ActivateAccount"
+            };
             request.AddJsonBody(account);
 
             return await ExecuteAsync<ApiResponse>(request);
@@ -144,8 +153,10 @@ namespace Harris.CelestialADB.Desktop.WebService
 
         public static async Task<TokenResponse> Login(string user, string pass)
         {
-            var request = new RestRequest(Method.POST);
-            request.Resource = "Token";
+            var request = new RestRequest(Method.POST)
+            {
+                Resource = "Token"
+            };
             request.AddParameter("grant_type", "password");
             request.AddParameter("username", user);
             request.AddParameter("password", pass);
@@ -167,9 +178,10 @@ namespace Harris.CelestialADB.Desktop.WebService
         {
             LastError = "";
 
-            var request = new RestRequest();
-            request.Resource = "api/Account/CheckTokenValid";
-
+            var request = new RestRequest()
+            {
+                Resource = "api/Account/CheckTokenValid"
+            };
             return (Execute<ApiResponse>(request)).Success;
         }
 
@@ -177,9 +189,10 @@ namespace Harris.CelestialADB.Desktop.WebService
         {
             LastError = "";
 
-            var request = new RestRequest();
-            request.Resource = "api/Account/GetUsersName";
-
+            var request = new RestRequest()
+            {
+                Resource = "api/Account/GetUsersName"
+            };
             return (await ExecuteAsync<ApiResponse>(request)).Message;
         }
 
@@ -187,9 +200,10 @@ namespace Harris.CelestialADB.Desktop.WebService
         {
             LastError = "";
 
-            var request = new RestRequest();
-            request.Resource = "api/Account/GetUsersName";
-
+            var request = new RestRequest()
+            {
+                Resource = "api/Account/GetUsersName"
+            };
             return (Execute<ApiResponse>(request)).Message;
         }
 
@@ -197,9 +211,10 @@ namespace Harris.CelestialADB.Desktop.WebService
         {
             LastError = "";
 
-            var request = new RestRequest(Method.GET);
-            request.Resource = "api/Altium/CheckFirewallRule";
-
+            var request = new RestRequest(Method.GET)
+            {
+                Resource = "api/Altium/CheckFirewallRule"
+            };
             return await ExecuteAsync<ApiResponse>(request);
         }
 
@@ -207,9 +222,10 @@ namespace Harris.CelestialADB.Desktop.WebService
         {
             LastError = "";
 
-            var request = new RestRequest(Method.GET);
-            request.Resource = "api/Altium/UpdateFirewallRule";
-
+            var request = new RestRequest(Method.GET)
+            {
+                Resource = "api/Altium/UpdateFirewallRule"
+            };
             return await ExecuteAsync<ApiResponse>(request);
         }
         
@@ -217,9 +233,10 @@ namespace Harris.CelestialADB.Desktop.WebService
         {
             LastError = "";
 
-            var request = new RestRequest(Method.GET);
-            request.Resource = "api/Altium/IpAddress";
-
+            var request = new RestRequest(Method.GET)
+            {
+                Resource = "api/Altium/IpAddress"
+            };
             return await ExecuteAsync<ApiResponse>(request);
         }
 
@@ -227,9 +244,10 @@ namespace Harris.CelestialADB.Desktop.WebService
         {
             LastError = "";
 
-            var request = new RestRequest();
-            request.Resource = "api/Altium/DatabaseViewDefinitions";
-
+            var request = new RestRequest()
+            {
+                Resource = "api/Altium/DatabaseViewDefinitions"
+            };
             return await ExecuteAsync<List<GenericViewDefinition>>(request);
         }
         
@@ -237,8 +255,10 @@ namespace Harris.CelestialADB.Desktop.WebService
         {
             LastError = "";
 
-            var request = new RestRequest(Method.GET);
-            request.Resource = "api/Altium/DatabaseViewDefinitions";
+            var request = new RestRequest(Method.GET)
+            {
+                Resource = "api/Altium/DatabaseViewDefinitions"
+            };
             request.AddParameter("viewName", viewName);
 
             return await ExecuteAsync<GenericViewDefinition>(request);
@@ -248,9 +268,10 @@ namespace Harris.CelestialADB.Desktop.WebService
         {
             LastError = "";
 
-            var request = new RestRequest();
-            request.Resource = "api/Altium/DatabaseViewList";
-
+            var request = new RestRequest()
+            {
+                Resource = "api/Altium/DatabaseViewList"
+            };
             return await ExecuteAsync<List<string>>(request);
         }
     }

@@ -212,7 +212,6 @@ namespace Harris.CelestialADB.Desktop.WebService
 
             return await ExecuteAsync<ApiResponse>(request);
         }
-
         
         public static async Task<ApiResponse> GetIpAddress()
         {
@@ -222,6 +221,37 @@ namespace Harris.CelestialADB.Desktop.WebService
             request.Resource = "api/Altium/IpAddress";
 
             return await ExecuteAsync<ApiResponse>(request);
+        }
+
+        public static async Task<List<GenericViewDefinition>> DatabaseViewDefinitions()
+        {
+            LastError = "";
+
+            var request = new RestRequest();
+            request.Resource = "api/Altium/DatabaseViewDefinitions";
+
+            return await ExecuteAsync<List<GenericViewDefinition>>(request);
+        }
+        
+        public static async Task<GenericViewDefinition> DatabaseViewDefinition(string viewName)
+        {
+            LastError = "";
+
+            var request = new RestRequest(Method.GET);
+            request.Resource = "api/Altium/DatabaseViewDefinitions";
+            request.AddParameter("viewName", viewName);
+
+            return await ExecuteAsync<GenericViewDefinition>(request);
+        }
+
+        public static async Task<List<string>> DatabaseViewList()
+        {
+            LastError = "";
+
+            var request = new RestRequest();
+            request.Resource = "api/Altium/DatabaseViewList";
+
+            return await ExecuteAsync<List<string>>(request);
         }
     }
 }

@@ -79,8 +79,10 @@ namespace Harris.CelestialADB.Desktop.ViewModel
 
             FirewallErrorButtonCommand = new DelegateCommand(async () => await UpdateFirewall());
 
-            SettingsViewModel = new SettingsViewModel();
-            SettingsViewModel.MainViewModel = this;
+            SettingsViewModel = new SettingsViewModel()
+            {
+                MainViewModel = this
+            };
             AzureViewModel = new AzureViewModel();
             LocalDbViewModel = new LocalDbViewModel();
         }

@@ -38,7 +38,7 @@
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>download.html</WebPage>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>2</ApplicationRevision>
+    <ApplicationRevision>3</ApplicationRevision>
     <ApplicationVersion>0.1.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -190,6 +190,7 @@
     <Compile Include="Converters\BooleanToBlurConverter.cs" />
     <Compile Include="Converters\BooleanToInvisibilityConverter.cs" />
     <Compile Include="Converters\DebugConverter.cs" />
+    <Compile Include="Database\MySQLReplicator.cs" />
     <Compile Include="Data\UserRegistration.cs" />
     <Compile Include="Design\DesignDataService.cs" />
     <Compile Include="Graphics\CelestialLibraryIcon.xaml.cs">
@@ -413,9 +414,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Database\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

@@ -70,5 +70,29 @@ namespace Harris.CelestialADB.Desktop.Properties {
                 this["ShowIntroBox"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string MySqlConnectionString {
+            get {
+                return ((string)(this["MySqlConnectionString"]));
+            }
+            set {
+                this["MySqlConnectionString"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string MsSqlConnectionString {
+            get {
+                return ((string)(this["MsSqlConnectionString"]));
+            }
+            set {
+                this["MsSqlConnectionString"] = value;
+            }
+        }
     }
 }

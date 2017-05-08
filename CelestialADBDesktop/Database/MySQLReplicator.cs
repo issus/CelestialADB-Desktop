@@ -20,7 +20,7 @@ namespace Harris.CelestialADB.Desktop.Database
         /// Check to see if the database is configured, for use when connecting to a database for the first time
         /// </summary>
         /// <returns>if the database appears to be setup as an altiumdb</returns>
-        Task<bool> IsDatabaseConfigured();
+        Task<bool> IsDatabaseConfigured(string name = "altium_library");
 
         /// <summary>
         /// Creates the database from scratch
@@ -223,9 +223,21 @@ namespace Harris.CelestialADB.Desktop.Database
         {
             throw new NotImplementedException();
         }
-        public async Task<bool> IsDatabaseConfigured()
+        public async Task<bool> IsDatabaseConfigured(string name = "altium_library")
         {
-            throw new NotImplementedException();
+            if (!(await CheckConnection()))
+                return false;
+
+            MySqlCommand cmd = new MySqlCommand("SELECT COUNT(*) FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = '@dbname'", conn);
+            cmd.Parameters.AddWithValue("dbname", name);
+            long count = (long)cmd.ExecuteScalar();
+
+            if (count == 0)
+                return false;
+
+            // todo: check tables and views exist
+
+            return true;
         }
 
         public async Task<bool> UpdateDatabaseDefinitions(List<DatabaseTableColumnDefinition> columns, List<DatabaseViewDefinition> views)

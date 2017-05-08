@@ -94,5 +94,29 @@ namespace Harris.CelestialADB.Desktop.Properties {
                 this["MsSqlConnectionString"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string MySqlSchema {
+            get {
+                return ((string)(this["MySqlSchema"]));
+            }
+            set {
+                this["MySqlSchema"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string MsSqlSchema {
+            get {
+                return ((string)(this["MsSqlSchema"]));
+            }
+            set {
+                this["MsSqlSchema"] = value;
+            }
+        }
     }
 }

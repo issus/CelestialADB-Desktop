@@ -16,13 +16,16 @@ namespace Harris.CelestialADB.Desktop.ViewModel
 
         public LocalDbViewModel()
         {
-            TestConnectionCommand = new AwaitableDelegateCommand(TestConnection, () => !String.IsNullOrEmpty(DatabaseHost) && !String.IsNullOrEmpty(DatabaseUser) && !String.IsNullOrEmpty(DatabasePassword) && DatabasePort > 0);
+            TestConnectionCommand = new AwaitableDelegateCommand(TestConnection, 
+                () => !String.IsNullOrEmpty(DatabaseHost) && !String.IsNullOrEmpty(DatabaseUser) && !String.IsNullOrEmpty(DatabasePassword) && !String.IsNullOrEmpty(DatabaseSchema) && DatabasePort > 0);
 
             DatabaseHost = "localhost";
             DatabasePort = 3306;
 
             DatabaseUser = "root";
             DatabasePassword = "";
+
+            DatabaseSchema = "altium_library";
         }
 
         private async Task TestConnection()
@@ -33,9 +36,9 @@ namespace Harris.CelestialADB.Desktop.ViewModel
 
             Properties.Settings.Default.MySqlConnectionString = String.Format("Server={0};Port={1};Uid={2};Pwd={3};",
                 DatabaseHost, DatabasePort, DatabaseUser, DatabasePassword);
+            Properties.Settings.Default.MySqlSchema = DatabaseSchema;
             Properties.Settings.Default.Save();
-
-
+            
             try
             {
                 using (MySQLReplicator db = new MySQLReplicator())
@@ -44,6 +47,22 @@ namespace Harris.CelestialADB.Desktop.ViewModel
                     {
                         ShowTestSuccessMessage = true;
                         TestMessage = "Connection successful!";
+
+                        try
+                        {
+                            if (await db.IsDatabaseConfigured())
+                            {
+                                TestMessage = "Connection successful, there appears to be an Altium database present!";
+                            }
+                            else
+                            {
+                                TestMessage = "Connection successful, there is no Altium database present!";
+                            }
+                        }
+                        catch (Exception err)
+                        {
+                            
+                        }
                     }
                     else
                     {
@@ -109,6 +128,17 @@ namespace Harris.CelestialADB.Desktop.ViewModel
             }
         }
 
+        private string databaseSchema;
+        public string DatabaseSchema
+        {
+            get { return databaseSchema; }
+            set
+            {
+                databaseSchema = value;
+                RaisePropertyChanged("DatabaseSchema");
+                TestConnectionCommand.RaiseCanExecuteChanged();
+            }
+        }
         private bool showTestErrorMessage;
         public bool ShowTestErrorMessage
         {

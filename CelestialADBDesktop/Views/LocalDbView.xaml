@@ -33,7 +33,7 @@
             <Border Background="White" BorderBrush="{StaticResource GrayMidLightBrush}" BorderThickness="1,0,1,2" Padding="13">
                 <StackPanel Orientation="Vertical">
                     <celestial:TextBlock 
-                        Text="Enter local database settings to replicate the Celestial Altium Database down to." 
+                        Text="Enter local database server settings to replicate the Celestial Altium Database down to. If the Database/Schema does not exist, it will be created for you - you should use the admin/root user login for this to work." 
                         Margin="0,0,0,12"
                         TextWrapping="Wrap"
                     />
@@ -47,12 +47,14 @@
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
                         <celestial:TextBlock Text="Hostname" Grid.Row="0" Grid.Column="0" />
                         <celestial:TextBlock Text="Port" Grid.Row="0" Grid.Column="1" />
                         <celestial:TextBlock Text="Username" Grid.Row="0" Grid.Column="2" />
                         <celestial:TextBlock Text="Password" Grid.Row="0" Grid.Column="3" />
+                        <celestial:TextBlock Text="Database" Grid.Row="0" Grid.Column="4" />
 
                         <TextBox Text="{Binding DatabaseHost}" Grid.Row="1" Grid.Column="0" Margin="0,0,6,12" />
                         <TextBox Text="{Binding DatabasePort}" Grid.Row="1" Grid.Column="1" Margin="0,0,6,12" />
@@ -64,8 +66,9 @@
                             Grid.Column="3"
                             Margin="0,0,6,12"
                         />
-
-                        <Button Content="Test" Command="{Binding TestConnectionCommand}" Grid.Row="1" Grid.Column="4" Margin="6,0,6,12" VerticalAlignment="Bottom" />
+                        <TextBox Text="{Binding DatabaseSchema}" Grid.Row="1" Grid.Column="4" Margin="0,0,6,12" />
+                        
+                        <Button Content="Test" Command="{Binding TestConnectionCommand}" Grid.Row="1" Grid.Column="5" Margin="6,0,6,12" VerticalAlignment="Bottom" />
                     </Grid>
                     <celestial:TextBlock 
                         Text="{Binding TestMessage}" 

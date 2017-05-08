@@ -1,5 +1,4 @@
 ﻿using GalaSoft.MvvmLight;
-using Harris.CelestialADB.Desktop.Model;
 using System;
 using System.ComponentModel;
 using System.Windows;
@@ -12,6 +11,7 @@ using Harris.CelestialADB.Desktop.WebService;
 using System.Windows.Input;
 using Harris.CelestialADB.Desktop.WPF;
 using System.Threading.Tasks;
+using System.Deployment.Application;
 
 namespace Harris.CelestialADB.Desktop.ViewModel
 {
@@ -31,7 +31,12 @@ namespace Harris.CelestialADB.Desktop.ViewModel
 
         public MainViewModel()
         {
-            version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            version = "(local build)"; //Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            try
+            {
+                version = ApplicationDeployment.CurrentDeployment.CurrentVersion.ToString();
+            }
+            catch { }
 
             WindowHeight = 900;
             WindowWidth = 1200;

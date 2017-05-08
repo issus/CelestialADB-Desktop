@@ -105,10 +105,10 @@ namespace Harris.CelestialADB.Desktop.ViewModel
             get { return pathToUdl; }
             set
             {
-                pathToUdl = value;
+                pathToUdl = value.Replace("\\\\", "\\");
                 RaisePropertyChanged("PathToUdl");
 
-                UdlExists = File.Exists(value);
+                UdlExists = File.Exists(pathToUdl);
             }
         }
 

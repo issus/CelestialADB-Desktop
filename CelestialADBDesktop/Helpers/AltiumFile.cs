@@ -155,7 +155,7 @@ namespace Harris.CelestialADB.Desktop.Helpers
                 udl.AppendFormat("Provider=SQLNCLI11.1; Password=\"{0}\";User ID={1}; Initial Catalog=altium_library; Data Source={2}; Initial File Name=\"\"; Server SPN=\"\"\r\n",
                     cred.Password, cred.Username, cred.Server);
 
-                File.WriteAllText(connectionStringPath, udl.ToString(), Encoding.UTF8);
+                File.WriteAllText(connectionStringPath, udl.ToString(), Encoding.Unicode);
             }
             catch (Exception err)
             {

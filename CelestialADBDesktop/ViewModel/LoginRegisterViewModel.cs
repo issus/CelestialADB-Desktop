@@ -134,15 +134,17 @@ namespace Harris.CelestialADB.Desktop.ViewModel
                 return false;
             }
 
-            UserRegistrationRequest user = new UserRegistrationRequest();
-            user.AllowEmail = AllowEmail;
-            user.Username = Username;
-            user.Password = Password;
-            user.ConfirmPassword = PasswordConfirm;
-            user.FirstName = FirstName;
-            user.LastName = LastName;
-            user.Company = Company;
-            user.Email = EmailAddress;
+            UserRegistrationRequest user = new UserRegistrationRequest()
+            {
+                AllowEmail = AllowEmail,
+                Username = Username,
+                Password = Password,
+                ConfirmPassword = PasswordConfirm,
+                FirstName = FirstName,
+                LastName = LastName,
+                Company = Company,
+                Email = EmailAddress
+            };
             user.Password = Password;
             user.UserType = databaseUse;
 

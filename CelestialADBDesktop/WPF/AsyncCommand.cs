@@ -7,6 +7,8 @@ using System.Windows.Input;
 
 namespace Harris.CelestialADB.Desktop.WPF
 {
+    // http://jake.ginnivan.net/awaitable-delegatecommand/
+
     public interface IRaiseCanExecuteChanged
     {
         void RaiseCanExecuteChanged();

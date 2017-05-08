@@ -104,6 +104,13 @@ namespace Harris.CelestialADB.Desktop.Database
         /// </summary>
         /// <returns>User created views</returns>
         Task<List<DatabaseViewDefinition>> UserViews();
+        
+
+        /// <summary>
+        /// Test the connection string in the config to see if the database can be contacted
+        /// </summary>
+        /// <returns>Success of the connection</returns>
+        Task<bool> TestConnection();
     }
 
     class MySQLReplicator : ISQLReplicator, IDisposable
@@ -120,6 +127,12 @@ namespace Harris.CelestialADB.Desktop.Database
                 conn = new MySqlConnection(Properties.Settings.Default.MySqlConnectionString);
                 conn.Open();
             }
+        }
+
+
+        public async Task<bool> TestConnection()
+        {
+            return await CheckConnection();
         }
 
         async Task<bool> CheckConnection()
@@ -175,7 +188,7 @@ namespace Harris.CelestialADB.Desktop.Database
                 return false;
 
             //todo: sanity check name.
-            MySqlCommand cmd = new MySqlCommand(String.Format("CREATE DATABASE {0}", name), conn);
+            MySqlCommand cmd = new MySqlCommand(String.Format("CREATE DATABASE IF NOT EXISTS {0}", name), conn);
             await cmd.ExecuteNonQueryAsync();
 
             throw new NotImplementedException();
@@ -219,8 +232,7 @@ namespace Harris.CelestialADB.Desktop.Database
         {
             throw new NotImplementedException();
         }
-
-
+        
 
         public void Dispose()
         { 
@@ -233,5 +245,6 @@ namespace Harris.CelestialADB.Desktop.Database
                 conn.Dispose();
             }
         }
+
     }
 }

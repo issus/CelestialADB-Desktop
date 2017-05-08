@@ -7,6 +7,7 @@
     xmlns:celestial="clr-namespace:Harris.CelestialADB.Desktop.Controls"
     xmlns:sys="clr-namespace:System;assembly=mscorlib" 
     xmlns:conv="clr-namespace:Harris.CelestialADB.Desktop.Converters"
+    xmlns:helpers="clr-namespace:Harris.CelestialADB.Desktop.Helpers"
     mc:Ignorable="d" 
     d:DesignHeight="300" d:DesignWidth="300"
 >
@@ -19,13 +20,68 @@
         <Border Background="{StaticResource GrayLightestBrush}" BorderBrush="{StaticResource GrayMidLightBrush}" BorderThickness="1" >
             <Grid>
                 <StackPanel Orientation="Vertical" Margin="19">
-                    <celestial:HeaderTextBlock Text="This is nowhere near complete :(" />
-                    <celestial:TextBlock Text="The plan for this screen is to allow you to setup a local database that has the same views/components as the live Azure database." TextWrapping="Wrap" />
-                    <celestial:TextBlock Text="I plan to make it so you can setup a local MSSQL or MySQL server and this screen will generate the database." TextWrapping="Wrap" />
-                    <celestial:TextBlock Text="This screen will also allow you to sync components down from azure to your local database as new items are added.." TextWrapping="Wrap" />
-                    <celestial:TextBlock Text="Having a local database greatly increases the speed of BOM generation, but otherwise has very little effect." TextWrapping="Wrap" />
+                    <celestial:HeaderTextBlock Text="This is very experimental...." />
+                    <celestial:TextBlock Text="Currently the database replication is only setup for MySQL and is under development." TextWrapping="Wrap" />
                 </StackPanel>
             </Grid>
         </Border>
+        
+        <StackPanel Orientation="Vertical" Margin="0,0,0,20">
+            <Border Background="{StaticResource BluedarkBrush}" BorderBrush="{StaticResource BluedarkBorderBrush}" BorderThickness="1,1,1,1" Height="34">
+                <celestial:WidgetHeaderTextBlock Text="Local Database Configuration" />
+            </Border>
+            <Border Background="White" BorderBrush="{StaticResource GrayMidLightBrush}" BorderThickness="1,0,1,2" Padding="13">
+                <StackPanel Orientation="Vertical">
+                    <celestial:TextBlock 
+                        Text="Enter local database settings to replicate the Celestial Altium Database down to." 
+                        Margin="0,0,0,12"
+                        TextWrapping="Wrap"
+                    />
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <celestial:TextBlock Text="Hostname" Grid.Row="0" Grid.Column="0" />
+                        <celestial:TextBlock Text="Port" Grid.Row="0" Grid.Column="1" />
+                        <celestial:TextBlock Text="Username" Grid.Row="0" Grid.Column="2" />
+                        <celestial:TextBlock Text="Password" Grid.Row="0" Grid.Column="3" />
+
+                        <TextBox Text="{Binding DatabaseHost}" Grid.Row="1" Grid.Column="0" Margin="0,0,6,12" />
+                        <TextBox Text="{Binding DatabasePort}" Grid.Row="1" Grid.Column="1" Margin="0,0,6,12" />
+                        <TextBox Text="{Binding DatabaseUser}" Grid.Row="1" Grid.Column="2" Margin="0,0,6,12" />
+                        <PasswordBox 
+                            helpers:PasswordHelper.Password="{Binding DatabasePassword, Mode=TwoWay}" 
+                            helpers:PasswordHelper.Attach="True" 
+                            Grid.Row="1" 
+                            Grid.Column="3"
+                            Margin="0,0,6,12"
+                        />
+
+                        <Button Content="Test" Command="{Binding TestConnectionCommand}" Grid.Row="1" Grid.Column="4" Margin="6,0,6,12" VerticalAlignment="Bottom" />
+                    </Grid>
+                    <celestial:TextBlock 
+                        Text="{Binding TestMessage}" 
+                        TextWrapping="Wrap"
+                        Foreground="{StaticResource DangerBrush}" 
+                        Visibility="{Binding ShowTestErrorMessage, Converter={StaticResource BoolToVis}}" 
+                    />
+                    <celestial:TextBlock 
+                        Text="{Binding TestMessage}" 
+                        TextWrapping="Wrap"
+                        Foreground="{StaticResource SuccessBrush}" 
+                        Visibility="{Binding ShowTestSuccessMessage, Converter={StaticResource BoolToVis}}" 
+                    />
+                </StackPanel>
+            </Border>
+        </StackPanel>
+        
     </StackPanel>
 </UserControl>

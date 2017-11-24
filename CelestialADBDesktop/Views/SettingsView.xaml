@@ -52,7 +52,7 @@
                         </Border>
                     </Grid>
                     <StackPanel Orientation="Horizontal">
-                        <celestial:TextBlock Text="{Binding PathToUdl, StringFormat='Universal Data Link (.udl) location: {0}'}" />
+                        <celestial:TextBlock Text="{Binding PathToUdl, StringFormat='Current Universal Data Link (.udl) location: {0}'}" />
                         <celestial:TextBlock Text="(does not exist!)" Visibility="{Binding UdlExists, Converter={StaticResource BoolToInvis}}" />
                     </StackPanel>
                     <Button Content="Update UDL Settings to Use Azure" Style="{StaticResource BtnPrimaryStyle}" Command="{Binding UpdateUdlFileCommand}" />

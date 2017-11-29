@@ -169,7 +169,7 @@
                         <RowDefinition Height="auto" />
                     </Grid.RowDefinitions>
 
-                    <Border Grid.ColumnSpan="2" Grid.Row="0" BorderThickness="0,0,0,1" BorderBrush="{StaticResource GrayMidLightBrush}" Background="{StaticResource GrayLightestBrush}" Padding="15" Margin="-14,0,-14,10">
+                    <Border Grid.ColumnSpan="2" Grid.Row="0" BorderThickness="0,0,0,1" BorderBrush="{StaticResource GrayMidLightBrush}" Background="{StaticResource GrayLightestBrush}" Padding="11" Margin="-14,0,-14,6">
                         <celestial:TextBlock 
                             Text="{Binding BoxTitleText}" 
                             HorizontalAlignment="Left" 
@@ -317,6 +317,7 @@
                     >
                         <Grid>
                             <Button Command="{Binding ShowVerificationCommand}" Content="Activate Account" HorizontalAlignment="Left" Style="{StaticResource BtnInfoStyle}" Visibility="{Binding RegisterUser, Converter={StaticResource BoolToVis}, FallbackValue=false}" />
+                            <Button Command="{Binding ShowResetPasswordCommand}" Content="Reset Password" HorizontalAlignment="Left" Style="{StaticResource BtnInfoStyle}" Visibility="{Binding RegisterUser, Converter={StaticResource BoolToInvis}, FallbackValue=false}" />
                             <Button Command="{Binding RegisterLoginCommand}" HorizontalAlignment="Right" Content="{Binding DisplayText}" Style="{StaticResource BtnPrimaryStyle}" />
                         </Grid>
                     </Border>
@@ -471,7 +472,66 @@
                 </Border>
             </Grid>
         </Border>
-        
+
+        <!-- Resend Email-->
+        <Border 
+            Grid.Row="1" 
+            BorderThickness="1" 
+            BorderBrush="{StaticResource GrayMidLightBrush}"
+            Background="White"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Padding="14,0,14,0"
+            Visibility="{Binding ShowResetPassword, Converter={StaticResource BoolToVis}}"
+            Width="400"
+        >
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Border Grid.Row="0" BorderThickness="0,0,0,1" BorderBrush="{StaticResource GrayMidLightBrush}" Background="{StaticResource GrayLightestBrush}" Padding="15" Margin="-14,0,-14,10">
+                    <celestial:TextBlock 
+                        Text="Reset Password" 
+                        HorizontalAlignment="Center" 
+                        VerticalAlignment="Center" 
+                        FontSize="18"
+                        FontWeight="Light"
+                        Foreground="{StaticResource GrayDarkerBrush}"
+                    />
+                </Border>
+
+                <celestial:TextBlock Text="Email Address" Grid.Row="1" />
+                <TextBox Text="{Binding EmailAddress, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" />
+
+                <celestial:TextBlock 
+                    Text="{Binding ErrorMessage}" 
+                    TextWrapping="Wrap"
+                    Grid.Row="3" 
+                    Foreground="{StaticResource DangerBrush}" 
+                    Visibility="{Binding ShowResendError, Converter={StaticResource BoolToVis}}" 
+                />
+
+                <Border 
+                    Grid.Row="4" 
+                    BorderThickness="0,1,0,0" 
+                    BorderBrush="{StaticResource GrayMidLightBrush}" 
+                    Background="{StaticResource GrayLightestBrush}" 
+                    Padding="14,11,14,9"
+                    Margin="-14,10,-14,0"
+                >
+                    <Grid>
+                        <Button Command="{Binding ShowResetPasswordCommand}" Content="Back" HorizontalAlignment="Left" Style="{StaticResource BtnDangerStyle}" />
+
+                        <Button Command="{Binding SendResetPasswordCommand}" HorizontalAlignment="Right" Content="Resend" Style="{StaticResource BtnPrimaryStyle}" />
+                    </Grid>
+                </Border>
+            </Grid>
+        </Border>
+
         <!-- Block background when busy -->
         <Border Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.RowSpan="2" Visibility="{Binding ShowBusy, Converter={StaticResource BoolToVis}}">
             <celestial:SubHeaderTextBlock x:Name="waitForIt" Text="Please wait..." HorizontalAlignment="Center" VerticalAlignment="Center">

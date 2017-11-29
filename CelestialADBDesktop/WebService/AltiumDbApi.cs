@@ -11,8 +11,8 @@ namespace Harris.CelestialADB.Desktop.WebService
 {
     public static class AltiumDbApi
     {
-        //const string BaseUrl = "http://localhost:64446/";
-        const string BaseUrl = "https://altiumservices.azurewebsites.net/";
+        const string BaseUrl = "http://localhost:64446/";
+        //const string BaseUrl = "https://altiumservices.azurewebsites.net/";
 
         public static string Token { get; set; }
         static string LastError { get; set; }
@@ -134,6 +134,32 @@ namespace Harris.CelestialADB.Desktop.WebService
                 Resource = "api/Account/ResendActivationEmail"
             };
             request.AddParameter("email", email);
+
+            return await ExecuteAsync<ApiResponse>(request);
+        }
+
+        public static async Task<ApiResponse> SendResetPassword(string email)
+        {
+            LastError = "";
+
+            var request = new RestRequest(Method.GET)
+            {
+                Resource = "api/Account/SendResetPasswordEmail"
+            };
+            request.AddParameter("email", email);
+
+            return await ExecuteAsync<ApiResponse>(request);
+        }
+
+        public static async Task<ApiResponse> CheckDatabaseUser(string password)
+        {
+            LastError = "";
+
+            var request = new RestRequest(Method.GET)
+            {
+                Resource = "api/Account/CheckDatabaseUser"
+            };
+            request.AddParameter("password", password);
 
             return await ExecuteAsync<ApiResponse>(request);
         }

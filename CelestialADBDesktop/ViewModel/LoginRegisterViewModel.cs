@@ -48,7 +48,7 @@ namespace Harris.CelestialADB.Desktop.ViewModel
             ShowBusy = false;
             ShowResendToken = false;
             UserIsLoggedIn = false; //= false;
-            
+
             try
             {
                 var stats = AltiumDbApi.GetDatabaseStats();
@@ -63,12 +63,28 @@ namespace Harris.CelestialADB.Desktop.ViewModel
             ActivateAccountCommand = new AwaitableDelegateCommand(ActivateAccount, ActivateAccountButtonEnabled);
             RegisterLoginCommand = new AwaitableDelegateCommand(RegisterLogin, RegisterLoginButtonEnabled);
             ResendTokenCommand = new AwaitableDelegateCommand(ResendToken, ResendButtonEnabled);
+            SendResetPasswordCommand = new AwaitableDelegateCommand(SendResetPassword, SendResetPasswordButtonEnabled);
 
             SwitchBetweenRegisterLoginCommand = new DelegateCommand(() => { RegisterUser = !RegisterUser; ShowLoginError = false; });
 
-            ShowResendTokenCommand = new DelegateCommand(() => { ShowResendToken = !ShowResendToken; ShowActivationError = false; ShowActivationMessage = false; ShowActivationBox = !ShowActivationBox; });
+            ShowResendTokenCommand = new DelegateCommand(() =>
+            {
+                ShowResendToken = !ShowResendToken;
+                ShowActivationError = false;
+                ShowActivationMessage = false;
+                ShowActivationBox = !ShowActivationBox;
+            });
 
-            ShowVerificationCommand = new DelegateCommand(() => { ShowActivationBox = !ShowActivationBox; ShowActivationError = false; });
+            ShowVerificationCommand = new DelegateCommand(() =>
+            {
+                ShowActivationBox = !ShowActivationBox;
+                ShowActivationError = false;
+            });
+
+            ShowResetPasswordCommand = new DelegateCommand(() =>
+            {
+                ShowResetPassword = !ShowResetPassword;
+            });
 
             ViewGithubCommand = new DelegateCommand(() => System.Diagnostics.Process.Start("https://github.com/issus/altium-library"));
 
@@ -193,6 +209,7 @@ namespace Harris.CelestialADB.Desktop.ViewModel
                 return false;
             }
 
+            // get a login token
             ShowBusy = true;
             try
             {
@@ -213,6 +230,7 @@ namespace Harris.CelestialADB.Desktop.ViewModel
                 ShowLoginError = true;
             }
 
+            // make sure the account has been activated
             ShowBusy = true;
             try
             {
@@ -231,7 +249,22 @@ namespace Harris.CelestialADB.Desktop.ViewModel
                 ErrorMessage = err.InnerException.Message;
                 ShowLoginError = true;
             }
+            
+            // just a courtesy to make sure the database user exists, incase it failed to create during activation.
+            ShowBusy = true;
+            try
+            {
+                var active = await AltiumDbApi.CheckDatabaseUser(Password);
+                ShowBusy = false;
+            }
+            catch (Exception err)
+            {
+                ShowBusy = false;
+                ErrorMessage = err.InnerException.Message;
+                ShowLoginError = true;
+            }
 
+            // login completed
             UserIsLoggedIn = true;
 
             return true;
@@ -309,6 +342,44 @@ namespace Harris.CelestialADB.Desktop.ViewModel
             return false;
         }
 
+        async Task<bool> SendResetPassword()
+        {
+            ErrorMessage = "";
+            ShowResetPassError = false;
+
+            ShowBusy = true;
+            try
+            {
+                var response = await AltiumDbApi.SendResetPassword(EmailAddress);
+                ShowBusy = false;
+
+                if (!response.Success)
+                {
+                    ErrorMessage = response.Message;
+                    ShowResetPassError = true;
+                }
+                else
+                {
+                    ShowResendToken = false;
+
+                    ActivationCode = "";
+                    ActivationMessage = "Please activate with the code you were emailed - it may take a few minutes to arrive.";
+                    ShowActivationMessage = true;
+                    ShowActivationBox = true;
+                }
+
+                return response.Success;
+            }
+            catch (Exception err)
+            {
+                ShowBusy = false;
+                ErrorMessage = err.InnerException.Message;
+                ShowResendError = true;
+            }
+
+            return false;
+        }
+
         void BrowseForAltiumDirectory()
         {
             var dbLib = AltiumFile.BrowseForDbLib();
@@ -319,7 +390,7 @@ namespace Harris.CelestialADB.Desktop.ViewModel
                 AltiumPathError = "DbLib could not be found/opened. Please login with username and password.";
                 return;
             }
-            
+
             if (String.IsNullOrEmpty(dbLib.ConnectionStringPath))
             {
                 ShowAltiumPathError = true;
@@ -538,6 +609,7 @@ namespace Harris.CelestialADB.Desktop.ViewModel
                 RaisePropertyChanged("EmailAddress");
                 RegisterLoginCommand.RaiseCanExecuteChanged();
                 ResendTokenCommand.RaiseCanExecuteChanged();
+                SendResetPasswordCommand.RaiseCanExecuteChanged();
             }
         }
 
@@ -748,7 +820,32 @@ namespace Harris.CelestialADB.Desktop.ViewModel
             }
         }
 
+        private bool showResetPassError;
+        public bool ShowResetPassError
+        {
+            get { return showResetPassError; }
+            set
+            {
+                showResetPassError = value;
+                RaisePropertyChanged("ShowResetPassError");
+            }
+        }
 
+
+        private bool showResetPassword;
+
+        public bool ShowResetPassword
+        {
+            get { return showResetPassword; }
+            set
+            {
+                showResetPassword = value;
+                RaisePropertyChanged("ShowResetPassword");
+            }
+        }
+
+
+        public IAsyncCommand SendResetPasswordCommand { get; set; }
         public IAsyncCommand ResendTokenCommand { get; }
         public IAsyncCommand ActivateAccountCommand { get; }
         public IAsyncCommand RegisterLoginCommand { get; }
@@ -757,6 +854,8 @@ namespace Harris.CelestialADB.Desktop.ViewModel
         public ICommand SwitchBetweenRegisterLoginCommand { get; }
         public ICommand AltiumBrowseCommand { get; }
         public ICommand ShowResendTokenCommand { get; }
+
+        public ICommand ShowResetPasswordCommand { get; }
 
         bool RegisterLoginButtonEnabled()
         {
@@ -797,6 +896,11 @@ namespace Harris.CelestialADB.Desktop.ViewModel
         }
 
         bool ResendButtonEnabled()
+        {
+            return !string.IsNullOrEmpty(EmailAddress) && CheckEmailAddressValid(EmailAddress);
+        }
+
+        bool SendResetPasswordButtonEnabled()
         {
             return !string.IsNullOrEmpty(EmailAddress) && CheckEmailAddressValid(EmailAddress);
         }

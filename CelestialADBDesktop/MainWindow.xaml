@@ -36,8 +36,8 @@
                 x:Name="ApplicationScaleTransform"
                 CenterX="0"
                 CenterY="0"
-                ScaleX="{Binding ElementName=dlMainWindow, Path=ScaleValue}"
-                ScaleY="{Binding ElementName=dlMainWindow, Path=ScaleValue}" 
+                ScaleX="{Binding ElementName=dbMainWindow, Path=ScaleValue}"
+                ScaleY="{Binding ElementName=dbMainWindow, Path=ScaleValue}" 
             />
         </Grid.LayoutTransform>
         <Grid.RowDefinitions>

@@ -23,6 +23,7 @@ namespace Harris.CelestialADB.Desktop
         {
             InitializeComponent();
             Closing += (s, e) => ViewModelLocator.Cleanup();
+            scale = UIScale.Regular;
         }
 
 
@@ -78,7 +79,7 @@ namespace Harris.CelestialADB.Desktop
 
         private void MainGrid_SizeChanged(object sender, EventArgs e)
         {
-            //CalculateScale();
+            CalculateScale();
         }
 
         private void CalculateScale()

@@ -11,13 +11,13 @@
     <sys:Double x:Key="MinorHeaderFontSize">18</sys:Double>
     <sys:Double x:Key="LinkButtonFontSize">17</sys:Double>
 
-    <Thickness x:Key="SubHeaderMarginWideLeft">30,4,12,6</Thickness>
-    <Thickness x:Key="SubHeaderMargin">12,4,12,6</Thickness>
-    <Thickness x:Key="MinorHeaderMargin">12,9,12,6</Thickness>
-    <Thickness x:Key="HeaderMargin">12,9,12,12</Thickness>
-    <Thickness x:Key="TextMargin">12,6,12,6</Thickness>
+    <Thickness x:Key="SubHeaderMarginWideLeft">10,0,0,10</Thickness>
+    <Thickness x:Key="SubHeaderMargin">0,0,0,10</Thickness>
+    <Thickness x:Key="MinorHeaderMargin">0,0,0,6</Thickness>
+    <Thickness x:Key="HeaderMargin">0,0,0,10</Thickness>
+    <Thickness x:Key="TextMargin">0,0,0,6</Thickness>
 
     <Style TargetType="{x:Type Window}">
-        <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
+        <Setter Property="TextOptions.TextFormattingMode" Value="Ideal" />
     </Style>
 </ResourceDictionary>
